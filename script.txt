@@ -1,0 +1,80 @@
+CREATE DATABASE Study_results;
+
+CREATE TABLE dbo.Professor(
+	P_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Name nvarchar(50) NOT NULL,
+)
+
+CREATE TABLE dbo.Discipline(
+	D_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Name nvarchar(50) NOT NULL,
+	FK_Professor int NOT NULL,
+	FOREIGN KEY (FK_Professor) REFERENCES dbo.Professor (P_Code)
+)
+
+CREATE TABLE dbo.Specialty(
+	S_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Name nvarchar(50) NOT NULL
+) 
+
+CREATE TABLE dbo.Mark(
+	M_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Name nvarchar(10) NOT NULL,
+)
+
+CREATE TABLE dbo.RecordBook(
+	RB_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Name nvarchar(50) NOT NULL,
+	FK_Specialty int NOT NULL,
+	FOREIGN KEY (FK_Specialty) REFERENCES dbo.Specialty (S_Code)
+)
+
+CREATE TABLE dbo.Line(
+	L_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Number int NOT NULL,
+	FK_RecordBook int NOT NULL,
+	FOREIGN KEY (FK_RecordBook) REFERENCES dbo.RecordBook (RB_Code),
+	FK_Discipline int NOT NULL,
+	FOREIGN KEY (FK_Discipline) REFERENCES dbo.Discipline (D_Code),
+	FK_Mark int NOT NULL,
+	FOREIGN KEY (FK_Mark) REFERENCES dbo.Mark (M_Code),
+	Date date NOT NULL
+)
+
+INSERT INTO dbo.Professor (Name) 
+VALUES ('Иванов Иван Иванович'),
+('Игорев Игорь Игоревич'),
+('Сергеев Сергей Сергеевич')
+
+INSERT INTO dbo.Discipline (Name, FK_Professor) 
+VALUES ('Алгебра', 1),
+('Математический анализ', 2),
+('Английский язык', 3)
+
+INSERT INTO dbo.Specialty(Name) 
+VALUES ('МОиАИС'),
+('КБ'),
+('ИСиТ')
+
+INSERT INTO dbo.Mark(Name) 
+VALUES ('Отлично'),
+('Хорошо'),
+('Удовлетворительно'),
+('Зачтено')
+
+INSERT INTO dbo.RecordBook(Name, FK_Specialty)
+VALUES ('Сидоров Иван Иванович', 1),
+('Иванов Сергей Сергеевич', 2),
+('Михалков Федор Андреевич', 3)
+
+VALUES (1, 1, 1, 1, '21/07/2022'),
+(2, 1, 2, 2, '21/07/2022'),
+(3, 1, 3, 1, '22/07/2022'),
+(1, 2, 1, 1, '21/07/2022'),
+(2, 2, 3, 3, '22/07/2022'),
+(3, 2, 2, 2, '23/07/2022')
+
+
+
+
+
