@@ -19,7 +19,7 @@ CREATE TABLE dbo.Specialty(
 
 CREATE TABLE dbo.Mark(
 	M_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	Name nvarchar(10) NOT NULL,
+	Name nvarchar(32) NOT NULL,
 )
 
 CREATE TABLE dbo.RecordBook(
@@ -67,14 +67,10 @@ VALUES ('Сидоров Иван Иванович', 1),
 ('Иванов Сергей Сергеевич', 2),
 ('Михалков Федор Андреевич', 3)
 
+INSERT INTO dbo.Line(Number, FK_RecordBook, FK_Discipline, FK_Mark, Date)
 VALUES (1, 1, 1, 1, '21/07/2022'),
 (2, 1, 2, 2, '21/07/2022'),
 (3, 1, 3, 1, '22/07/2022'),
 (1, 2, 1, 1, '21/07/2022'),
 (2, 2, 3, 3, '22/07/2022'),
 (3, 2, 2, 2, '23/07/2022')
-
-
-
-
-
