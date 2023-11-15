@@ -24,7 +24,29 @@ namespace StudentsResults
             SpGridInit();
             DisGridInit();
             ProfGridInit();
+            MarkGridInit();
         }
+
+        //Marks grid
+        private void MarkGridInit()
+        {
+            DataGridView grid = MarkdataGridView;
+            grid.Columns.Add("M_Code", "Код");
+            grid.Columns.Add("Name", "Название");
+            GridUpdate(grid, MarkGridRequest(), MarkReadRow);
+        }
+        private string MarkGridRequest()
+        {
+            string code = MarkCodeFilterBox.Text;
+            string name = MarkNameFilterBox.Text;
+            string Request = @"SELECT M_Code, Name FROM Mark";
+            return Request;
+        }
+        private void MarkReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
 
         //Discipline grid
         private void DisGridInit()
@@ -37,6 +59,9 @@ namespace StudentsResults
         }
         private string DisGridRequest()
         {
+            string code = DisCodeFilterBox.Text;
+            string name = DisNameFilterBox.Text;
+            string professor = DisProfessorFilterBox.Text;
             string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
                                FROM Discipline AS D LEFT JOIN Professor AS P ON
                                FK_Professor = P_Code";
@@ -57,6 +82,8 @@ namespace StudentsResults
         }
         private string ProfGridRequest()
         {
+            string code = ProfCodeFilterBox.Text;
+            string name = ProfNameFilterBox.Text;
             string Request = @"SELECT P_Code, Name FROM Professor;";
             return Request;
         }
@@ -75,6 +102,8 @@ namespace StudentsResults
         }
         private string SpGridRequest()
         {
+            string code = SpCodeFilterBox.Text;
+            string name = SpNameFilterBox.Text;
             string Request = @"SELECT S_Code, Name from Specialty;";
             return Request;
         }
@@ -206,6 +235,11 @@ namespace StudentsResults
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProfdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

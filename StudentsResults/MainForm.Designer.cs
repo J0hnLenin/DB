@@ -65,6 +65,12 @@
             ProfCodeFilterBox = new TextBox();
             ProfdataGridView = new DataGridView();
             Mark = new TabPage();
+            splitContainer5 = new SplitContainer();
+            label9 = new Label();
+            MarkNameFilterBox = new TextBox();
+            label10 = new Label();
+            MarkCodeFilterBox = new TextBox();
+            MarkdataGridView = new DataGridView();
             IconImageList = new ImageList(components);
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
@@ -91,6 +97,12 @@
             splitContainer4.Panel2.SuspendLayout();
             splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ProfdataGridView).BeginInit();
+            Mark.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
+            splitContainer5.Panel1.SuspendLayout();
+            splitContainer5.Panel2.SuspendLayout();
+            splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MarkdataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainControl
@@ -492,9 +504,11 @@
             ProfdataGridView.RowTemplate.Height = 25;
             ProfdataGridView.Size = new Size(815, 402);
             ProfdataGridView.TabIndex = 0;
+            ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
             // 
             // Mark
             // 
+            Mark.Controls.Add(splitContainer5);
             Mark.ImageIndex = 5;
             Mark.Location = new Point(4, 44);
             Mark.Name = "Mark";
@@ -502,6 +516,76 @@
             Mark.TabIndex = 5;
             Mark.Text = "Виды оценок";
             Mark.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer5
+            // 
+            splitContainer5.Dock = DockStyle.Fill;
+            splitContainer5.Location = new Point(0, 0);
+            splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            splitContainer5.Panel1.Controls.Add(label9);
+            splitContainer5.Panel1.Controls.Add(MarkNameFilterBox);
+            splitContainer5.Panel1.Controls.Add(label10);
+            splitContainer5.Panel1.Controls.Add(MarkCodeFilterBox);
+            // 
+            // splitContainer5.Panel2
+            // 
+            splitContainer5.Panel2.Controls.Add(MarkdataGridView);
+            splitContainer5.Size = new Size(1075, 402);
+            splitContainer5.SplitterDistance = 256;
+            splitContainer5.TabIndex = 4;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(8, 69);
+            label9.Name = "label9";
+            label9.Size = new Size(80, 20);
+            label9.TabIndex = 3;
+            label9.Text = "Название:";
+            // 
+            // MarkNameFilterBox
+            // 
+            MarkNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MarkNameFilterBox.Location = new Point(121, 66);
+            MarkNameFilterBox.Name = "MarkNameFilterBox";
+            MarkNameFilterBox.Size = new Size(131, 27);
+            MarkNameFilterBox.TabIndex = 2;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(8, 36);
+            label10.Name = "label10";
+            label10.Size = new Size(38, 20);
+            label10.TabIndex = 1;
+            label10.Text = "Код:";
+            // 
+            // MarkCodeFilterBox
+            // 
+            MarkCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MarkCodeFilterBox.Location = new Point(121, 33);
+            MarkCodeFilterBox.Name = "MarkCodeFilterBox";
+            MarkCodeFilterBox.Size = new Size(132, 27);
+            MarkCodeFilterBox.TabIndex = 0;
+            // 
+            // MarkdataGridView
+            // 
+            MarkdataGridView.AllowUserToAddRows = false;
+            MarkdataGridView.AllowUserToDeleteRows = false;
+            MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            MarkdataGridView.Dock = DockStyle.Fill;
+            MarkdataGridView.Location = new Point(0, 0);
+            MarkdataGridView.Name = "MarkdataGridView";
+            MarkdataGridView.ReadOnly = true;
+            MarkdataGridView.RowTemplate.Height = 25;
+            MarkdataGridView.Size = new Size(815, 402);
+            MarkdataGridView.TabIndex = 0;
             // 
             // IconImageList
             // 
@@ -553,6 +637,13 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
             splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ProfdataGridView).EndInit();
+            Mark.ResumeLayout(false);
+            splitContainer5.Panel1.ResumeLayout(false);
+            splitContainer5.Panel1.PerformLayout();
+            splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
+            splitContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)MarkdataGridView).EndInit();
             ResumeLayout(false);
         }
 
@@ -596,5 +687,11 @@
         private Label label8;
         private TextBox ProfCodeFilterBox;
         private DataGridView ProfdataGridView;
+        private SplitContainer splitContainer5;
+        private Label label9;
+        private TextBox MarkNameFilterBox;
+        private Label label10;
+        private TextBox MarkCodeFilterBox;
+        private DataGridView MarkdataGridView;
     }
 }
