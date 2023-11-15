@@ -2,6 +2,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using static System.Windows.Forms.LinkLabel;
 using System.Windows.Forms;
+using Azure.Core;
 
 
 namespace StudentsResults
@@ -33,10 +34,6 @@ namespace StudentsResults
         private void MarkGridInit()
         {
             DataGridView grid = MarkdataGridView;
-
-            grid.Columns.Add("M_Code", "Код");
-            grid.Columns.Add("Name", "Оценка");
-
             GridUpdate(grid, MarkGridRequest(), MarkReadRow);
         }
         private string MarkGridRequest()
@@ -204,7 +201,16 @@ namespace StudentsResults
                 ReadRow(grid, reader);
             }
             reader.Close();
+        }
+        private void UpdateObject(string table, string id_name, int id, string property, string value)
+        {
+            var request = $"UPDATE {table} " +
+                            $"SET {property} = '{value}' " +
+                            $"WHERE {id_name} = {id};";
 
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
         }
 
         private void CreateColumns()
@@ -378,6 +384,21 @@ namespace StudentsResults
         private void label4_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        
+        private void MarkdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            var id_name = MarkdataGridView.Columns[0].Name.Substring(1);
+            var row = MarkdataGridView.Rows[e.RowIndex];
+            var id = (int)row.Cells[0].Value;
+            var property = MarkdataGridView.Columns[e.ColumnIndex].Name.Substring(1);
+            string value = (string)row.Cells[e.ColumnIndex].Value;
+
+            UpdateObject("Mark", id_name, id, property, value);
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
         }
     }
 }
