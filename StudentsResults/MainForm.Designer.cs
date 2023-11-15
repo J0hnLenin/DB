@@ -42,6 +42,12 @@
             CodeFilterBox = new TextBox();
             RB_DataGridView = new DataGridView();
             Specialty = new TabPage();
+            splitContainer2 = new SplitContainer();
+            label2 = new Label();
+            SpNameFilterBox = new TextBox();
+            label3 = new Label();
+            SpCodeFilterBox = new TextBox();
+            SpdataGridView = new DataGridView();
             Discipline = new TabPage();
             Professor = new TabPage();
             Mark = new TabPage();
@@ -53,6 +59,12 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RB_DataGridView).BeginInit();
+            Specialty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainControl
@@ -192,6 +204,7 @@
             // 
             // Specialty
             // 
+            Specialty.Controls.Add(splitContainer2);
             Specialty.ImageIndex = 2;
             Specialty.Location = new Point(4, 44);
             Specialty.Name = "Specialty";
@@ -199,6 +212,78 @@
             Specialty.TabIndex = 2;
             Specialty.Text = "Направления подготовки";
             Specialty.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(label2);
+            splitContainer2.Panel1.Controls.Add(SpNameFilterBox);
+            splitContainer2.Panel1.Controls.Add(label3);
+            splitContainer2.Panel1.Controls.Add(SpCodeFilterBox);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(SpdataGridView);
+            splitContainer2.Size = new Size(1075, 402);
+            splitContainer2.SplitterDistance = 256;
+            splitContainer2.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(8, 69);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Название:";
+            label2.Click += label2_Click;
+            // 
+            // SpNameFilterBox
+            // 
+            SpNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SpNameFilterBox.Location = new Point(121, 66);
+            SpNameFilterBox.Name = "SpNameFilterBox";
+            SpNameFilterBox.Size = new Size(131, 27);
+            SpNameFilterBox.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(8, 36);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 20);
+            label3.TabIndex = 1;
+            label3.Text = "Код:";
+            // 
+            // SpCodeFilterBox
+            // 
+            SpCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SpCodeFilterBox.Location = new Point(121, 33);
+            SpCodeFilterBox.Name = "SpCodeFilterBox";
+            SpCodeFilterBox.Size = new Size(132, 27);
+            SpCodeFilterBox.TabIndex = 0;
+            // 
+            // SpdataGridView
+            // 
+            SpdataGridView.AllowUserToAddRows = false;
+            SpdataGridView.AllowUserToDeleteRows = false;
+            SpdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SpdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SpdataGridView.Dock = DockStyle.Fill;
+            SpdataGridView.Location = new Point(0, 0);
+            SpdataGridView.Name = "SpdataGridView";
+            SpdataGridView.ReadOnly = true;
+            SpdataGridView.RowTemplate.Height = 25;
+            SpdataGridView.Size = new Size(815, 402);
+            SpdataGridView.TabIndex = 0;
+            SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Discipline
             // 
@@ -259,6 +344,13 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RB_DataGridView).EndInit();
+            Specialty.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel1.PerformLayout();
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SpdataGridView).EndInit();
             ResumeLayout(false);
         }
 
@@ -280,5 +372,13 @@
         private TextBox NameFilterBox;
         private Label DisciplineFilterLabel;
         private TextBox DisciplineFilterBox;
+        private SplitContainer splitContainer2;
+        private Label label1;
+        private TextBox textBox1;
+        private Label label2;
+        private TextBox SpNameFilterBox;
+        private Label label3;
+        private TextBox SpCodeFilterBox;
+        private DataGridView SpdataGridView;
     }
 }

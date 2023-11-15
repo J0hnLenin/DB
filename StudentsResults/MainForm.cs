@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
+using static System.Windows.Forms.LinkLabel;
 
 namespace StudentsResults
 {
@@ -20,6 +21,52 @@ namespace StudentsResults
             InitializeComponent();
             CreateColumns();
             RefreshDataGrid(RB_DataGridView);
+            SpGridInit();
+        }
+
+        private void SpGridInit()
+        {
+            DataGridView grid = SpdataGridView;
+            grid.Columns.Add("S_Code", "Код");
+            grid.Columns.Add("Name", "Название");
+            SpGridUpdate();
+        }
+
+        private string SpGridRequest()
+        {
+            string Request = @"SELECT S_Code, Name from Specialty;";
+            return Request;
+        }
+        private void SpReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
+        private void SpGridUpdate()
+        {
+            DataGridView grid = SpdataGridView;
+            string Request = SpGridRequest();
+
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            SqlDataReader reader = Command.ExecuteReader();
+
+
+            grid.Rows.Clear();
+
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "WriteLines.txt")))
+            {
+                int i = 0;
+                while (reader.Read())
+                {
+                    SpReadRow(grid, reader);
+                    outputFile.WriteLine("i = " + i);
+                    i++;
+                }
+            }
+            reader.Close();
+
         }
 
         private void CreateColumns()
@@ -52,9 +99,9 @@ namespace StudentsResults
 
                 if (CodeFilterBox.Text != "")
                 {
-                    if (Flag) 
-                    { 
-                        Request = string.Format("{0} AND", Request); 
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
                     }
                     Request = string.Format("{0} RB_Code = {1}", Request, CodeFilterBox.Text);
                     Flag = true;
@@ -78,7 +125,7 @@ namespace StudentsResults
                     Flag = true;
                 }
             }
-            
+
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
             dataBase.openConnection();
             SqlDataReader reader = Command.ExecuteReader();
@@ -117,6 +164,16 @@ namespace StudentsResults
         private void DisciplineFilterBox_TextChanged(object sender, EventArgs e)
         {
             RefreshDataGrid(RB_DataGridView);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
