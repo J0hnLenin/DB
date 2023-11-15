@@ -104,7 +104,23 @@ namespace StudentsResults
         {
             string code = SpCodeFilterBox.Text;
             string name = SpNameFilterBox.Text;
-            string Request = @"SELECT S_Code, Name from Specialty;";
+            string Request = @"SELECT S_Code, Name from Specialty ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("S_code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
             return Request;
         }
         private void SpReadRow(DataGridView grid, IDataRecord record)
@@ -242,6 +258,16 @@ namespace StudentsResults
         private void ProfdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void SpCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
+
+        private void SpNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
         }
     }
 }

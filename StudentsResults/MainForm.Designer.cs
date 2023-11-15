@@ -289,6 +289,7 @@
             SpNameFilterBox.Name = "SpNameFilterBox";
             SpNameFilterBox.Size = new Size(131, 27);
             SpNameFilterBox.TabIndex = 2;
+            SpNameFilterBox.TextChanged += SpNameFilterBox_TextChanged;
             // 
             // label3
             // 
@@ -307,6 +308,7 @@
             SpCodeFilterBox.Name = "SpCodeFilterBox";
             SpCodeFilterBox.Size = new Size(132, 27);
             SpCodeFilterBox.TabIndex = 0;
+            SpCodeFilterBox.TextChanged += SpCodeFilterBox_TextChanged;
             // 
             // SpdataGridView
             // 
