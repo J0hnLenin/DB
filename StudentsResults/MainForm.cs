@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace StudentsResults
 {
@@ -89,9 +90,13 @@ namespace StudentsResults
             reader.Close();
         }
 
-        private void RB_DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void RB_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
 
+            RB_Form New_RB_Form = new RB_Form(Convert.ToInt32(RB_DataGridView.Rows[e.RowIndex].Cells[0].Value));
+            New_RB_Form.Show();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

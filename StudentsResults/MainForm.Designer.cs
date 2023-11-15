@@ -188,7 +188,7 @@
             RB_DataGridView.RowTemplate.Height = 25;
             RB_DataGridView.Size = new Size(815, 402);
             RB_DataGridView.TabIndex = 0;
-            RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
+            RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
             // 
             // Specialty
             // 
