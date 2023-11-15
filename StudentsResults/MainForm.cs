@@ -26,8 +26,8 @@ namespace StudentsResults
         {
             RB_DataGridView.Columns.Add("RB_Code", "Код");
             RB_DataGridView.Columns.Add("Name", "ФИО");
-            RB_DataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
-            RB_DataGridView.Columns.Add("State", String.Empty);
+            RB_DataGridView.Columns.Add("SpecialtyName", "Направление\nподготовки");
+            RB_DataGridView.Columns.Add("State", "State");
 
         }
 
