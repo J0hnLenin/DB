@@ -33,15 +33,19 @@
             MainControl = new TabControl();
             MainMenu = new TabPage();
             RecordBook = new TabPage();
+            RB_DataGridView = new DataGridView();
             Specialty = new TabPage();
             Discipline = new TabPage();
             Professor = new TabPage();
             Mark = new TabPage();
             IconImageList = new ImageList(components);
-            RB_DataGridView = new DataGridView();
+            splitContainer1 = new SplitContainer();
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RB_DataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // MainControl
@@ -74,7 +78,7 @@
             // 
             // RecordBook
             // 
-            RecordBook.Controls.Add(RB_DataGridView);
+            RecordBook.Controls.Add(splitContainer1);
             RecordBook.ImageIndex = 1;
             RecordBook.Location = new Point(4, 44);
             RecordBook.Name = "RecordBook";
@@ -82,6 +86,21 @@
             RecordBook.TabIndex = 1;
             RecordBook.Text = "Зачётные книги";
             RecordBook.UseVisualStyleBackColor = true;
+            // 
+            // RB_DataGridView
+            // 
+            RB_DataGridView.AllowUserToAddRows = false;
+            RB_DataGridView.AllowUserToDeleteRows = false;
+            RB_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            RB_DataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            RB_DataGridView.Dock = DockStyle.Fill;
+            RB_DataGridView.Location = new Point(0, 0);
+            RB_DataGridView.Name = "RB_DataGridView";
+            RB_DataGridView.ReadOnly = true;
+            RB_DataGridView.RowTemplate.Height = 25;
+            RB_DataGridView.Size = new Size(599, 402);
+            RB_DataGridView.TabIndex = 0;
+            RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
             // 
             // Specialty
             // 
@@ -135,18 +154,18 @@
             IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
             IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
             // 
-            // RB_DataGridView
+            // splitContainer1
             // 
-            RB_DataGridView.AllowUserToAddRows = false;
-            RB_DataGridView.AllowUserToDeleteRows = false;
-            RB_DataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RB_DataGridView.Location = new Point(227, 19);
-            RB_DataGridView.Name = "RB_DataGridView";
-            RB_DataGridView.ReadOnly = true;
-            RB_DataGridView.RowTemplate.Height = 25;
-            RB_DataGridView.Size = new Size(562, 380);
-            RB_DataGridView.TabIndex = 0;
-            RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(RB_DataGridView);
+            splitContainer1.Size = new Size(792, 402);
+            splitContainer1.SplitterDistance = 189;
+            splitContainer1.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -160,6 +179,9 @@
             MainControl.ResumeLayout(false);
             RecordBook.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RB_DataGridView).EndInit();
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -174,5 +196,6 @@
         private TabPage Mark;
         private ImageList IconImageList;
         private DataGridView RB_DataGridView;
+        private SplitContainer splitContainer1;
     }
 }
