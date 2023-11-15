@@ -64,7 +64,29 @@ namespace StudentsResults
             string professor = DisProfessorFilterBox.Text;
             string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
                                FROM Discipline AS D LEFT JOIN Professor AS P ON
-                               FK_Professor = P_Code";
+                               FK_Professor = P_Code ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "" || professor != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("D_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("D.Name LIKE '%{0}%'", name));
+                }
+                if (professor != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("P.Name LIKE '%{0}%'", professor));
+                }
+            }
+            Request += String.Concat(args);
             return Request;
         }
         private void DisReadRow(DataGridView grid, IDataRecord record)
@@ -268,6 +290,21 @@ namespace StudentsResults
         private void SpNameFilterBox_TextChanged(object sender, EventArgs e)
         {
             GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
+
+        private void DisCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisProfessorFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
         }
     }
 }
