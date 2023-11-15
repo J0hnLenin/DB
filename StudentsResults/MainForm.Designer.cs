@@ -171,7 +171,7 @@
             // 
             DisciplineFilterLabel.AutoSize = true;
             DisciplineFilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisciplineFilterLabel.Location = new Point(8, 102);
+            DisciplineFilterLabel.Location = new Point(3, 102);
             DisciplineFilterLabel.Name = "DisciplineFilterLabel";
             DisciplineFilterLabel.Size = new Size(107, 20);
             DisciplineFilterLabel.TabIndex = 5;
@@ -190,7 +190,7 @@
             // 
             NameFilterLabel.AutoSize = true;
             NameFilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            NameFilterLabel.Location = new Point(8, 69);
+            NameFilterLabel.Location = new Point(3, 66);
             NameFilterLabel.Name = "NameFilterLabel";
             NameFilterLabel.Size = new Size(45, 20);
             NameFilterLabel.TabIndex = 3;
@@ -210,7 +210,7 @@
             // 
             CodeFilterLabel.AutoSize = true;
             CodeFilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CodeFilterLabel.Location = new Point(8, 36);
+            CodeFilterLabel.Location = new Point(3, 36);
             CodeFilterLabel.Name = "CodeFilterLabel";
             CodeFilterLabel.Size = new Size(38, 20);
             CodeFilterLabel.TabIndex = 1;
@@ -275,17 +275,17 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(8, 69);
+            label2.Location = new Point(3, 69);
             label2.Name = "label2";
-            label2.Size = new Size(80, 20);
+            label2.Size = new Size(119, 20);
             label2.TabIndex = 3;
-            label2.Text = "Название:";
+            label2.Text = "Наименование:";
             label2.Click += label2_Click;
             // 
             // SpNameFilterBox
             // 
             SpNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            SpNameFilterBox.Location = new Point(121, 66);
+            SpNameFilterBox.Location = new Point(123, 66);
             SpNameFilterBox.Name = "SpNameFilterBox";
             SpNameFilterBox.Size = new Size(131, 27);
             SpNameFilterBox.TabIndex = 2;
@@ -295,7 +295,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(8, 36);
+            label3.Location = new Point(3, 36);
             label3.Name = "label3";
             label3.Size = new Size(38, 20);
             label3.TabIndex = 1;
@@ -304,7 +304,7 @@
             // SpCodeFilterBox
             // 
             SpCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            SpCodeFilterBox.Location = new Point(121, 33);
+            SpCodeFilterBox.Location = new Point(122, 33);
             SpCodeFilterBox.Name = "SpCodeFilterBox";
             SpCodeFilterBox.Size = new Size(132, 27);
             SpCodeFilterBox.TabIndex = 0;
@@ -355,23 +355,24 @@
             // 
             splitContainer3.Panel2.Controls.Add(DisdataGridView);
             splitContainer3.Size = new Size(1075, 402);
-            splitContainer3.SplitterDistance = 256;
+            splitContainer3.SplitterDistance = 272;
             splitContainer3.TabIndex = 2;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(8, 102);
+            label4.Location = new Point(3, 102);
             label4.Name = "label4";
-            label4.Size = new Size(91, 20);
+            label4.Size = new Size(120, 20);
             label4.TabIndex = 5;
-            label4.Text = "Профессор:";
+            label4.Text = "Преподаватель:";
+            label4.Click += label4_Click_1;
             // 
             // DisProfessorFilterBox
             // 
             DisProfessorFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisProfessorFilterBox.Location = new Point(121, 99);
+            DisProfessorFilterBox.Location = new Point(134, 99);
             DisProfessorFilterBox.Name = "DisProfessorFilterBox";
             DisProfessorFilterBox.Size = new Size(131, 27);
             DisProfessorFilterBox.TabIndex = 4;
@@ -381,16 +382,16 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(8, 69);
+            label5.Location = new Point(3, 69);
             label5.Name = "label5";
-            label5.Size = new Size(80, 20);
+            label5.Size = new Size(119, 20);
             label5.TabIndex = 3;
-            label5.Text = "Название:";
+            label5.Text = "Наименование:";
             // 
             // DisNameFilterBox
             // 
             DisNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisNameFilterBox.Location = new Point(121, 66);
+            DisNameFilterBox.Location = new Point(133, 66);
             DisNameFilterBox.Name = "DisNameFilterBox";
             DisNameFilterBox.Size = new Size(131, 27);
             DisNameFilterBox.TabIndex = 2;
@@ -400,7 +401,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(8, 36);
+            label6.Location = new Point(3, 36);
             label6.Name = "label6";
             label6.Size = new Size(38, 20);
             label6.TabIndex = 1;
@@ -409,7 +410,7 @@
             // DisCodeFilterBox
             // 
             DisCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisCodeFilterBox.Location = new Point(121, 33);
+            DisCodeFilterBox.Location = new Point(133, 33);
             DisCodeFilterBox.Name = "DisCodeFilterBox";
             DisCodeFilterBox.Size = new Size(132, 27);
             DisCodeFilterBox.TabIndex = 0;
@@ -426,7 +427,7 @@
             DisdataGridView.Name = "DisdataGridView";
             DisdataGridView.ReadOnly = true;
             DisdataGridView.RowTemplate.Height = 25;
-            DisdataGridView.Size = new Size(815, 402);
+            DisdataGridView.Size = new Size(799, 402);
             DisdataGridView.TabIndex = 0;
             // 
             // Professor
@@ -464,7 +465,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(8, 69);
+            label7.Location = new Point(3, 69);
             label7.Name = "label7";
             label7.Size = new Size(45, 20);
             label7.TabIndex = 3;
@@ -483,7 +484,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(8, 36);
+            label8.Location = new Point(3, 36);
             label8.Name = "label8";
             label8.Size = new Size(38, 20);
             label8.TabIndex = 1;
@@ -548,11 +549,11 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(8, 69);
+            label9.Location = new Point(3, 69);
             label9.Name = "label9";
-            label9.Size = new Size(80, 20);
+            label9.Size = new Size(119, 20);
             label9.TabIndex = 3;
-            label9.Text = "Название:";
+            label9.Text = "Наименование:";
             // 
             // MarkNameFilterBox
             // 
@@ -567,7 +568,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(8, 36);
+            label10.Location = new Point(3, 36);
             label10.Name = "label10";
             label10.Size = new Size(38, 20);
             label10.TabIndex = 1;

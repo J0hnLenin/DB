@@ -74,7 +74,7 @@ namespace StudentsResults
             DataGridView grid = DisdataGridView;
 
             grid.Columns.Add("D_Code", "Код");
-            grid.Columns.Add("Name", "Название");
+            grid.Columns.Add("Name", "Наименование");
             grid.Columns.Add("ProfessorName", "Преподаватель");
 
             GridUpdate(grid, DisGridRequest(), DisReadRow);
@@ -158,7 +158,7 @@ namespace StudentsResults
         private void SpGridInit()
         {
             DataGridView grid = SpdataGridView;
-<
+
             grid.Columns.Add("S_Code", "Код");
             grid.Columns.Add("Name", "Наименование");
 
@@ -212,7 +212,7 @@ namespace StudentsResults
 
             RB_DataGridView.Columns.Add("RB_Code", "Код");
             RB_DataGridView.Columns.Add("Name", "ФИО");
-            RB_DataGridView.Columns.Add("SpecialtyName", "Направление\nподготовки");
+            RB_DataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
 
             //RB_DataGridView.Columns.Add("State", "State");
 
@@ -373,6 +373,11 @@ namespace StudentsResults
         private void MarkNameFilterBox_TextChanged(object sender, EventArgs e)
         {
             GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
