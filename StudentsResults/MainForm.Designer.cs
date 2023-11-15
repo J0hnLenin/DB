@@ -561,6 +561,7 @@
             MarkNameFilterBox.Name = "MarkNameFilterBox";
             MarkNameFilterBox.Size = new Size(131, 27);
             MarkNameFilterBox.TabIndex = 2;
+            MarkNameFilterBox.TextChanged += MarkNameFilterBox_TextChanged;
             // 
             // label10
             // 
@@ -579,6 +580,7 @@
             MarkCodeFilterBox.Name = "MarkCodeFilterBox";
             MarkCodeFilterBox.Size = new Size(132, 27);
             MarkCodeFilterBox.TabIndex = 0;
+            MarkCodeFilterBox.TextChanged += MarkCodeFilterBox_TextChanged;
             // 
             // MarkdataGridView
             // 

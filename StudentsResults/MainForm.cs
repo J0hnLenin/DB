@@ -39,7 +39,23 @@ namespace StudentsResults
         {
             string code = MarkCodeFilterBox.Text;
             string name = MarkNameFilterBox.Text;
-            string Request = @"SELECT M_Code, Name FROM Mark";
+            string Request = @"SELECT M_Code, Name FROM Mark ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("M_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
             return Request;
         }
         private void MarkReadRow(DataGridView grid, IDataRecord record)
@@ -331,6 +347,16 @@ namespace StudentsResults
         private void ProfNameFilterBox_TextChanged(object sender, EventArgs e)
         {
             GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+        }
+
+        private void MarkCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+        }
+
+        private void MarkNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
         }
     }
 }
