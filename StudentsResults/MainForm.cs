@@ -1,6 +1,8 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
+using static System.Windows.Forms.LinkLabel;
 using System.Windows.Forms;
+
 
 namespace StudentsResults
 {
@@ -21,13 +23,187 @@ namespace StudentsResults
             InitializeComponent();
             CreateColumns();
             RefreshDataGrid(RB_DataGridView);
+            SpGridInit();
+            DisGridInit();
+            ProfGridInit();
+            MarkGridInit();
+        }
+
+        //Marks grid
+        private void MarkGridInit()
+        {
+            DataGridView grid = MarkdataGridView;
+            grid.Columns.Add("M_Code", "Êîä");
+            grid.Columns.Add("Name", "Íàçâàíèå");
+            GridUpdate(grid, MarkGridRequest(), MarkReadRow);
+        }
+        private string MarkGridRequest()
+        {
+            string code = MarkCodeFilterBox.Text;
+            string name = MarkNameFilterBox.Text;
+            string Request = @"SELECT M_Code, Name FROM Mark ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("M_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
+            return Request;
+        }
+        private void MarkReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
+
+        //Discipline grid
+        private void DisGridInit()
+        {
+            DataGridView grid = DisdataGridView;
+            grid.Columns.Add("D_Code", "Êîä");
+            grid.Columns.Add("Name", "Íàçâàíèå");
+            grid.Columns.Add("ProfessorName", "Ïðîôåññîð");
+            GridUpdate(grid, DisGridRequest(), DisReadRow);
+        }
+        private string DisGridRequest()
+        {
+            string code = DisCodeFilterBox.Text;
+            string name = DisNameFilterBox.Text;
+            string professor = DisProfessorFilterBox.Text;
+            string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
+                               FROM Discipline AS D LEFT JOIN Professor AS P ON
+                               FK_Professor = P_Code ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "" || professor != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("D_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("D.Name LIKE '%{0}%'", name));
+                }
+                if (professor != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("P.Name LIKE '%{0}%'", professor));
+                }
+            }
+            Request += String.Concat(args);
+            return Request;
+        }
+        private void DisReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
+        }
+
+        //Professor grid
+        private void ProfGridInit()
+        {
+            DataGridView grid = ProfdataGridView;
+            grid.Columns.Add("P_Code", "Êîä");
+            grid.Columns.Add("Name", "ÔÈÎ");
+            GridUpdate(grid, ProfGridRequest(), ProfReadRow);
+        }
+        private string ProfGridRequest()
+        {
+            string code = ProfCodeFilterBox.Text;
+            string name = ProfNameFilterBox.Text;
+            string Request = @"SELECT P_Code, Name FROM Professor ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("P_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
+            return Request;
+        }
+        private void ProfReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
+        //Specialty grid
+        private void SpGridInit()
+        {
+            DataGridView grid = SpdataGridView;
+            grid.Columns.Add("S_Code", "Êîä");
+            grid.Columns.Add("Name", "Íàçâàíèå");
+            GridUpdate(grid, SpGridRequest(), SpReadRow);
+        }
+        private string SpGridRequest()
+        {
+            string code = SpCodeFilterBox.Text;
+            string name = SpNameFilterBox.Text;
+            string Request = @"SELECT S_Code, Name from Specialty ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("S_code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
+            return Request;
+        }
+        private void SpReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
+        private void GridUpdate(DataGridView grid, string Request, Action<DataGridView, IDataRecord> ReadRow)
+        {
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            SqlDataReader reader = Command.ExecuteReader();
+
+            grid.Rows.Clear();
+            while (reader.Read())
+            {
+                ReadRow(grid, reader);
+            }
+            reader.Close();
+
         }
 
         private void CreateColumns()
         {
-            RB_DataGridView.Columns.Add("RB_Code", "���");
-            RB_DataGridView.Columns.Add("Name", "���");
-            RB_DataGridView.Columns.Add("SpecialtyName", "�����������\n����������");
+            RB_DataGridView.Columns.Add("RB_Code", "Êîä");
+            RB_DataGridView.Columns.Add("Name", "ÔÈÎ");
+            RB_DataGridView.Columns.Add("SpecialtyName", "Íàïðàâëåíèå\nïîäãîòîâêè");
             //RB_DataGridView.Columns.Add("State", "State");
 
         }
@@ -53,9 +229,9 @@ namespace StudentsResults
 
                 if (CodeFilterBox.Text != "")
                 {
-                    if (Flag) 
-                    { 
-                        Request = string.Format("{0} AND", Request); 
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
                     }
                     Request = string.Format("{0} RB_Code = {1}", Request, CodeFilterBox.Text);
                     Flag = true;
@@ -79,7 +255,7 @@ namespace StudentsResults
                     Flag = true;
                 }
             }
-            
+
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
             dataBase.openConnection();
             SqlDataReader reader = Command.ExecuteReader();
@@ -122,6 +298,71 @@ namespace StudentsResults
         private void DisciplineFilterBox_TextChanged(object sender, EventArgs e)
         {
             RefreshDataGrid(RB_DataGridView);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProfdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void SpCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
+
+        private void SpNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
+
+        private void DisCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisProfessorFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void ProfCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+        }
+
+        private void ProfNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+        }
+
+        private void MarkCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+        }
+
+        private void MarkNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
         }
     }
 }
