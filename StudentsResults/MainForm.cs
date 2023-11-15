@@ -31,8 +31,8 @@ namespace StudentsResults
         private void MarkGridInit()
         {
             DataGridView grid = MarkdataGridView;
-            grid.Columns.Add("M_Code", "Код");
-            grid.Columns.Add("Name", "Название");
+            grid.Columns.Add("M_Code", "РљРѕРґ");
+            grid.Columns.Add("Name", "РќР°Р·РІР°РЅРёРµ");
             GridUpdate(grid, MarkGridRequest(), MarkReadRow);
         }
         private string MarkGridRequest()
@@ -68,9 +68,9 @@ namespace StudentsResults
         private void DisGridInit()
         {
             DataGridView grid = DisdataGridView;
-            grid.Columns.Add("D_Code", "Код");
-            grid.Columns.Add("Name", "Название");
-            grid.Columns.Add("ProfessorName", "Профессор");
+            grid.Columns.Add("D_Code", "РљРѕРґ");
+            grid.Columns.Add("Name", "РќР°Р·РІР°РЅРёРµ");
+            grid.Columns.Add("ProfessorName", "РџСЂРѕС„РµСЃСЃРѕСЂ");
             GridUpdate(grid, DisGridRequest(), DisReadRow);
         }
         private string DisGridRequest()
@@ -114,8 +114,8 @@ namespace StudentsResults
         private void ProfGridInit()
         {
             DataGridView grid = ProfdataGridView;
-            grid.Columns.Add("P_Code", "Код");
-            grid.Columns.Add("Name", "ФИО");
+            grid.Columns.Add("P_Code", "РљРѕРґ");
+            grid.Columns.Add("Name", "Р¤РРћ");
             GridUpdate(grid, ProfGridRequest(), ProfReadRow);
         }
         private string ProfGridRequest()
@@ -150,8 +150,8 @@ namespace StudentsResults
         private void SpGridInit()
         {
             DataGridView grid = SpdataGridView;
-            grid.Columns.Add("S_Code", "Код");
-            grid.Columns.Add("Name", "Название");
+            grid.Columns.Add("S_Code", "РљРѕРґ");
+            grid.Columns.Add("Name", "РќР°Р·РІР°РЅРёРµ");
             GridUpdate(grid, SpGridRequest(), SpReadRow);
         }
         private string SpGridRequest()
@@ -199,9 +199,9 @@ namespace StudentsResults
 
         private void CreateColumns()
         {
-            RB_DataGridView.Columns.Add("RB_Code", "Код");
-            RB_DataGridView.Columns.Add("Name", "ФИО");
-            RB_DataGridView.Columns.Add("SpecialtyName", "Направление\nподготовки");
+            RB_DataGridView.Columns.Add("RB_Code", "РљРѕРґ");
+            RB_DataGridView.Columns.Add("Name", "Р¤РРћ");
+            RB_DataGridView.Columns.Add("SpecialtyName", "РќР°РїСЂР°РІР»РµРЅРёРµ\nРїРѕРґРіРѕС‚РѕРІРєРё");
             //RB_DataGridView.Columns.Add("State", "State");
 
         }
