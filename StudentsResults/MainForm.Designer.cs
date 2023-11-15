@@ -58,6 +58,12 @@
             DisCodeFilterBox = new TextBox();
             DisdataGridView = new DataGridView();
             Professor = new TabPage();
+            splitContainer4 = new SplitContainer();
+            label7 = new Label();
+            ProfNameFilterBox = new TextBox();
+            label8 = new Label();
+            ProfCodeFilterBox = new TextBox();
+            ProfdataGridView = new DataGridView();
             Mark = new TabPage();
             IconImageList = new ImageList(components);
             MainControl.SuspendLayout();
@@ -79,6 +85,12 @@
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DisdataGridView).BeginInit();
+            Professor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
+            splitContainer4.Panel1.SuspendLayout();
+            splitContainer4.Panel2.SuspendLayout();
+            splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProfdataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainControl
@@ -402,6 +414,7 @@
             // 
             // Professor
             // 
+            Professor.Controls.Add(splitContainer4);
             Professor.ImageIndex = 4;
             Professor.Location = new Point(4, 44);
             Professor.Name = "Professor";
@@ -409,6 +422,76 @@
             Professor.TabIndex = 4;
             Professor.Text = "Преподаватели";
             Professor.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            splitContainer4.Dock = DockStyle.Fill;
+            splitContainer4.Location = new Point(0, 0);
+            splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            splitContainer4.Panel1.Controls.Add(label7);
+            splitContainer4.Panel1.Controls.Add(ProfNameFilterBox);
+            splitContainer4.Panel1.Controls.Add(label8);
+            splitContainer4.Panel1.Controls.Add(ProfCodeFilterBox);
+            // 
+            // splitContainer4.Panel2
+            // 
+            splitContainer4.Panel2.Controls.Add(ProfdataGridView);
+            splitContainer4.Size = new Size(1075, 402);
+            splitContainer4.SplitterDistance = 256;
+            splitContainer4.TabIndex = 3;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(8, 69);
+            label7.Name = "label7";
+            label7.Size = new Size(45, 20);
+            label7.TabIndex = 3;
+            label7.Text = "ФИО:";
+            // 
+            // ProfNameFilterBox
+            // 
+            ProfNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ProfNameFilterBox.Location = new Point(121, 66);
+            ProfNameFilterBox.Name = "ProfNameFilterBox";
+            ProfNameFilterBox.Size = new Size(131, 27);
+            ProfNameFilterBox.TabIndex = 2;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(8, 36);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 20);
+            label8.TabIndex = 1;
+            label8.Text = "Код:";
+            // 
+            // ProfCodeFilterBox
+            // 
+            ProfCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ProfCodeFilterBox.Location = new Point(121, 33);
+            ProfCodeFilterBox.Name = "ProfCodeFilterBox";
+            ProfCodeFilterBox.Size = new Size(132, 27);
+            ProfCodeFilterBox.TabIndex = 0;
+            // 
+            // ProfdataGridView
+            // 
+            ProfdataGridView.AllowUserToAddRows = false;
+            ProfdataGridView.AllowUserToDeleteRows = false;
+            ProfdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ProfdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ProfdataGridView.Dock = DockStyle.Fill;
+            ProfdataGridView.Location = new Point(0, 0);
+            ProfdataGridView.Name = "ProfdataGridView";
+            ProfdataGridView.ReadOnly = true;
+            ProfdataGridView.RowTemplate.Height = 25;
+            ProfdataGridView.Size = new Size(815, 402);
+            ProfdataGridView.TabIndex = 0;
             // 
             // Mark
             // 
@@ -463,6 +546,13 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
             splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DisdataGridView).EndInit();
+            Professor.ResumeLayout(false);
+            splitContainer4.Panel1.ResumeLayout(false);
+            splitContainer4.Panel1.PerformLayout();
+            splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
+            splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ProfdataGridView).EndInit();
             ResumeLayout(false);
         }
 
@@ -500,5 +590,11 @@
         private Label label6;
         private TextBox DisCodeFilterBox;
         private DataGridView DisdataGridView;
+        private SplitContainer splitContainer4;
+        private Label label7;
+        private TextBox ProfNameFilterBox;
+        private Label label8;
+        private TextBox ProfCodeFilterBox;
+        private DataGridView ProfdataGridView;
     }
 }

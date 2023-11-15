@@ -23,8 +23,10 @@ namespace StudentsResults
             RefreshDataGrid(RB_DataGridView);
             SpGridInit();
             DisGridInit();
+            ProfGridInit();
         }
 
+        //Discipline grid
         private void DisGridInit()
         {
             DataGridView grid = DisdataGridView;
@@ -33,7 +35,6 @@ namespace StudentsResults
             grid.Columns.Add("ProfessorName", "Профессор");
             GridUpdate(grid, DisGridRequest(), DisReadRow);
         }
-
         private string DisGridRequest()
         {
             string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
@@ -46,6 +47,25 @@ namespace StudentsResults
             grid.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
         }
 
+        //Professor grid
+        private void ProfGridInit()
+        {
+            DataGridView grid = ProfdataGridView;
+            grid.Columns.Add("P_Code", "Код");
+            grid.Columns.Add("Name", "ФИО");
+            GridUpdate(grid, ProfGridRequest(), ProfReadRow);
+        }
+        private string ProfGridRequest()
+        {
+            string Request = @"SELECT P_Code, Name FROM Professor;";
+            return Request;
+        }
+        private void ProfReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1));
+        }
+
+        //Specialty grid
         private void SpGridInit()
         {
             DataGridView grid = SpdataGridView;
@@ -53,7 +73,6 @@ namespace StudentsResults
             grid.Columns.Add("Name", "Название");
             GridUpdate(grid, SpGridRequest(), SpReadRow);
         }
-
         private string SpGridRequest()
         {
             string Request = @"SELECT S_Code, Name from Specialty;";
