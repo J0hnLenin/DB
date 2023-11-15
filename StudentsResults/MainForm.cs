@@ -106,7 +106,23 @@ namespace StudentsResults
         {
             string code = ProfCodeFilterBox.Text;
             string name = ProfNameFilterBox.Text;
-            string Request = @"SELECT P_Code, Name FROM Professor;";
+            string Request = @"SELECT P_Code, Name FROM Professor ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("P_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("Name LIKE '%{0}%'", name));
+                }
+            }
+            Request += String.Concat(args);
             return Request;
         }
         private void ProfReadRow(DataGridView grid, IDataRecord record)
@@ -305,6 +321,16 @@ namespace StudentsResults
         private void DisProfessorFilterBox_TextChanged(object sender, EventArgs e)
         {
             GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void ProfCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+        }
+
+        private void ProfNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
         }
     }
 }

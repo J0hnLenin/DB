@@ -477,6 +477,7 @@
             ProfNameFilterBox.Name = "ProfNameFilterBox";
             ProfNameFilterBox.Size = new Size(131, 27);
             ProfNameFilterBox.TabIndex = 2;
+            ProfNameFilterBox.TextChanged += ProfNameFilterBox_TextChanged;
             // 
             // label8
             // 
@@ -495,6 +496,7 @@
             ProfCodeFilterBox.Name = "ProfCodeFilterBox";
             ProfCodeFilterBox.Size = new Size(132, 27);
             ProfCodeFilterBox.TabIndex = 0;
+            ProfCodeFilterBox.TextChanged += ProfCodeFilterBox_TextChanged;
             // 
             // ProfdataGridView
             // 
