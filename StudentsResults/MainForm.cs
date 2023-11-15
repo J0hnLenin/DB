@@ -22,6 +22,28 @@ namespace StudentsResults
             CreateColumns();
             RefreshDataGrid(RB_DataGridView);
             SpGridInit();
+            DisGridInit();
+        }
+
+        private void DisGridInit()
+        {
+            DataGridView grid = DisdataGridView;
+            grid.Columns.Add("D_Code", "Код");
+            grid.Columns.Add("Name", "Название");
+            grid.Columns.Add("ProfessorName", "Профессор");
+            GridUpdate(grid, DisGridRequest(), DisReadRow);
+        }
+
+        private string DisGridRequest()
+        {
+            string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
+                               FROM Discipline AS D LEFT JOIN Professor AS P ON
+                               FK_Professor = P_Code";
+            return Request;
+        }
+        private void DisReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
         }
 
         private void SpGridInit()
@@ -29,7 +51,7 @@ namespace StudentsResults
             DataGridView grid = SpdataGridView;
             grid.Columns.Add("S_Code", "Код");
             grid.Columns.Add("Name", "Название");
-            SpGridUpdate();
+            GridUpdate(grid, SpGridRequest(), SpReadRow);
         }
 
         private string SpGridRequest()
@@ -42,28 +64,16 @@ namespace StudentsResults
             grid.Rows.Add(record.GetInt32(0), record.GetString(1));
         }
 
-        private void SpGridUpdate()
+        private void GridUpdate(DataGridView grid, string Request, Action<DataGridView, IDataRecord> ReadRow)
         {
-            DataGridView grid = SpdataGridView;
-            string Request = SpGridRequest();
-
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
             dataBase.openConnection();
             SqlDataReader reader = Command.ExecuteReader();
 
-
             grid.Rows.Clear();
-
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "WriteLines.txt")))
+            while (reader.Read())
             {
-                int i = 0;
-                while (reader.Read())
-                {
-                    SpReadRow(grid, reader);
-                    outputFile.WriteLine("i = " + i);
-                    i++;
-                }
+                ReadRow(grid, reader);
             }
             reader.Close();
 
@@ -172,6 +182,11 @@ namespace StudentsResults
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

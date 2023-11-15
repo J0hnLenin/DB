@@ -49,6 +49,14 @@
             SpCodeFilterBox = new TextBox();
             SpdataGridView = new DataGridView();
             Discipline = new TabPage();
+            splitContainer3 = new SplitContainer();
+            label4 = new Label();
+            DisProfessorFilterBox = new TextBox();
+            label5 = new Label();
+            DisNameFilterBox = new TextBox();
+            label6 = new Label();
+            DisCodeFilterBox = new TextBox();
+            DisdataGridView = new DataGridView();
             Professor = new TabPage();
             Mark = new TabPage();
             IconImageList = new ImageList(components);
@@ -65,6 +73,12 @@
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
+            Discipline.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DisdataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainControl
@@ -287,6 +301,7 @@
             // 
             // Discipline
             // 
+            Discipline.Controls.Add(splitContainer3);
             Discipline.ImageIndex = 3;
             Discipline.Location = new Point(4, 44);
             Discipline.Name = "Discipline";
@@ -294,6 +309,96 @@
             Discipline.TabIndex = 3;
             Discipline.Text = "Дисциплины";
             Discipline.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer3
+            // 
+            splitContainer3.Dock = DockStyle.Fill;
+            splitContainer3.Location = new Point(0, 0);
+            splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Controls.Add(label4);
+            splitContainer3.Panel1.Controls.Add(DisProfessorFilterBox);
+            splitContainer3.Panel1.Controls.Add(label5);
+            splitContainer3.Panel1.Controls.Add(DisNameFilterBox);
+            splitContainer3.Panel1.Controls.Add(label6);
+            splitContainer3.Panel1.Controls.Add(DisCodeFilterBox);
+            // 
+            // splitContainer3.Panel2
+            // 
+            splitContainer3.Panel2.Controls.Add(DisdataGridView);
+            splitContainer3.Size = new Size(1075, 402);
+            splitContainer3.SplitterDistance = 256;
+            splitContainer3.TabIndex = 2;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(8, 102);
+            label4.Name = "label4";
+            label4.Size = new Size(91, 20);
+            label4.TabIndex = 5;
+            label4.Text = "Профессор:";
+            // 
+            // DisProfessorFilterBox
+            // 
+            DisProfessorFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            DisProfessorFilterBox.Location = new Point(121, 99);
+            DisProfessorFilterBox.Name = "DisProfessorFilterBox";
+            DisProfessorFilterBox.Size = new Size(131, 27);
+            DisProfessorFilterBox.TabIndex = 4;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(8, 69);
+            label5.Name = "label5";
+            label5.Size = new Size(80, 20);
+            label5.TabIndex = 3;
+            label5.Text = "Название:";
+            // 
+            // DisNameFilterBox
+            // 
+            DisNameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            DisNameFilterBox.Location = new Point(121, 66);
+            DisNameFilterBox.Name = "DisNameFilterBox";
+            DisNameFilterBox.Size = new Size(131, 27);
+            DisNameFilterBox.TabIndex = 2;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(8, 36);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 20);
+            label6.TabIndex = 1;
+            label6.Text = "Код:";
+            // 
+            // DisCodeFilterBox
+            // 
+            DisCodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            DisCodeFilterBox.Location = new Point(121, 33);
+            DisCodeFilterBox.Name = "DisCodeFilterBox";
+            DisCodeFilterBox.Size = new Size(132, 27);
+            DisCodeFilterBox.TabIndex = 0;
+            // 
+            // DisdataGridView
+            // 
+            DisdataGridView.AllowUserToAddRows = false;
+            DisdataGridView.AllowUserToDeleteRows = false;
+            DisdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DisdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DisdataGridView.Dock = DockStyle.Fill;
+            DisdataGridView.Location = new Point(0, 0);
+            DisdataGridView.Name = "DisdataGridView";
+            DisdataGridView.ReadOnly = true;
+            DisdataGridView.RowTemplate.Height = 25;
+            DisdataGridView.Size = new Size(815, 402);
+            DisdataGridView.TabIndex = 0;
             // 
             // Professor
             // 
@@ -351,6 +456,13 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SpdataGridView).EndInit();
+            Discipline.ResumeLayout(false);
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel1.PerformLayout();
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DisdataGridView).EndInit();
             ResumeLayout(false);
         }
 
@@ -380,5 +492,13 @@
         private Label label3;
         private TextBox SpCodeFilterBox;
         private DataGridView SpdataGridView;
+        private SplitContainer splitContainer3;
+        private Label label4;
+        private TextBox DisProfessorFilterBox;
+        private Label label5;
+        private TextBox DisNameFilterBox;
+        private Label label6;
+        private TextBox DisCodeFilterBox;
+        private DataGridView DisdataGridView;
     }
 }
