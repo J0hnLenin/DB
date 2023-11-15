@@ -19,7 +19,7 @@ CREATE TABLE dbo.Specialty(
 
 CREATE TABLE dbo.Mark(
 	M_Code int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	Name nvarchar(32) NOT NULL,
+	Name nvarchar(20) NOT NULL,
 )
 
 CREATE TABLE dbo.RecordBook(
