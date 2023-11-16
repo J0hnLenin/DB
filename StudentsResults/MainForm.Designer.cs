@@ -71,9 +71,9 @@
             label10 = new Label();
             MarkCodeFilterBox = new TextBox();
             MarkdataGridView = new DataGridView();
-            IconImageList = new ImageList(components);
             _M_Code = new DataGridViewTextBoxColumn();
             _Name = new DataGridViewTextBoxColumn();
+            IconImageList = new ImageList(components);
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -587,7 +587,6 @@
             // 
             // MarkdataGridView
             // 
-            MarkdataGridView.AllowUserToAddRows = false;
             MarkdataGridView.AllowUserToDeleteRows = false;
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -599,18 +598,6 @@
             MarkdataGridView.Size = new Size(815, 402);
             MarkdataGridView.TabIndex = 0;
             MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
-            // 
-            // IconImageList
-            // 
-            IconImageList.ColorDepth = ColorDepth.Depth32Bit;
-            IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
-            IconImageList.TransparentColor = Color.Transparent;
-            IconImageList.Images.SetKeyName(0, "free-icon-home-3648679.png");
-            IconImageList.Images.SetKeyName(1, "free-icon-open-book-760346.png");
-            IconImageList.Images.SetKeyName(2, "free-icon-directional-sign-7276274.png");
-            IconImageList.Images.SetKeyName(3, "free-icon-note-book-11092418.png");
-            IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
-            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
             // 
             // _M_Code
             // 
@@ -625,6 +612,18 @@
             _Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _Name.HeaderText = "Оценка";
             _Name.Name = "_Name";
+            // 
+            // IconImageList
+            // 
+            IconImageList.ColorDepth = ColorDepth.Depth32Bit;
+            IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
+            IconImageList.TransparentColor = Color.Transparent;
+            IconImageList.Images.SetKeyName(0, "free-icon-home-3648679.png");
+            IconImageList.Images.SetKeyName(1, "free-icon-open-book-760346.png");
+            IconImageList.Images.SetKeyName(2, "free-icon-directional-sign-7276274.png");
+            IconImageList.Images.SetKeyName(3, "free-icon-note-book-11092418.png");
+            IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
+            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
             // 
             // MainForm
             // 

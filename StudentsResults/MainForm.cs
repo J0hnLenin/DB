@@ -33,8 +33,7 @@ namespace StudentsResults
         //Marks grid
         private void MarkGridInit()
         {
-            DataGridView grid = MarkdataGridView;
-            GridUpdate(grid, MarkGridRequest(), MarkReadRow);
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
         }
         private string MarkGridRequest()
         {
@@ -189,6 +188,25 @@ namespace StudentsResults
             grid.Rows.Add(record.GetInt32(0), record.GetString(1));
         }
 
+        private void GridUpdate(string table_name)
+        {
+            switch (table_name)
+            {
+                case "Professor":
+                    ProfGridInit();
+                    break;
+                case "Discipline":
+                    DisGridInit();
+                    break;
+                case "Specialty":
+                    SpGridInit();
+                    break;
+                case "Mark":
+                    MarkGridInit();
+                    break;
+            }
+        }
+
         private void GridUpdate(DataGridView grid, string Request, Action<DataGridView, IDataRecord> ReadRow)
         {
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
@@ -207,6 +225,15 @@ namespace StudentsResults
             var request = $"UPDATE {table} " +
                             $"SET {property} = '{value}' " +
                             $"WHERE {id_name} = {id};";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+        private void InsertObject(string table, string property, string value)
+        {
+            var request = $"INSERT INTO {table} ({property})" +
+                            $"VALUES ('{value}')";
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
@@ -386,19 +413,29 @@ namespace StudentsResults
 
         }
 
-        
-        private void MarkdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void OnCellChange(DataGridView grid, string table, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
-            var id_name = MarkdataGridView.Columns[0].Name.Substring(1);
-            var row = MarkdataGridView.Rows[e.RowIndex];
-            var id = (int)row.Cells[0].Value;
-            var property = MarkdataGridView.Columns[e.ColumnIndex].Name.Substring(1);
-            string value = (string)row.Cells[e.ColumnIndex].Value;
+            var row = grid.Rows[e.RowIndex];
+            var id_name = grid.Columns[0].Name.Substring(1);
+            var id = row.Cells[0].Value;
+            var property = grid.Columns[e.ColumnIndex].Name.Substring(1);
+            var value = (string)row.Cells[e.ColumnIndex].Value;
+            if (id is not null)
+            {
+                UpdateObject(table, id_name, (int)id, property, value);
+            } else
+            {
+                InsertObject(table, property, value);
+            }
 
-            UpdateObject("Mark", id_name, id, property, value);
-            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+            GridUpdate(table);
+        }
+        
+        private void MarkdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(MarkdataGridView, "Mark", e);
         }
     }
 }
