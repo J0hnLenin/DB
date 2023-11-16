@@ -455,6 +455,12 @@ namespace StudentsResults
             int id = (int)ReportComboBox.SelectedIndex;
             ReportCreateColumns(id);
             RefreshReportDataGrid(ReportDataGridView, id);
+
+            // + TEST
+            ProfessorBetween = -1;
+            ProfessorSelectForm New_Form = new ProfessorSelectForm();
+            New_Form.Show(this);
+            // - TEST
         }
 
         private void ReportCreateColumns(int id)
@@ -645,5 +651,14 @@ namespace StudentsResults
         {
             OnRowDeletion(SpdataGridView, "Specialty", e);
         }
+
+        private void RB_DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+        public int DisciplineBetween { set; get; }
+        public int ProfessorBetween { set; get; }
+        public int MarkBetween { set; get; }
+        public int SpecialtyBetween { set; get; }
     }
 }

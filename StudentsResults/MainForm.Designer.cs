@@ -83,10 +83,12 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
+
             _MM_Code = new DataGridViewTextBoxColumn();
             _MName = new DataGridViewTextBoxColumn();
             _SS_Code = new DataGridViewTextBoxColumn();
             _SName = new DataGridViewTextBoxColumn();
+
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -668,6 +670,22 @@
             // 
             // IconImageList
             // 
+            //++TEST
+            RB_DataGridView.AllowUserToAddRows = false;
+            RB_DataGridView.AllowUserToDeleteRows = false;
+            RB_DataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RB_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            RB_DataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            RB_DataGridView.Location = new Point(0, 0);
+            RB_DataGridView.Name = "RB_DataGridView";
+            RB_DataGridView.ReadOnly = true;
+            RB_DataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            RB_DataGridView.RowTemplate.Height = 25;
+            RB_DataGridView.Size = new Size(815, 402);
+            RB_DataGridView.TabIndex = 0;
+            RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
+            RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
+            //--
             IconImageList.ColorDepth = ColorDepth.Depth32Bit;
             IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
             IconImageList.TransparentColor = Color.Transparent;
