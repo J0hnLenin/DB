@@ -110,6 +110,11 @@ namespace StudentsResults
                         SelectDiscipline(sender, e);
                         break;
                     }
+                case 3:
+                    {
+                        SelectMark(sender, e);
+                        break;
+                    }
             }
         }
 
@@ -125,7 +130,16 @@ namespace StudentsResults
         public int SelectedCode = -1;
         private void SelectSpecialty(object sender, EventArgs e)
         {
-
+            SelectedCode = -1;
+            SpecialtySelectForm selectForm = new SpecialtySelectForm();
+            selectForm.ShowDialog(this);
+            if (SelectedCode != -1)
+            {
+               
+                UpdateObject("RecordBook", "RB_Code", RB_Code, "FK_Specialty", Convert.ToString(SelectedCode));
+                RefreshHead();
+                SelectedCode = -1;
+            }
         }
         private void SelectDiscipline(object sender, DataGridViewCellEventArgs e)
         {
@@ -145,6 +159,26 @@ namespace StudentsResults
                 SelectedCode = -1;
             }
         }
+
+        private void SelectMark(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            DataGridView grid = Line_DataGridView;
+
+            SelectedCode = -1;
+            MarkSelectForm selectForm = new MarkSelectForm();
+            selectForm.ShowDialog(this);
+            if (SelectedCode != -1)
+            {
+                var row = grid.Rows[e.RowIndex];
+                var id = row.Cells[0].Value;
+                UpdateObject("Line", "L_Code", (int)id, "FK_Mark", Convert.ToString(SelectedCode));
+                RefreshDataGrid(grid);
+                SelectedCode = -1;
+            }
+        }
+
         private void UpdateObject(string table, string id_name, int id, string property, string value)
         {
             var request = $"UPDATE {table} " +

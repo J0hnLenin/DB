@@ -18,7 +18,7 @@ namespace StudentsResults
     public partial class MainForm : Form
     {
         DataBase dataBase = new DataBase();
-        int SelectedRow;
+        
         public MainForm()
         {
             InitializeComponent();
@@ -357,7 +357,7 @@ namespace StudentsResults
 
         }
 
-        private void ProfdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ProfdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -652,7 +652,7 @@ namespace StudentsResults
         }
 
         public int SelectedCode = -1;
-        private void DisdataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DisdataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             
             if (e.RowIndex == -1 || e.ColumnIndex != 2) 

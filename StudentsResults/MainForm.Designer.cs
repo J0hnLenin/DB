@@ -312,7 +312,7 @@
             ProfdataGridView.RowTemplate.Height = 25;
             ProfdataGridView.Size = new Size(815, 402);
             ProfdataGridView.TabIndex = 0;
-            ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
+            ProfdataGridView.CellClick += ProfdataGridView_CellClick;
             ProfdataGridView.CellValueChanged += ProfdataGridView_CellValueChanged;
             ProfdataGridView.UserDeletedRow += ProfdataGridView_UserDeletedRow;
             // 
@@ -435,7 +435,7 @@
             DisdataGridView.RowTemplate.Height = 25;
             DisdataGridView.Size = new Size(799, 402);
             DisdataGridView.TabIndex = 0;
-            DisdataGridView.CellContentDoubleClick += DisdataGridView_CellContentDoubleClick;
+            DisdataGridView.CellDoubleClick += DisdataGridView_CellDoubleClick;
             // 
             // Specialty
             // 
