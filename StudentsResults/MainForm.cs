@@ -232,8 +232,17 @@ namespace StudentsResults
         }
         private void InsertObject(string table, string property, string value)
         {
-            var request = $"INSERT INTO {table} ({property})" +
+            var request = $"INSERT INTO {table} ({property}) " +
                             $"VALUES ('{value}')";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+        private void DeleteObject(string table, string id_name, int id)
+        {
+            var request = $"DELETE FROM {table} " +
+                            $"WHERE {id_name} = {id}";
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
@@ -425,17 +434,32 @@ namespace StudentsResults
             if (id is not null)
             {
                 UpdateObject(table, id_name, (int)id, property, value);
-            } else
+            }
+            else
             {
                 InsertObject(table, property, value);
             }
 
             GridUpdate(table);
         }
-        
+
+        private void OnRowDeletion(DataGridView grid, string table, DataGridViewRowEventArgs e)
+        {
+            var row = e.Row;
+            var id_name = grid.Columns[0].Name.Substring(1);
+            var id = (int)row.Cells[0].Value;
+            DeleteObject(table, id_name, id);
+            GridUpdate(table);
+        }
+
         private void MarkdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             OnCellChange(MarkdataGridView, "Mark", e);
+        }
+
+        private void MarkdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(MarkdataGridView, "Mark", e);
         }
     }
 }

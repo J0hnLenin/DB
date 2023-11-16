@@ -587,7 +587,6 @@
             // 
             // MarkdataGridView
             // 
-            MarkdataGridView.AllowUserToDeleteRows = false;
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _M_Code, _Name });
@@ -598,6 +597,7 @@
             MarkdataGridView.Size = new Size(815, 402);
             MarkdataGridView.TabIndex = 0;
             MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
+            MarkdataGridView.UserDeletedRow += MarkdataGridView_UserDeletedRow;
             // 
             // _M_Code
             // 
