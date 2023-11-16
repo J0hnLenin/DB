@@ -30,7 +30,7 @@ namespace StudentsResults
             MainForm MF = (MainForm)this.Owner;
 
             //присваиваем значение свойству в родительской форме
-            MF.ProfessorBetween = Convert.ToInt32(ProfdataGridView.Rows[e.RowIndex].Cells[0].Value);
+            //MF.ProfessorBetween = Convert.ToInt32(ProfdataGridView.Rows[e.RowIndex].Cells[0].Value);
             this.Close();
             
         }
