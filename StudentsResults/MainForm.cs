@@ -22,8 +22,7 @@ namespace StudentsResults
         public MainForm()
         {
             InitializeComponent();
-            CreateColumns();
-            RefreshDataGrid(RB_DataGridView);
+            RBGridInit();
             SpGridInit();
             DisGridInit();
             ProfGridInit();
@@ -172,7 +171,48 @@ namespace StudentsResults
             grid.Rows.Add(record.GetInt32(0), record.GetString(1));
         }
 
-        private void GridUpdate(string table_name)
+        //RecordBook
+        private void RBGridInit()
+        {
+            GridUpdate(RB_DataGridView, RBGridRequest(), RBReadRow);
+        }
+        private string RBGridRequest()
+        {
+            string code = CodeFilterBox.Text;
+            string name = NameFilterBox.Text;
+            string dis = DisciplineFilterBox.Text;
+            string Request = @"SELECT RB_Code, R.Name, ISNULL(S.Name, '') AS SpecialtyName
+                                FROM RecordBook AS R LEFT JOIN Specialty AS S ON FK_Specialty = S_Code ";
+            List<string> args = new List<string>();
+            if (code != "" || name != "" || dis != "")
+            {
+                args.Add("WHERE ");
+                if (code != "")
+                {
+                    args.Add("RB_Code = " + code);
+                }
+                if (name != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("R.Name LIKE '%{0}%'", name));
+                }
+                if (dis != "")
+                {
+                    if (args.Count() > 1)
+                        args.Add(" AND ");
+                    args.Add(string.Format("S.Name LIKE '%{0}%'", dis));
+                }
+            }
+            Request += String.Concat(args);
+            return Request;
+        }
+        private void RBReadRow(DataGridView grid, IDataRecord record)
+        {
+            grid.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
+        }
+
+        public void GridUpdate(string table_name)
         {
             switch (table_name)
             {
@@ -187,6 +227,9 @@ namespace StudentsResults
                     break;
                 case "Mark":
                     MarkGridInit();
+                    break;
+                case "RecordBook":
+                    RBGridInit();
                     break;
             }
         }
@@ -218,7 +261,6 @@ namespace StudentsResults
         {
             var request = $"INSERT INTO {table} ({property}) " +
                             $"VALUES ('{value}')";
-            label6.Text = request;
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
@@ -233,83 +275,23 @@ namespace StudentsResults
             dataBase.openConnection();
             Command.ExecuteNonQuery();
         }
-
-        private void CreateColumns()
-        {
-
-            RB_DataGridView.Columns.Add("RB_Code", "Код");
-            RB_DataGridView.Columns.Add("Name", "ФИО");
-            RB_DataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
-
-            //RB_DataGridView.Columns.Add("State", "State");
-
-        }
-
-        private void ReadRow(DataGridView dgw, IDataRecord record)
-        {
-            dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
-        }
-
-        private void RefreshDataGrid(DataGridView dgw)
-        {
-            dgw.Rows.Clear();
-            string Request = @"SELECT 
-	                            RB_Code,
-	                            R.Name,
-	                            ISNULL(S.Name, '') AS SpecialtyName
-                              FROM RecordBook AS R LEFT JOIN Specialty AS S ON
-	                            FK_Specialty = S_Code";
-            if (CodeFilterBox.Text != "" || NameFilterBox.Text != "" || DisciplineFilterBox.Text != "")
-            {
-                bool Flag = false;
-                Request = string.Format("{0} WHERE", Request);
-
-                if (CodeFilterBox.Text != "")
-                {
-                    if (Flag)
-                    {
-                        Request = string.Format("{0} AND", Request);
-                    }
-                    Request = string.Format("{0} RB_Code = {1}", Request, CodeFilterBox.Text);
-                    Flag = true;
-                }
-                if (NameFilterBox.Text != "")
-                {
-                    if (Flag)
-                    {
-                        Request = string.Format("{0} AND", Request);
-                    }
-                    Request = string.Format("{0} R.Name LIKE '%{1}%'", Request, NameFilterBox.Text);
-                    Flag = true;
-                }
-                if (DisciplineFilterBox.Text != "")
-                {
-                    if (Flag)
-                    {
-                        Request = string.Format("{0} AND", Request);
-                    }
-                    Request = string.Format("{0} S.Name LIKE '%{1}%'", Request, DisciplineFilterBox.Text);
-                    Flag = true;
-                }
-            }
-
-            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
-            dataBase.openConnection();
-            SqlDataReader reader = Command.ExecuteReader();
-            while (reader.Read())
-            {
-                ReadRow(dgw, reader);
-            }
-            reader.Close();
-        }
-
         private void RB_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex == -1)
                 return;
+            DataGridView grid = RB_DataGridView;
 
-            RB_Form New_RB_Form = new RB_Form(Convert.ToInt32(RB_DataGridView.Rows[e.RowIndex].Cells[0].Value));
+            var row = grid.Rows[e.RowIndex];
+            var id = row.Cells[0].Value;
+            if (id == null)
+            {
+                InsertObject("RecordBook", "Name, FK_Specialty", " ', '1");
+                GridUpdate("RecordBook");
+            }
+
+            RB_Form New_RB_Form = new RB_Form(Convert.ToInt32(RB_DataGridView.Rows[e.RowIndex].Cells[0].Value), this);
             New_RB_Form.Show();
+            GridUpdate("RecordBook");
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -324,17 +306,18 @@ namespace StudentsResults
 
         private void NameFilterBox_TextChanged(object sender, EventArgs e)
         {
-            RefreshDataGrid(RB_DataGridView);
+            RBGridInit();
         }
 
         private void CodeFilterBox_TextChanged(object sender, EventArgs e)
         {
-            RefreshDataGrid(RB_DataGridView);
+            RBGridInit();
+
         }
 
         private void DisciplineFilterBox_TextChanged(object sender, EventArgs e)
         {
-            RefreshDataGrid(RB_DataGridView);
+            RBGridInit();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -694,5 +677,28 @@ namespace StudentsResults
         {
             OnRowDeletion(DisdataGridView, "Discipline", e);
         }
+        private void RB_DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            DataGridView grid = RB_DataGridView;
+
+            var row = grid.Rows[e.RowIndex];
+            var id = row.Cells[0].Value;
+            if (id == null)
+            {
+                var value = (string)row.Cells[e.ColumnIndex].Value;
+                InsertObject("RecordBook", "Name, FK_Specialty", $"{value}', '1");
+                GridUpdate("RecordBook");
+            }
+            OnCellChange(RB_DataGridView, "RecordBook", e);
+        }
+
+        private void RB_DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+
+            OnRowDeletion(RB_DataGridView, "RecordBook", e);
+        }
+
     }
 }

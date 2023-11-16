@@ -15,8 +15,10 @@ namespace StudentsResults
     {
         DataBase dataBase = new DataBase();
         int RB_Code = -1;
-        public RB_Form(int Code)
+        MainForm master;
+        public RB_Form(int Code, MainForm master)
         {
+            this.master = master;
             RB_Code = Code;
             InitializeComponent();
             RefreshHead();
@@ -135,7 +137,7 @@ namespace StudentsResults
             selectForm.ShowDialog(this);
             if (SelectedCode != -1)
             {
-               
+
                 UpdateObject("RecordBook", "RB_Code", RB_Code, "FK_Specialty", Convert.ToString(SelectedCode));
                 RefreshHead();
                 SelectedCode = -1;
@@ -188,6 +190,16 @@ namespace StudentsResults
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
             Command.ExecuteNonQuery();
+        }
+
+        private void NameBox_Validated(object sender, EventArgs e)
+        {
+            UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);
+        }
+
+        private void RB_Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            master.GridUpdate("RecordBook");
         }
     }
 }

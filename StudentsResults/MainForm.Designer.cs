@@ -58,6 +58,9 @@
             label6 = new Label();
             DisCodeFilterBox = new TextBox();
             DisdataGridView = new DataGridView();
+            _DD_Code = new DataGridViewTextBoxColumn();
+            _DName = new DataGridViewTextBoxColumn();
+            _DProfessorName = new DataGridViewTextBoxColumn();
             Specialty = new TabPage();
             splitContainer2 = new SplitContainer();
             label2 = new Label();
@@ -76,6 +79,9 @@
             CodeFilterLabel = new Label();
             CodeFilterBox = new TextBox();
             RB_DataGridView = new DataGridView();
+            _RRB_Code = new DataGridViewTextBoxColumn();
+            _RName = new DataGridViewTextBoxColumn();
+            _RSpecialtyName = new DataGridViewTextBoxColumn();
             MainControl = new TabControl();
             ReportPage = new TabPage();
             MFilterLable = new Label();
@@ -87,9 +93,6 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            _DD_Code = new DataGridViewTextBoxColumn();
-            _DName = new DataGridViewTextBoxColumn();
-            _DProfessorName = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -440,6 +443,29 @@
             DisdataGridView.CellValueChanged += DisdataGridView_CellValueChanged;
             DisdataGridView.UserDeletedRow += DisdataGridView_UserDeletedRow;
             // 
+            // _DD_Code
+            // 
+            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DD_Code.HeaderText = "Код";
+            _DD_Code.Name = "_DD_Code";
+            _DD_Code.ReadOnly = true;
+            _DD_Code.Width = 60;
+            // 
+            // _DName
+            // 
+            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DName.HeaderText = "Наименование";
+            _DName.MaxInputLength = 50;
+            _DName.Name = "_DName";
+            _DName.Width = 141;
+            // 
+            // _DProfessorName
+            // 
+            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _DProfessorName.HeaderText = "Преподаватель";
+            _DProfessorName.Name = "_DProfessorName";
+            _DProfessorName.ReadOnly = true;
+            // 
             // Specialty
             // 
             Specialty.Controls.Add(splitContainer2);
@@ -632,19 +658,42 @@
             // 
             // RB_DataGridView
             // 
-            RB_DataGridView.AllowUserToAddRows = false;
-            RB_DataGridView.AllowUserToDeleteRows = false;
             RB_DataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             RB_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             RB_DataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            RB_DataGridView.Columns.AddRange(new DataGridViewColumn[] { _RRB_Code, _RName, _RSpecialtyName });
             RB_DataGridView.Location = new Point(0, 0);
             RB_DataGridView.Name = "RB_DataGridView";
-            RB_DataGridView.ReadOnly = true;
             RB_DataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             RB_DataGridView.RowTemplate.Height = 25;
             RB_DataGridView.Size = new Size(815, 402);
             RB_DataGridView.TabIndex = 0;
             RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
+            RB_DataGridView.CellValueChanged += RB_DataGridView_CellValueChanged;
+            RB_DataGridView.UserDeletedRow += RB_DataGridView_UserDeletedRow;
+            // 
+            // _RRB_Code
+            // 
+            _RRB_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _RRB_Code.HeaderText = "Код";
+            _RRB_Code.Name = "_RRB_Code";
+            _RRB_Code.ReadOnly = true;
+            _RRB_Code.Width = 60;
+            // 
+            // _RName
+            // 
+            _RName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _RName.HeaderText = "ФИО";
+            _RName.MaxInputLength = 50;
+            _RName.Name = "_RName";
+            _RName.Width = 67;
+            // 
+            // _RSpecialtyName
+            // 
+            _RSpecialtyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _RSpecialtyName.HeaderText = "Направление подготовки";
+            _RSpecialtyName.Name = "_RSpecialtyName";
+            _RSpecialtyName.ReadOnly = true;
             // 
             // MainControl
             // 
@@ -775,29 +824,6 @@
             ReportDataGridView.TabIndex = 0;
             ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
             // 
-            // _DD_Code
-            // 
-            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DD_Code.HeaderText = "Код";
-            _DD_Code.Name = "_DD_Code";
-            _DD_Code.ReadOnly = true;
-            _DD_Code.Width = 60;
-            // 
-            // _DName
-            // 
-            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DName.HeaderText = "Наименование";
-            _DName.MaxInputLength = 50;
-            _DName.Name = "_DName";
-            _DName.Width = 141;
-            // 
-            // _DProfessorName
-            // 
-            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _DProfessorName.HeaderText = "Преподаватель";
-            _DProfessorName.Name = "_DProfessorName";
-            _DProfessorName.ReadOnly = true;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -910,5 +936,8 @@
         private DataGridViewTextBoxColumn _DD_Code;
         private DataGridViewTextBoxColumn _DName;
         private DataGridViewTextBoxColumn _DProfessorName;
+        private DataGridViewTextBoxColumn _RRB_Code;
+        private DataGridViewTextBoxColumn _RName;
+        private DataGridViewTextBoxColumn _RSpecialtyName;
     }
 }

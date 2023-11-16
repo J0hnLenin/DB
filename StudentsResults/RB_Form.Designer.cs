@@ -90,6 +90,7 @@
             NameBox.Name = "NameBox";
             NameBox.Size = new Size(460, 27);
             NameBox.TabIndex = 8;
+            NameBox.Validated += NameBox_Validated;
             // 
             // CodeLabel
             // 
@@ -157,6 +158,7 @@
             Controls.Add(Line_DataGridView);
             Name = "RB_Form";
             Text = "Зачётная книга";
+            FormClosed += RB_Form_FormClosed;
             ((System.ComponentModel.ISupportInitialize)Line_DataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
