@@ -30,33 +30,14 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            MainControl = new TabControl();
-            MainMenu = new TabPage();
-            RecordBook = new TabPage();
-            splitContainer1 = new SplitContainer();
-            DisciplineFilterLabel = new Label();
-            DisciplineFilterBox = new TextBox();
-            NameFilterLabel = new Label();
-            NameFilterBox = new TextBox();
-            CodeFilterLabel = new Label();
-            CodeFilterBox = new TextBox();
-            RB_DataGridView = new DataGridView();
-            Specialty = new TabPage();
-            splitContainer2 = new SplitContainer();
-            label2 = new Label();
-            SpNameFilterBox = new TextBox();
-            label3 = new Label();
-            SpCodeFilterBox = new TextBox();
-            SpdataGridView = new DataGridView();
-            Discipline = new TabPage();
-            splitContainer3 = new SplitContainer();
-            label4 = new Label();
-            DisProfessorFilterBox = new TextBox();
-            label5 = new Label();
-            DisNameFilterBox = new TextBox();
-            label6 = new Label();
-            DisCodeFilterBox = new TextBox();
-            DisdataGridView = new DataGridView();
+            IconImageList = new ImageList(components);
+            Mark = new TabPage();
+            splitContainer5 = new SplitContainer();
+            label9 = new Label();
+            MarkNameFilterBox = new TextBox();
+            label10 = new Label();
+            MarkCodeFilterBox = new TextBox();
+            MarkdataGridView = new DataGridView();
             Professor = new TabPage();
             splitContainer4 = new SplitContainer();
             label7 = new Label();
@@ -66,19 +47,70 @@
             ProfdataGridView = new DataGridView();
             _PP_Code = new DataGridViewTextBoxColumn();
             _PName = new DataGridViewTextBoxColumn();
-            Mark = new TabPage();
-            splitContainer5 = new SplitContainer();
-            label9 = new Label();
-            MarkNameFilterBox = new TextBox();
-            label10 = new Label();
-            MarkCodeFilterBox = new TextBox();
-            MarkdataGridView = new DataGridView();
+            Discipline = new TabPage();
+            splitContainer3 = new SplitContainer();
+            label4 = new Label();
+            DisProfessorFilterBox = new TextBox();
+            label5 = new Label();
+            DisNameFilterBox = new TextBox();
+            label6 = new Label();
+            DisCodeFilterBox = new TextBox();
+            DisdataGridView = new DataGridView();
+            Specialty = new TabPage();
+            splitContainer2 = new SplitContainer();
+            label2 = new Label();
+            SpNameFilterBox = new TextBox();
+            label3 = new Label();
+            SpCodeFilterBox = new TextBox();
+            SpdataGridView = new DataGridView();
+            RecordBook = new TabPage();
+            splitContainer1 = new SplitContainer();
+            DisciplineFilterLabel = new Label();
+            DisciplineFilterBox = new TextBox();
+            NameFilterLabel = new Label();
+            NameFilterBox = new TextBox();
+            CodeFilterLabel = new Label();
+            CodeFilterBox = new TextBox();
+            RB_DataGridView = new DataGridView();
+            MainControl = new TabControl();
+            ReportPage = new TabPage();
+            MFilterLable = new Label();
+            MFilterBox = new TextBox();
+            SFilterLable = new Label();
+            SFilterBox = new TextBox();
+            DFilterLable = new Label();
+            DFilterBox = new TextBox();
+            ReportComboBox = new ComboBox();
+            GetReport = new Button();
+            ReportDataGridView = new DataGridView();
             _MM_Code = new DataGridViewTextBoxColumn();
             _MName = new DataGridViewTextBoxColumn();
-            IconImageList = new ImageList(components);
             _SS_Code = new DataGridViewTextBoxColumn();
             _SName = new DataGridViewTextBoxColumn();
-            MainControl.SuspendLayout();
+            Mark.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
+            splitContainer5.Panel1.SuspendLayout();
+            splitContainer5.Panel2.SuspendLayout();
+            splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MarkdataGridView).BeginInit();
+            Professor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
+            splitContainer4.Panel1.SuspendLayout();
+            splitContainer4.Panel2.SuspendLayout();
+            splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProfdataGridView).BeginInit();
+            Discipline.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DisdataGridView).BeginInit();
+            Specialty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
             RecordBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -205,33 +237,19 @@
             // 
             // NameFilterBox
             // 
-            NameFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            NameFilterBox.Location = new Point(121, 66);
-            NameFilterBox.Name = "NameFilterBox";
-            NameFilterBox.Size = new Size(131, 27);
-            NameFilterBox.TabIndex = 2;
-            NameFilterBox.TextChanged += NameFilterBox_TextChanged;
+            MarkdataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _MM_Code, _MName });
+            MarkdataGridView.Location = new Point(0, 0);
+            MarkdataGridView.Name = "MarkdataGridView";
+            MarkdataGridView.RowTemplate.Height = 25;
+            MarkdataGridView.Size = new Size(815, 402);
+            MarkdataGridView.TabIndex = 0;
+            MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
+            MarkdataGridView.UserDeletedRow += MarkdataGridView_UserDeletedRow;
             // 
-            // CodeFilterLabel
-            // 
-            CodeFilterLabel.AutoSize = true;
-            CodeFilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CodeFilterLabel.Location = new Point(3, 36);
-            CodeFilterLabel.Name = "CodeFilterLabel";
-            CodeFilterLabel.Size = new Size(38, 20);
-            CodeFilterLabel.TabIndex = 1;
-            CodeFilterLabel.Text = "Код:";
-            // 
-            // CodeFilterBox
-            // 
-            CodeFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CodeFilterBox.Location = new Point(121, 33);
-            CodeFilterBox.Name = "CodeFilterBox";
-            CodeFilterBox.Size = new Size(132, 27);
-            CodeFilterBox.TabIndex = 0;
-            CodeFilterBox.TextChanged += CodeFilterBox_TextChanged;
-            // 
-            // RB_DataGridView
+            // Professor
             // 
             RB_DataGridView.AllowUserToAddRows = false;
             RB_DataGridView.AllowUserToDeleteRows = false;
@@ -318,17 +336,33 @@
             // 
             // SpdataGridView
             // 
-            SpdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            SpdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SpdataGridView.Columns.AddRange(new DataGridViewColumn[] { _SS_Code, _SName });
-            SpdataGridView.Dock = DockStyle.Fill;
-            SpdataGridView.Location = new Point(0, 0);
-            SpdataGridView.Name = "SpdataGridView";
-            SpdataGridView.RowTemplate.Height = 25;
-            SpdataGridView.Size = new Size(815, 402);
-            SpdataGridView.TabIndex = 0;
-            SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
-            SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
+            ProfdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ProfdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ProfdataGridView.Columns.AddRange(new DataGridViewColumn[] { _PP_Code, _PName });
+            ProfdataGridView.Dock = DockStyle.Fill;
+            ProfdataGridView.Location = new Point(0, 0);
+            ProfdataGridView.Name = "ProfdataGridView";
+            ProfdataGridView.RowTemplate.Height = 25;
+            ProfdataGridView.Size = new Size(815, 402);
+            ProfdataGridView.TabIndex = 0;
+            ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
+            ProfdataGridView.CellValueChanged += ProfdataGridView_CellValueChanged;
+            ProfdataGridView.UserDeletedRow += ProfdataGridView_UserDeletedRow;
+            // 
+            // _PP_Code
+            // 
+            _PP_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _PP_Code.HeaderText = "Код";
+            _PP_Code.Name = "_PP_Code";
+            _PP_Code.ReadOnly = true;
+            _PP_Code.Width = 60;
+            // 
+            // _PName
+            // 
+            _PName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _PName.HeaderText = "ФИО";
+            _PName.MaxInputLength = 50;
+            _PName.Name = "_PName";
             // 
             // Discipline
             // 
@@ -506,18 +540,18 @@
             // 
             // ProfdataGridView
             // 
-            ProfdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ProfdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ProfdataGridView.Columns.AddRange(new DataGridViewColumn[] { _PP_Code, _PName });
-            ProfdataGridView.Dock = DockStyle.Fill;
-            ProfdataGridView.Location = new Point(0, 0);
-            ProfdataGridView.Name = "ProfdataGridView";
-            ProfdataGridView.RowTemplate.Height = 25;
-            ProfdataGridView.Size = new Size(815, 402);
-            ProfdataGridView.TabIndex = 0;
-            ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
-            ProfdataGridView.CellValueChanged += ProfdataGridView_CellValueChanged;
-            ProfdataGridView.UserDeletedRow += ProfdataGridView_UserDeletedRow;
+            SpdataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SpdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SpdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SpdataGridView.Columns.AddRange(new DataGridViewColumn[] { _SS_Code, _SName });
+            SpdataGridView.Location = new Point(0, 0);
+            SpdataGridView.Name = "SpdataGridView";
+            SpdataGridView.RowTemplate.Height = 25;
+            SpdataGridView.Size = new Size(815, 402);
+            SpdataGridView.TabIndex = 0;
+            SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
+            SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
+            SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
             // 
             // _PP_Code
             // 
@@ -654,9 +688,143 @@
             // 
             // _SName
             // 
+            // ReportPage
+            // 
+            ReportPage.Controls.Add(MFilterLable);
+            ReportPage.Controls.Add(MFilterBox);
+            ReportPage.Controls.Add(SFilterLable);
+            ReportPage.Controls.Add(SFilterBox);
+            ReportPage.Controls.Add(DFilterLable);
+            ReportPage.Controls.Add(DFilterBox);
+            ReportPage.Controls.Add(ReportComboBox);
+            ReportPage.Controls.Add(GetReport);
+            ReportPage.Controls.Add(ReportDataGridView);
+            ReportPage.ImageIndex = 6;
+            ReportPage.Location = new Point(4, 44);
+            ReportPage.Name = "ReportPage";
+            ReportPage.Padding = new Padding(3);
+            ReportPage.Size = new Size(1075, 402);
+            ReportPage.TabIndex = 6;
+            ReportPage.Text = "Отчёты";
+            ReportPage.UseVisualStyleBackColor = true;
+            // 
+            // MFilterLable
+            // 
+            MFilterLable.AutoSize = true;
+            MFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MFilterLable.Location = new Point(8, 157);
+            MFilterLable.Name = "MFilterLable";
+            MFilterLable.Size = new Size(64, 20);
+            MFilterLable.TabIndex = 11;
+            MFilterLable.Text = "Оценка:";
+            MFilterLable.Click += label1_Click_2;
+            // 
+            // MFilterBox
+            // 
+            MFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MFilterBox.Location = new Point(121, 154);
+            MFilterBox.Name = "MFilterBox";
+            MFilterBox.Size = new Size(185, 27);
+            MFilterBox.TabIndex = 10;
+            // 
+            // SFilterLable
+            // 
+            SFilterLable.AutoSize = true;
+            SFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SFilterLable.Location = new Point(8, 92);
+            SFilterLable.Name = "SFilterLable";
+            SFilterLable.Size = new Size(107, 20);
+            SFilterLable.TabIndex = 9;
+            SFilterLable.Text = "Направление:";
+            SFilterLable.Click += label1_Click_1;
+            // 
+            // SFilterBox
+            // 
+            SFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SFilterBox.Location = new Point(121, 89);
+            SFilterBox.Name = "SFilterBox";
+            SFilterBox.Size = new Size(185, 27);
+            SFilterBox.TabIndex = 8;
+            // 
+            // DFilterLable
+            // 
+            DFilterLable.AutoSize = true;
+            DFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            DFilterLable.Location = new Point(8, 125);
+            DFilterLable.Name = "DFilterLable";
+            DFilterLable.Size = new Size(99, 20);
+            DFilterLable.TabIndex = 7;
+            DFilterLable.Text = "Дисциплина:";
+            DFilterLable.Click += label11_Click;
+            // 
+            // DFilterBox
+            // 
+            DFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            DFilterBox.Location = new Point(121, 122);
+            DFilterBox.Name = "DFilterBox";
+            DFilterBox.Size = new Size(185, 27);
+            DFilterBox.TabIndex = 6;
+            // 
+            // ReportComboBox
+            // 
+            ReportComboBox.FormattingEnabled = true;
+            ReportComboBox.Items.AddRange(new object[] { "Списочный отчёт об успеваемости", "Статистический отчёт об успеваемости " });
+            ReportComboBox.Location = new Point(8, 55);
+            ReportComboBox.Name = "ReportComboBox";
+            ReportComboBox.Size = new Size(298, 28);
+            ReportComboBox.TabIndex = 2;
+            // 
+            // GetReport
+            // 
+            GetReport.BackColor = Color.AliceBlue;
+            GetReport.Location = new Point(8, 11);
+            GetReport.Name = "GetReport";
+            GetReport.Size = new Size(125, 38);
+            GetReport.TabIndex = 1;
+            GetReport.Text = "Сформировать";
+            GetReport.UseVisualStyleBackColor = false;
+            GetReport.Click += GetReport_Click;
+            // 
+            // ReportDataGridView
+            // 
+            ReportDataGridView.AllowUserToAddRows = false;
+            ReportDataGridView.AllowUserToOrderColumns = true;
+            ReportDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ReportDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ReportDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ReportDataGridView.Location = new Point(312, 3);
+            ReportDataGridView.Name = "ReportDataGridView";
+            ReportDataGridView.RowTemplate.Height = 25;
+            ReportDataGridView.Size = new Size(760, 396);
+            ReportDataGridView.TabIndex = 0;
+            ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
+            // 
+            // _MM_Code
+            // 
+            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _MM_Code.HeaderText = "Код";
+            _MM_Code.Name = "_MM_Code";
+            _MM_Code.ReadOnly = true;
+            _MM_Code.Width = 60;
+            // 
+            // _MName
+            // 
+            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _MName.HeaderText = "Оценка";
+            _MName.Name = "_MName";
+            // 
+            // _SS_Code
+            // 
+            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _SS_Code.HeaderText = "Код";
+            _SS_Code.Name = "_SS_Code";
+            _SS_Code.ReadOnly = true;
+            _SS_Code.Width = 60;
+            // 
+            // _SName
+            // 
             _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _SName.HeaderText = "Наименование";
-            _SName.MaxInputLength = 50;
             _SName.Name = "_SName";
             // 
             // MainForm
@@ -708,11 +876,21 @@
         }
 
         #endregion
-
-        private TabControl MainControl;
-        private TabPage MainMenu;
-        private TabPage RecordBook;
-        private TabPage Specialty;
+        private ImageList IconImageList;
+        private TabPage Mark;
+        private SplitContainer splitContainer5;
+        private Label label9;
+        private TextBox MarkNameFilterBox;
+        private Label label10;
+        private TextBox MarkCodeFilterBox;
+        private DataGridView MarkdataGridView;
+        private TabPage Professor;
+        private SplitContainer splitContainer4;
+        private Label label7;
+        private TextBox ProfNameFilterBox;
+        private Label label8;
+        private TextBox ProfCodeFilterBox;
+        private DataGridView ProfdataGridView;
         private TabPage Discipline;
         private TabPage Professor;
         private TabPage Mark;
@@ -741,18 +919,33 @@
         private Label label6;
         private TextBox DisCodeFilterBox;
         private DataGridView DisdataGridView;
-        private SplitContainer splitContainer4;
-        private Label label7;
-        private TextBox ProfNameFilterBox;
-        private Label label8;
-        private TextBox ProfCodeFilterBox;
-        private DataGridView ProfdataGridView;
-        private SplitContainer splitContainer5;
-        private Label label9;
-        private TextBox MarkNameFilterBox;
-        private Label label10;
-        private TextBox MarkCodeFilterBox;
-        private DataGridView MarkdataGridView;
+        private TabPage Specialty;
+        private SplitContainer splitContainer2;
+        private Label label2;
+        private TextBox SpNameFilterBox;
+        private Label label3;
+        private TextBox SpCodeFilterBox;
+        private DataGridView SpdataGridView;
+        private TabPage RecordBook;
+        private SplitContainer splitContainer1;
+        private Label DisciplineFilterLabel;
+        private TextBox DisciplineFilterBox;
+        private Label NameFilterLabel;
+        private TextBox NameFilterBox;
+        private Label CodeFilterLabel;
+        private TextBox CodeFilterBox;
+        private DataGridView RB_DataGridView;
+        private TabControl MainControl;
+        private TabPage ReportPage;
+        private Button GetReport;
+        private ComboBox ReportComboBox;
+        private DataGridView ReportDataGridView;
+        private Label DFilterLable;
+        private TextBox DFilterBox;
+        private Label SFilterLable;
+        private TextBox SFilterBox;
+        private Label MFilterLable;
+        private TextBox MFilterBox;
         private DataGridViewTextBoxColumn _PP_Code;
         private DataGridViewTextBoxColumn _PName;
         private DataGridViewTextBoxColumn _MM_Code;

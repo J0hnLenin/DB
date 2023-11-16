@@ -447,6 +447,185 @@ namespace StudentsResults
             OnRowDeletion(MarkdataGridView, "Mark", e);
         }
 
+        private void GetReport_Click(object sender, EventArgs e)
+        {
+            if (ReportComboBox.SelectedIndex == -1)
+                return;
+
+            int id = (int)ReportComboBox.SelectedIndex;
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
+        }
+
+        private void ReportCreateColumns(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    {
+                        ReportDataGridView.Columns.Clear();
+                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная книга");
+                        ReportDataGridView.Columns.Add("RB_Name", "ФИО");
+                        ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
+                        ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
+                        ReportDataGridView.Columns.Add("MarkName", "Оценка");
+                        ReportDataGridView.Columns.Add("Date", "Дата экзамена");
+                        break;
+                    }
+                case 1:
+                    {
+                        ReportDataGridView.Columns.Clear();
+                        ReportDataGridView.Columns.Add("Number", "Количество студентов");
+                        ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
+                        ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
+                        ReportDataGridView.Columns.Add("MarkName", "Оценка");
+                        break;
+                    }
+            }
+
+        }
+
+        private void ReportReadRow(DataGridView dgw, IDataRecord record, int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    {
+                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2), record.GetString(3), record.GetString(4), record.GetDateTime(5).ToString("d"));
+                        break;
+                    }
+                case 1:
+                    {
+                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2), record.GetString(3));
+                        break;
+                    }
+
+            }
+        }
+
+        private void RefreshReportDataGrid(DataGridView dgw, int id)
+        {
+            dgw.Rows.Clear();
+            string Request = "";
+            switch (id)
+            {
+                case 0:
+                    {
+                        Request = @"SELECT
+	                        RB_Code,
+	                        RB.Name AS RB_Name,
+	                        ISNULL(S.Name, '') AS SpecialityName,
+	                        ISNULL(D.Name, '') AS DisciplineName,
+	                        ISNULL(M.Name, '') AS MarkName,
+	                        Date
+                        FROM RecordBook AS RB INNER JOIN Line AS L ON
+	                        RB_Code = FK_RecordBook
+	                        LEFT JOIN Mark AS M ON 
+	                        M_Code = FK_Mark
+	                        LEFT JOIN Specialty AS S ON
+	                        S_Code = FK_Specialty
+	                        LEFT JOIN Discipline AS D ON
+	                        D_Code = FK_Discipline";
+                        break;
+                    }
+                case 1:
+                    {
+                        Request = @"SELECT
+	                        COUNT(RB_Code) AS NUMBER,
+	                        ISNULL(S.Name, '') AS SpecialityName,
+	                        ISNULL(D.Name, '') AS DisciplineName,
+	                        ISNULL(M.Name, '') AS MarkName
+                        FROM RecordBook AS RB INNER JOIN Line AS L ON
+	                        RB_Code = FK_RecordBook
+	                        LEFT JOIN Mark AS M ON 
+	                        M_Code = FK_Mark
+	                        LEFT JOIN Specialty AS S ON
+	                        S_Code = FK_Specialty
+	                        LEFT JOIN Discipline AS D ON
+	                        D_Code = FK_Discipline";
+                        break;
+                    }
+            }
+
+            if (SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "")
+            {
+                bool Flag = false;
+                Request = string.Format("{0} WHERE", Request);
+
+                if (SFilterBox.Text != "")
+                {
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
+                    }
+                    Request = string.Format("{0} S.Name LIKE '%{1}%'", Request, SFilterBox.Text);
+                    Flag = true;
+                }
+                if (DFilterBox.Text != "")
+                {
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
+                    }
+                    Request = string.Format("{0} D.Name LIKE '%{1}%'", Request, DFilterBox.Text);
+                    Flag = true;
+                }
+                if (MFilterBox.Text != "")
+                {
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
+                    }
+                    Request = string.Format("{0} M.Name LIKE '%{1}%'", Request, MFilterBox.Text);
+                    Flag = true;
+                }
+            }
+            switch (id)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        Request = string.Format(@"{0}
+                                                GROUP BY
+                                                    S.Name,
+                                                    D.Name,
+                                                    M.Name", Request);
+                        break;
+                    }
+            }
+
+
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            SqlDataReader reader = Command.ExecuteReader();
+            while (reader.Read())
+            {
+                ReportReadRow(dgw, reader, id);
+            }
+            reader.Close();
+        }
+
+        private void ReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(ProfdataGridView, "Professor", e);
+        }
+
+        private void ProfdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(ProfdataGridView, "Professor", e);
+        }
+
+        private void SpdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(SpdataGridView, "Specialty", e);
+        }
+
+        private void SpdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(SpdataGridView, "Specialty", e);
+        }
+
         private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             OnCellChange(ProfdataGridView, "Professor", e);
