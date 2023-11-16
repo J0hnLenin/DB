@@ -64,6 +64,8 @@
             label8 = new Label();
             ProfCodeFilterBox = new TextBox();
             ProfdataGridView = new DataGridView();
+            _PP_Code = new DataGridViewTextBoxColumn();
+            _PName = new DataGridViewTextBoxColumn();
             Mark = new TabPage();
             splitContainer5 = new SplitContainer();
             label9 = new Label();
@@ -72,8 +74,8 @@
             MarkCodeFilterBox = new TextBox();
             MarkdataGridView = new DataGridView();
             IconImageList = new ImageList(components);
-            _M_Code = new DataGridViewTextBoxColumn();
-            _Name = new DataGridViewTextBoxColumn();
+            _MM_Code = new DataGridViewTextBoxColumn();
+            _MName = new DataGridViewTextBoxColumn();
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -503,18 +505,33 @@
             // 
             // ProfdataGridView
             // 
-            ProfdataGridView.AllowUserToAddRows = false;
-            ProfdataGridView.AllowUserToDeleteRows = false;
             ProfdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ProfdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ProfdataGridView.Columns.AddRange(new DataGridViewColumn[] { _PP_Code, _PName });
             ProfdataGridView.Dock = DockStyle.Fill;
             ProfdataGridView.Location = new Point(0, 0);
             ProfdataGridView.Name = "ProfdataGridView";
-            ProfdataGridView.ReadOnly = true;
             ProfdataGridView.RowTemplate.Height = 25;
             ProfdataGridView.Size = new Size(815, 402);
             ProfdataGridView.TabIndex = 0;
             ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
+            ProfdataGridView.CellValueChanged += ProfdataGridView_CellValueChanged;
+            ProfdataGridView.UserDeletedRow += ProfdataGridView_UserDeletedRow;
+            // 
+            // _PP_Code
+            // 
+            _PP_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _PP_Code.HeaderText = "Код";
+            _PP_Code.Name = "_PP_Code";
+            _PP_Code.ReadOnly = true;
+            _PP_Code.Width = 60;
+            // 
+            // _PName
+            // 
+            _PName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _PName.HeaderText = "ФИО";
+            _PName.MaxInputLength = 50;
+            _PName.Name = "_PName";
             // 
             // Mark
             // 
@@ -589,7 +606,7 @@
             // 
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _M_Code, _Name });
+            MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _MM_Code, _MName });
             MarkdataGridView.Dock = DockStyle.Fill;
             MarkdataGridView.Location = new Point(0, 0);
             MarkdataGridView.Name = "MarkdataGridView";
@@ -611,20 +628,20 @@
             IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
             IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
             // 
-            // _M_Code
+            // _MM_Code
             // 
-            _M_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _M_Code.HeaderText = "Код";
-            _M_Code.Name = "_M_Code";
-            _M_Code.ReadOnly = true;
-            _M_Code.Width = 60;
+            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _MM_Code.HeaderText = "Код";
+            _MM_Code.Name = "_MM_Code";
+            _MM_Code.ReadOnly = true;
+            _MM_Code.Width = 60;
             // 
-            // _Name
+            // _MName
             // 
-            _Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _Name.HeaderText = "Оценка";
-            _Name.MaxInputLength = 20;
-            _Name.Name = "_Name";
+            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _MName.HeaderText = "Оценка";
+            _MName.MaxInputLength = 20;
+            _MName.Name = "_MName";
             // 
             // MainForm
             // 
@@ -720,7 +737,9 @@
         private Label label10;
         private TextBox MarkCodeFilterBox;
         private DataGridView MarkdataGridView;
-        private DataGridViewTextBoxColumn _M_Code;
-        private DataGridViewTextBoxColumn _Name;
+        private DataGridViewTextBoxColumn _PP_Code;
+        private DataGridViewTextBoxColumn _PName;
+        private DataGridViewTextBoxColumn _MM_Code;
+        private DataGridViewTextBoxColumn _MName;
     }
 }
