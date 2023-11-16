@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             Line_DataGridView = new DataGridView();
-            DisciplineNameLabel = new Label();
-            DisciplineNameBox = new TextBox();
+            SpecialtyNameLabel = new Label();
+            SpecialtyNameBox = new TextBox();
             NameLabel = new Label();
             NameBox = new TextBox();
             CodeLabel = new Label();
@@ -51,25 +51,27 @@
             Line_DataGridView.RowTemplate.Height = 25;
             Line_DataGridView.Size = new Size(800, 254);
             Line_DataGridView.TabIndex = 0;
-            Line_DataGridView.CellContentClick += Line_DataGridView_CellContentClick;
+            Line_DataGridView.CellDoubleClick += Line_DataGridView_CellDoubleClick;
             // 
-            // DisciplineNameLabel
+            // SpecialtyNameLabel
             // 
-            DisciplineNameLabel.AutoSize = true;
-            DisciplineNameLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisciplineNameLabel.Location = new Point(12, 87);
-            DisciplineNameLabel.Name = "DisciplineNameLabel";
-            DisciplineNameLabel.Size = new Size(216, 20);
-            DisciplineNameLabel.TabIndex = 11;
-            DisciplineNameLabel.Text = "Наименование направления:";
+            SpecialtyNameLabel.AutoSize = true;
+            SpecialtyNameLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SpecialtyNameLabel.Location = new Point(12, 87);
+            SpecialtyNameLabel.Name = "SpecialtyNameLabel";
+            SpecialtyNameLabel.Size = new Size(216, 20);
+            SpecialtyNameLabel.TabIndex = 11;
+            SpecialtyNameLabel.Text = "Наименование направления:";
             // 
-            // DisciplineNameBox
+            // SpecialtyNameBox
             // 
-            DisciplineNameBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DisciplineNameBox.Location = new Point(236, 84);
-            DisciplineNameBox.Name = "DisciplineNameBox";
-            DisciplineNameBox.Size = new Size(131, 27);
-            DisciplineNameBox.TabIndex = 10;
+            SpecialtyNameBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            SpecialtyNameBox.Location = new Point(236, 84);
+            SpecialtyNameBox.Name = "SpecialtyNameBox";
+            SpecialtyNameBox.ReadOnly = true;
+            SpecialtyNameBox.Size = new Size(131, 27);
+            SpecialtyNameBox.TabIndex = 10;
+            SpecialtyNameBox.Click += SpecialtyNameBox_Click;
             // 
             // NameLabel
             // 
@@ -104,6 +106,7 @@
             CodeBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             CodeBox.Location = new Point(236, 47);
             CodeBox.Name = "CodeBox";
+            CodeBox.ReadOnly = true;
             CodeBox.Size = new Size(132, 27);
             CodeBox.TabIndex = 6;
             // 
@@ -122,8 +125,10 @@
             DisciplineCodeBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             DisciplineCodeBox.Location = new Point(237, 117);
             DisciplineCodeBox.Name = "DisciplineCodeBox";
+            DisciplineCodeBox.ReadOnly = true;
             DisciplineCodeBox.Size = new Size(131, 27);
             DisciplineCodeBox.TabIndex = 12;
+            DisciplineCodeBox.Click += SpecialtyCodeBox_Click;
             // 
             // TableLable
             // 
@@ -143,8 +148,8 @@
             Controls.Add(TableLable);
             Controls.Add(DisciplineCodeLabel);
             Controls.Add(DisciplineCodeBox);
-            Controls.Add(DisciplineNameLabel);
-            Controls.Add(DisciplineNameBox);
+            Controls.Add(SpecialtyNameLabel);
+            Controls.Add(SpecialtyNameBox);
             Controls.Add(NameLabel);
             Controls.Add(NameBox);
             Controls.Add(CodeLabel);
@@ -160,8 +165,8 @@
         #endregion
 
         private DataGridView Line_DataGridView;
-        private Label DisciplineNameLabel;
-        private TextBox DisciplineNameBox;
+        private Label SpecialtyNameLabel;
+        private TextBox SpecialtyNameBox;
         private Label NameLabel;
         private TextBox NameBox;
         private Label CodeLabel;

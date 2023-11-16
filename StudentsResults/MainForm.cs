@@ -652,11 +652,12 @@ namespace StudentsResults
         }
 
         public int SelectedCode = -1;
-        private void DisdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DisdataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView grid = DisdataGridView;
-            if (e.RowIndex == -1) 
+            
+            if (e.RowIndex == -1 || e.ColumnIndex != 2) 
                 return;
+            DataGridView grid = DisdataGridView;
 
             SelectedCode = -1;
             ProfessorSelectForm selectForm = new ProfessorSelectForm();
@@ -667,6 +668,7 @@ namespace StudentsResults
                 var id = row.Cells[0].Value;
                 UpdateObject("Discipline", "D_Code", (int)id, "FK_Professor", Convert.ToString(SelectedCode));
                 GridUpdate(grid, DisGridRequest(), DisReadRow);
+                SelectedCode = -1;
             }
         }
     }

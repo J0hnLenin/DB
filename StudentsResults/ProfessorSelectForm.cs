@@ -21,7 +21,7 @@ namespace StudentsResults
             ProfGridInit();
         }
 
-        private void ProfdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ProfdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
@@ -30,9 +30,9 @@ namespace StudentsResults
             var id = row.Cells[0].Value;
             MainForm MF = (MainForm)this.Owner;
             MF.SelectedCode = (int)id;
-            
+
             this.Close();
-            
+
         }
 
         private void ProfGridInit()

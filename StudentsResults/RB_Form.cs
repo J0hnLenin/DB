@@ -26,11 +26,17 @@ namespace StudentsResults
 
         private void CreateColumns()
         {
+            Line_DataGridView.Columns.Clear();
+            Line_DataGridView.Columns.Add("L_Code", "№");
+            Line_DataGridView.Columns[0].Visible = false;
             Line_DataGridView.Columns.Add("Number", "№");
             Line_DataGridView.Columns.Add("DisciplineName", "Дисциплина");
+            Line_DataGridView.Columns[2].ReadOnly = true;
             Line_DataGridView.Columns.Add("MarkName", "Оценка");
+            Line_DataGridView.Columns[3].ReadOnly = true;
             Line_DataGridView.Columns.Add("Date", "Дата экзамена");
             Line_DataGridView.Columns.Add("ProfessorName", "Преподаватель");
+            Line_DataGridView.Columns[5].ReadOnly = true;
 
         }
 
@@ -53,7 +59,7 @@ namespace StudentsResults
                 CodeBox.Text = Convert.ToString(reader.GetInt32(0));
                 NameBox.Text = reader.GetString(1);
                 DisciplineCodeBox.Text = Convert.ToString(reader.GetInt32(2));
-                DisciplineNameBox.Text = reader.GetString(3);
+                SpecialtyNameBox.Text = reader.GetString(3);
             }
             reader.Close();
         }
@@ -62,6 +68,7 @@ namespace StudentsResults
         {
             dgw.Rows.Clear();
             string Request = @"SELECT
+                                    L.L_Code AS L_Code,
 	                                L.Number AS Number,
 	                                ISNULL(D.Name, '') AS DisciplineName,
 	                                ISNULL(M.Name, '') AS MarkName,
@@ -89,12 +96,64 @@ namespace StudentsResults
         }
         private void ReadRow(DataGridView dgw, IDataRecord record)
         {
-            dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2), record.GetDateTime(3).ToString("d"), record.GetString(4));
+            dgw.Rows.Add(record.GetInt32(0), record.GetInt32(1), record.GetString(2), record.GetString(3), record.GetDateTime(4).ToString("d"), record.GetString(5));
         }
 
-        private void Line_DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Line_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            switch (e.ColumnIndex)
+            {
+                case 2:
+                    {
+                        SelectDiscipline(sender, e);
+                        break;
+                    }
+            }
+        }
+
+        private void SpecialtyNameBox_Click(object sender, EventArgs e)
+        {
+            SelectSpecialty(sender, e);
+        }
+        private void SpecialtyCodeBox_Click(object sender, EventArgs e)
+        {
+            SelectSpecialty(sender, e);
+        }
+
+        public int SelectedCode = -1;
+        private void SelectSpecialty(object sender, EventArgs e)
         {
 
+        }
+        private void SelectDiscipline(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            DataGridView grid = Line_DataGridView;
+
+            SelectedCode = -1;
+            DisciplineSelectForm selectForm = new DisciplineSelectForm();
+            selectForm.ShowDialog(this);
+            if (SelectedCode != -1)
+            {
+                var row = grid.Rows[e.RowIndex];
+                var id = row.Cells[0].Value;
+                UpdateObject("Line", "L_Code", (int)id, "FK_Discipline", Convert.ToString(SelectedCode));
+                RefreshDataGrid(grid);
+                SelectedCode = -1;
+            }
+        }
+        private void UpdateObject(string table, string id_name, int id, string property, string value)
+        {
+            var request = $"UPDATE {table} " +
+                            $"SET {property} = '{value}' " +
+                            $"WHERE {id_name} = {id};";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
         }
     }
 }

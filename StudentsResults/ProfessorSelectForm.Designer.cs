@@ -85,7 +85,7 @@
             ProfdataGridView.RowTemplate.Height = 25;
             ProfdataGridView.Size = new Size(542, 451);
             ProfdataGridView.TabIndex = 5;
-            ProfdataGridView.CellContentClick += ProfdataGridView_CellContentClick;
+            ProfdataGridView.CellClick += ProfdataGridView_CellClick;
             // 
             // ProfessorSelectForm
             // 
@@ -98,7 +98,7 @@
             Controls.Add(ProfCodeFilterBox);
             Controls.Add(ProfdataGridView);
             Name = "ProfessorSelectForm";
-            Text = "ProfessorSelectForm";
+            Text = "Выберете преподавателя";
             ((System.ComponentModel.ISupportInitialize)ProfdataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

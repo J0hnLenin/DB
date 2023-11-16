@@ -435,7 +435,7 @@
             DisdataGridView.RowTemplate.Height = 25;
             DisdataGridView.Size = new Size(799, 402);
             DisdataGridView.TabIndex = 0;
-            DisdataGridView.CellContentClick += DisdataGridView_CellContentClick;
+            DisdataGridView.CellContentDoubleClick += DisdataGridView_CellContentDoubleClick;
             // 
             // Specialty
             // 
