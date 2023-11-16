@@ -73,9 +73,11 @@
             label10 = new Label();
             MarkCodeFilterBox = new TextBox();
             MarkdataGridView = new DataGridView();
-            IconImageList = new ImageList(components);
             _MM_Code = new DataGridViewTextBoxColumn();
             _MName = new DataGridViewTextBoxColumn();
+            IconImageList = new ImageList(components);
+            _SS_Code = new DataGridViewTextBoxColumn();
+            _SName = new DataGridViewTextBoxColumn();
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -316,18 +318,17 @@
             // 
             // SpdataGridView
             // 
-            SpdataGridView.AllowUserToAddRows = false;
-            SpdataGridView.AllowUserToDeleteRows = false;
             SpdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SpdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SpdataGridView.Columns.AddRange(new DataGridViewColumn[] { _SS_Code, _SName });
             SpdataGridView.Dock = DockStyle.Fill;
             SpdataGridView.Location = new Point(0, 0);
             SpdataGridView.Name = "SpdataGridView";
-            SpdataGridView.ReadOnly = true;
             SpdataGridView.RowTemplate.Height = 25;
             SpdataGridView.Size = new Size(815, 402);
             SpdataGridView.TabIndex = 0;
-            SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
+            SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
+            SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
             // 
             // Discipline
             // 
@@ -616,18 +617,6 @@
             MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
             MarkdataGridView.UserDeletedRow += MarkdataGridView_UserDeletedRow;
             // 
-            // IconImageList
-            // 
-            IconImageList.ColorDepth = ColorDepth.Depth32Bit;
-            IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
-            IconImageList.TransparentColor = Color.Transparent;
-            IconImageList.Images.SetKeyName(0, "free-icon-home-3648679.png");
-            IconImageList.Images.SetKeyName(1, "free-icon-open-book-760346.png");
-            IconImageList.Images.SetKeyName(2, "free-icon-directional-sign-7276274.png");
-            IconImageList.Images.SetKeyName(3, "free-icon-note-book-11092418.png");
-            IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
-            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
-            // 
             // _MM_Code
             // 
             _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -642,6 +631,33 @@
             _MName.HeaderText = "Оценка";
             _MName.MaxInputLength = 20;
             _MName.Name = "_MName";
+            // 
+            // IconImageList
+            // 
+            IconImageList.ColorDepth = ColorDepth.Depth32Bit;
+            IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
+            IconImageList.TransparentColor = Color.Transparent;
+            IconImageList.Images.SetKeyName(0, "free-icon-home-3648679.png");
+            IconImageList.Images.SetKeyName(1, "free-icon-open-book-760346.png");
+            IconImageList.Images.SetKeyName(2, "free-icon-directional-sign-7276274.png");
+            IconImageList.Images.SetKeyName(3, "free-icon-note-book-11092418.png");
+            IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
+            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
+            // 
+            // _SS_Code
+            // 
+            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _SS_Code.HeaderText = "Код";
+            _SS_Code.Name = "_SS_Code";
+            _SS_Code.ReadOnly = true;
+            _SS_Code.Width = 60;
+            // 
+            // _SName
+            // 
+            _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _SName.HeaderText = "Наименование";
+            _SName.MaxInputLength = 50;
+            _SName.Name = "_SName";
             // 
             // MainForm
             // 
@@ -741,5 +757,7 @@
         private DataGridViewTextBoxColumn _PName;
         private DataGridViewTextBoxColumn _MM_Code;
         private DataGridViewTextBoxColumn _MName;
+        private DataGridViewTextBoxColumn _SS_Code;
+        private DataGridViewTextBoxColumn _SName;
     }
 }

@@ -148,12 +148,7 @@ namespace StudentsResults
         //Specialty grid
         private void SpGridInit()
         {
-            DataGridView grid = SpdataGridView;
-
-            grid.Columns.Add("S_Code", "Код");
-            grid.Columns.Add("Name", "Наименование");
-
-            GridUpdate(grid, SpGridRequest(), SpReadRow);
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
         }
         private string SpGridRequest()
         {
@@ -352,11 +347,6 @@ namespace StudentsResults
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -459,12 +449,22 @@ namespace StudentsResults
 
         private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            OnCellChange(ProfdataGridView , "Professor", e);
+            OnCellChange(ProfdataGridView, "Professor", e);
         }
 
         private void ProfdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             OnRowDeletion(ProfdataGridView, "Professor", e);
+        }
+
+        private void SpdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(SpdataGridView, "Specialty", e);
+        }
+
+        private void SpdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(SpdataGridView, "Specialty", e);
         }
     }
 }
