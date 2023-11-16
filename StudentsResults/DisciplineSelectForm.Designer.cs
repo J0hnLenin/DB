@@ -70,6 +70,7 @@
             DisProfessorFilterBox.Name = "DisProfessorFilterBox";
             DisProfessorFilterBox.Size = new Size(131, 27);
             DisProfessorFilterBox.TabIndex = 11;
+            DisProfessorFilterBox.TextChanged += DisProfessorFilterBox_TextChanged;
             // 
             // label5
             // 
@@ -88,6 +89,7 @@
             DisNameFilterBox.Name = "DisNameFilterBox";
             DisNameFilterBox.Size = new Size(131, 27);
             DisNameFilterBox.TabIndex = 9;
+            DisNameFilterBox.TextChanged += DisNameFilterBox_TextChanged;
             // 
             // label6
             // 
@@ -106,6 +108,7 @@
             DisCodeFilterBox.Name = "DisCodeFilterBox";
             DisCodeFilterBox.Size = new Size(132, 27);
             DisCodeFilterBox.TabIndex = 7;
+            DisCodeFilterBox.TextChanged += DisCodeFilterBox_TextChanged;
             // 
             // DisciplineSelectForm
             // 

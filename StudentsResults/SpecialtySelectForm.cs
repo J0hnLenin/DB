@@ -77,5 +77,15 @@ namespace StudentsResults
 
             this.Close();
         }
+
+        private void SpCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
+
+        private void SpNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+        }
     }
 }

@@ -37,12 +37,12 @@ namespace StudentsResults
 
         private void ProfGridInit()
         {
-            DataGridView grid = ProfdataGridView;
 
-            grid.Columns.Add("P_Code", "Код");
-            grid.Columns.Add("Name", "ФИО");
 
-            GridUpdate(grid, ProfGridRequest(), ProfReadRow);
+            ProfdataGridView.Columns.Add("P_Code", "Код");
+            ProfdataGridView.Columns.Add("Name", "ФИО");
+
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
         }
         private string ProfGridRequest()
         {
@@ -84,6 +84,16 @@ namespace StudentsResults
                 ReadRow(grid, reader);
             }
             reader.Close();
+        }
+
+        private void ProfCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+        }
+
+        private void ProfNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
         }
     }
 }

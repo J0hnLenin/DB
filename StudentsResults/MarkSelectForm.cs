@@ -78,5 +78,15 @@ namespace StudentsResults
 
             this.Close();
         }
+
+        private void MarkCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+        }
+
+        private void MarkNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+        }
     }
 }

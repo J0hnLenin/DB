@@ -93,5 +93,20 @@ namespace StudentsResults
 
             this.Close();
         }
+
+        private void DisCodeFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisNameFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
+
+        private void DisProfessorFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+        }
     }
 }

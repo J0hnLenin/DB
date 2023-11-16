@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             MarkdataGridView = new DataGridView();
             _MM_Code = new DataGridViewTextBoxColumn();
             _MName = new DataGridViewTextBoxColumn();
@@ -43,14 +43,14 @@
             // 
             MarkdataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            MarkdataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            MarkdataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _MM_Code, _MName });
             MarkdataGridView.Location = new Point(252, 1);
@@ -91,6 +91,7 @@
             MarkNameFilterBox.Name = "MarkNameFilterBox";
             MarkNameFilterBox.Size = new Size(131, 27);
             MarkNameFilterBox.TabIndex = 7;
+            MarkNameFilterBox.TextChanged += MarkNameFilterBox_TextChanged;
             // 
             // label10
             // 
@@ -109,6 +110,7 @@
             MarkCodeFilterBox.Name = "MarkCodeFilterBox";
             MarkCodeFilterBox.Size = new Size(132, 27);
             MarkCodeFilterBox.TabIndex = 5;
+            MarkCodeFilterBox.TextChanged += MarkCodeFilterBox_TextChanged;
             // 
             // MarkSelectForm
             // 
