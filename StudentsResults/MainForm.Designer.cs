@@ -74,6 +74,8 @@
             RB_DataGridView = new DataGridView();
             MainControl = new TabControl();
             ReportPage = new TabPage();
+            MFilterLable = new Label();
+            MFilterBox = new TextBox();
             SFilterLable = new Label();
             SFilterBox = new TextBox();
             DFilterLable = new Label();
@@ -81,8 +83,6 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            MFilterLable = new Label();
-            MFilterBox = new TextBox();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -607,6 +607,7 @@
             RB_DataGridView.RowTemplate.Height = 25;
             RB_DataGridView.Size = new Size(815, 402);
             RB_DataGridView.TabIndex = 0;
+            RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
             RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
             // 
             // MainControl
@@ -646,6 +647,25 @@
             ReportPage.TabIndex = 6;
             ReportPage.Text = "Отчёты";
             ReportPage.UseVisualStyleBackColor = true;
+            // 
+            // MFilterLable
+            // 
+            MFilterLable.AutoSize = true;
+            MFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MFilterLable.Location = new Point(8, 157);
+            MFilterLable.Name = "MFilterLable";
+            MFilterLable.Size = new Size(64, 20);
+            MFilterLable.TabIndex = 11;
+            MFilterLable.Text = "Оценка:";
+            MFilterLable.Click += label1_Click_2;
+            // 
+            // MFilterBox
+            // 
+            MFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            MFilterBox.Location = new Point(121, 154);
+            MFilterBox.Name = "MFilterBox";
+            MFilterBox.Size = new Size(185, 27);
+            MFilterBox.TabIndex = 10;
             // 
             // SFilterLable
             // 
@@ -718,25 +738,6 @@
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
             ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
-            // 
-            // MFilterLable
-            // 
-            MFilterLable.AutoSize = true;
-            MFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            MFilterLable.Location = new Point(8, 157);
-            MFilterLable.Name = "MFilterLable";
-            MFilterLable.Size = new Size(64, 20);
-            MFilterLable.TabIndex = 11;
-            MFilterLable.Text = "Оценка:";
-            MFilterLable.Click += label1_Click_2;
-            // 
-            // MFilterBox
-            // 
-            MFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            MFilterBox.Location = new Point(121, 154);
-            MFilterBox.Name = "MFilterBox";
-            MFilterBox.Size = new Size(185, 27);
-            MFilterBox.TabIndex = 10;
             // 
             // MainForm
             // 
