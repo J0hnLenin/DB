@@ -18,7 +18,7 @@ namespace StudentsResults
     public partial class MainForm : Form
     {
         DataBase dataBase = new DataBase();
-        
+
         public MainForm()
         {
             InitializeComponent();
@@ -67,13 +67,7 @@ namespace StudentsResults
         //Discipline grid
         private void DisGridInit()
         {
-            DataGridView grid = DisdataGridView;
-
-            grid.Columns.Add("D_Code", "Код");
-            grid.Columns.Add("Name", "Наименование");
-            grid.Columns.Add("ProfessorName", "Преподаватель");
-
-            GridUpdate(grid, DisGridRequest(), DisReadRow);
+            GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
         }
         private string DisGridRequest()
         {
@@ -224,6 +218,7 @@ namespace StudentsResults
         {
             var request = $"INSERT INTO {table} ({property}) " +
                             $"VALUES ('{value}')";
+            label6.Text = request;
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
@@ -654,8 +649,8 @@ namespace StudentsResults
         public int SelectedCode = -1;
         private void DisdataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (e.RowIndex == -1 || e.ColumnIndex != 2) 
+
+            if (e.RowIndex == -1 || e.ColumnIndex != 2)
                 return;
             DataGridView grid = DisdataGridView;
 
@@ -666,10 +661,38 @@ namespace StudentsResults
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
+                if (id == null)
+                {
+                    InsertObject("Discipline", "Name, FK_Professor", " ', '1");
+                    GridUpdate("Discipline");
+                    id = grid.Rows[e.RowIndex].Cells[0].Value;
+                }
                 UpdateObject("Discipline", "D_Code", (int)id, "FK_Professor", Convert.ToString(SelectedCode));
                 GridUpdate(grid, DisGridRequest(), DisReadRow);
                 SelectedCode = -1;
             }
+        }
+
+        private void DisdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            DataGridView grid = DisdataGridView;
+
+            var row = grid.Rows[e.RowIndex];
+            var id = row.Cells[0].Value;
+            if (id == null)
+            {
+                var value = (string)row.Cells[e.ColumnIndex].Value;
+                InsertObject("Discipline", "Name, FK_Professor", $"{value}', '1");
+                GridUpdate("Discipline");
+            }
+            OnCellChange(DisdataGridView, "Discipline", e);
+        }
+
+        private void DisdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(DisdataGridView, "Discipline", e);
         }
     }
 }

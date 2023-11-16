@@ -87,6 +87,9 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
+            _DD_Code = new DataGridViewTextBoxColumn();
+            _DName = new DataGridViewTextBoxColumn();
+            _DProfessorName = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -424,18 +427,18 @@
             // 
             // DisdataGridView
             // 
-            DisdataGridView.AllowUserToAddRows = false;
-            DisdataGridView.AllowUserToDeleteRows = false;
             DisdataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DisdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DisdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DisdataGridView.Columns.AddRange(new DataGridViewColumn[] { _DD_Code, _DName, _DProfessorName });
             DisdataGridView.Location = new Point(0, 0);
             DisdataGridView.Name = "DisdataGridView";
-            DisdataGridView.ReadOnly = true;
             DisdataGridView.RowTemplate.Height = 25;
             DisdataGridView.Size = new Size(799, 402);
             DisdataGridView.TabIndex = 0;
             DisdataGridView.CellDoubleClick += DisdataGridView_CellDoubleClick;
+            DisdataGridView.CellValueChanged += DisdataGridView_CellValueChanged;
+            DisdataGridView.UserDeletedRow += DisdataGridView_UserDeletedRow;
             // 
             // Specialty
             // 
@@ -772,6 +775,29 @@
             ReportDataGridView.TabIndex = 0;
             ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
             // 
+            // _DD_Code
+            // 
+            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DD_Code.HeaderText = "Код";
+            _DD_Code.Name = "_DD_Code";
+            _DD_Code.ReadOnly = true;
+            _DD_Code.Width = 60;
+            // 
+            // _DName
+            // 
+            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DName.HeaderText = "Наименование";
+            _DName.MaxInputLength = 50;
+            _DName.Name = "_DName";
+            _DName.Width = 141;
+            // 
+            // _DProfessorName
+            // 
+            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _DProfessorName.HeaderText = "Преподаватель";
+            _DProfessorName.Name = "_DProfessorName";
+            _DProfessorName.ReadOnly = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -881,5 +907,8 @@
         private DataGridViewTextBoxColumn _MName;
         private DataGridViewTextBoxColumn _SS_Code;
         private DataGridViewTextBoxColumn _SName;
+        private DataGridViewTextBoxColumn _DD_Code;
+        private DataGridViewTextBoxColumn _DName;
+        private DataGridViewTextBoxColumn _DProfessorName;
     }
 }
