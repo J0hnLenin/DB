@@ -22,7 +22,7 @@ namespace StudentsResults
             RB_Code = Code;
             InitializeComponent();
             RefreshHead();
-            CreateColumns();
+            //CreateColumns();
             RefreshDataGrid(Line_DataGridView);
         }
 
@@ -105,6 +105,17 @@ namespace StudentsResults
         {
             if (e.RowIndex == -1)
                 return;
+            DataGridView grid = Line_DataGridView;
+
+            var row = grid.Rows[e.RowIndex];
+            var id = row.Cells[0].Value;
+            if (id == null)
+            {
+                InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
+                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
+                RefreshDataGrid(grid);
+            }
+
             switch (e.ColumnIndex)
             {
                 case 2:
@@ -192,6 +203,15 @@ namespace StudentsResults
             Command.ExecuteNonQuery();
         }
 
+        private void InsertObject(string table, string property, string value)
+        {
+            var request = $"INSERT INTO {table} ({property}) " +
+                            $"VALUES ('{value}')";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
         private void NameBox_Validated(object sender, EventArgs e)
         {
             UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);
@@ -200,6 +220,29 @@ namespace StudentsResults
         private void RB_Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             master.GridUpdate("RecordBook");
+        }
+
+        private void Line_DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(Line_DataGridView, "Line", e);
+        }
+
+        private void DeleteObject(string table, string id_name, int id)
+        {
+            var request = $"DELETE FROM {table} " +
+                            $"WHERE {id_name} = {id}";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+        private void OnRowDeletion(DataGridView grid, string table, DataGridViewRowEventArgs e)
+        {
+            var row = e.Row;
+            var id_name = "L_Code";
+            var id = (int)row.Cells[0].Value;
+            DeleteObject(table, id_name, id);
+            RefreshDataGrid(grid);
         }
     }
 }

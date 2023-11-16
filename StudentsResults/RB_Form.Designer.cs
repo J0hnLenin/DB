@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             Line_DataGridView = new DataGridView();
+            L_Code = new DataGridViewTextBoxColumn();
+            Number = new DataGridViewTextBoxColumn();
+            DisciplineName = new DataGridViewTextBoxColumn();
+            MarkName = new DataGridViewTextBoxColumn();
+            Date = new DataGridViewTextBoxColumn();
+            ProfessorName = new DataGridViewTextBoxColumn();
             SpecialtyNameLabel = new Label();
             SpecialtyNameBox = new TextBox();
             NameLabel = new Label();
@@ -45,6 +51,7 @@
             // 
             Line_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Line_DataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Line_DataGridView.Columns.AddRange(new DataGridViewColumn[] { L_Code, Number, DisciplineName, MarkName, Date, ProfessorName });
             Line_DataGridView.Dock = DockStyle.Bottom;
             Line_DataGridView.Location = new Point(0, 196);
             Line_DataGridView.Name = "Line_DataGridView";
@@ -52,6 +59,52 @@
             Line_DataGridView.Size = new Size(800, 254);
             Line_DataGridView.TabIndex = 0;
             Line_DataGridView.CellDoubleClick += Line_DataGridView_CellDoubleClick;
+            Line_DataGridView.UserDeletedRow += Line_DataGridView_UserDeletedRow;
+            // 
+            // L_Code
+            // 
+            L_Code.HeaderText = "№";
+            L_Code.Name = "L_Code";
+            L_Code.ReadOnly = true;
+            L_Code.Visible = false;
+            // 
+            // Number
+            // 
+            Number.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Number.HeaderText = "№";
+            Number.Name = "Number";
+            Number.ReadOnly = true;
+            Number.Width = 45;
+            // 
+            // DisciplineName
+            // 
+            DisciplineName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DisciplineName.HeaderText = "Дисциплина";
+            DisciplineName.Name = "DisciplineName";
+            DisciplineName.ReadOnly = true;
+            DisciplineName.Width = 101;
+            // 
+            // MarkName
+            // 
+            MarkName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            MarkName.HeaderText = "Оценка";
+            MarkName.Name = "MarkName";
+            MarkName.ReadOnly = true;
+            MarkName.Width = 73;
+            // 
+            // Date
+            // 
+            Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Date.HeaderText = "Дата экзамена";
+            Date.Name = "Date";
+            Date.Width = 102;
+            // 
+            // ProfessorName
+            // 
+            ProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProfessorName.HeaderText = "Преподаватель";
+            ProfessorName.Name = "ProfessorName";
+            ProfessorName.ReadOnly = true;
             // 
             // SpecialtyNameLabel
             // 
@@ -176,5 +229,11 @@
         private Label DisciplineCodeLabel;
         private TextBox DisciplineCodeBox;
         private Label TableLable;
+        private DataGridViewTextBoxColumn L_Code;
+        private DataGridViewTextBoxColumn Number;
+        private DataGridViewTextBoxColumn DisciplineName;
+        private DataGridViewTextBoxColumn MarkName;
+        private DataGridViewTextBoxColumn Date;
+        private DataGridViewTextBoxColumn ProfessorName;
     }
 }
