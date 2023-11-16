@@ -347,6 +347,11 @@ namespace StudentsResults
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -455,12 +460,6 @@ namespace StudentsResults
             int id = (int)ReportComboBox.SelectedIndex;
             ReportCreateColumns(id);
             RefreshReportDataGrid(ReportDataGridView, id);
-
-            // + TEST
-            ProfessorBetween = -1;
-            ProfessorSelectForm New_Form = new ProfessorSelectForm();
-            New_Form.Show(this);
-            // - TEST
         }
 
         private void ReportCreateColumns(int id)
@@ -614,6 +613,26 @@ namespace StudentsResults
 
         private void ReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
             OnCellChange(ProfdataGridView, "Professor", e);
         }
 
@@ -631,21 +650,5 @@ namespace StudentsResults
         {
             OnRowDeletion(SpdataGridView, "Specialty", e);
         }
-
-        private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            OnCellChange(ProfdataGridView, "Professor", e);
-        }
-
-        
-
-        private void RB_DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-        public int DisciplineBetween { set; get; }
-        public int ProfessorBetween { set; get; }
-        public int MarkBetween { set; get; }
-        public int SpecialtyBetween { set; get; }
     }
 }
