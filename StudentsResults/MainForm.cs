@@ -115,12 +115,7 @@ namespace StudentsResults
         //Professor grid
         private void ProfGridInit()
         {
-            DataGridView grid = ProfdataGridView;
-
-            grid.Columns.Add("P_Code", "Код");
-            grid.Columns.Add("Name", "ФИО");
-
-            GridUpdate(grid, ProfGridRequest(), ProfReadRow);
+            GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
         }
         private string ProfGridRequest()
         {
@@ -153,12 +148,7 @@ namespace StudentsResults
         //Specialty grid
         private void SpGridInit()
         {
-            DataGridView grid = SpdataGridView;
-
-            grid.Columns.Add("S_Code", "Код");
-            grid.Columns.Add("Name", "Наименование");
-
-            GridUpdate(grid, SpGridRequest(), SpReadRow);
+            GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
         }
         private string SpGridRequest()
         {
@@ -357,11 +347,6 @@ namespace StudentsResults
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -427,9 +412,9 @@ namespace StudentsResults
             if (e.RowIndex == -1)
                 return;
             var row = grid.Rows[e.RowIndex];
-            var id_name = grid.Columns[0].Name.Substring(1);
+            var id_name = grid.Columns[0].Name.Substring(2);
             var id = row.Cells[0].Value;
-            var property = grid.Columns[e.ColumnIndex].Name.Substring(1);
+            var property = grid.Columns[e.ColumnIndex].Name.Substring(2);
             var value = (string)row.Cells[e.ColumnIndex].Value;
             if (id is not null)
             {
@@ -446,7 +431,7 @@ namespace StudentsResults
         private void OnRowDeletion(DataGridView grid, string table, DataGridViewRowEventArgs e)
         {
             var row = e.Row;
-            var id_name = grid.Columns[0].Name.Substring(1);
+            var id_name = grid.Columns[0].Name.Substring(2);
             var id = (int)row.Cells[0].Value;
             DeleteObject(table, id_name, id);
             GridUpdate(table);
@@ -461,6 +446,26 @@ namespace StudentsResults
         {
             OnRowDeletion(MarkdataGridView, "Mark", e);
         }
+
+
+        private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(ProfdataGridView, "Professor", e);
+        }
+
+        private void ProfdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(ProfdataGridView, "Professor", e);
+        }
+
+        private void SpdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(SpdataGridView, "Specialty", e);
+        }
+
+        private void SpdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(SpdataGridView, "Specialty", e);
 
         private void GetReport_Click(object sender, EventArgs e)
         {
@@ -638,6 +643,7 @@ namespace StudentsResults
 
         private void label1_Click_2(object sender, EventArgs e)
         {
+
 
         }
     }
