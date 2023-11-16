@@ -51,6 +51,7 @@
             Line_DataGridView.RowTemplate.Height = 25;
             Line_DataGridView.Size = new Size(800, 254);
             Line_DataGridView.TabIndex = 0;
+            Line_DataGridView.CellContentClick += Line_DataGridView_CellContentClick;
             // 
             // DisciplineNameLabel
             // 
