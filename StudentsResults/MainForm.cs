@@ -347,11 +347,6 @@ namespace StudentsResults
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -613,22 +608,22 @@ namespace StudentsResults
 
         private void ReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            OnCellChange(ProfdataGridView, "Professor", e);
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void ProfdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
-
+            OnRowDeletion(ProfdataGridView, "Professor", e);
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        private void SpdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
+            OnCellChange(SpdataGridView, "Specialty", e);
         }
 
-        private void label1_Click_2(object sender, EventArgs e)
+        private void SpdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
-
+            OnRowDeletion(SpdataGridView, "Specialty", e);
         }
 
         private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
