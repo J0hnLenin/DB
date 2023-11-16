@@ -26,11 +26,11 @@ namespace StudentsResults
             if (e.RowIndex < 0)
                 return;
 
-            
+            var row = ProfdataGridView.Rows[e.RowIndex];
+            var id = row.Cells[0].Value;
             MainForm MF = (MainForm)this.Owner;
-
-            //присваиваем значение свойству в родительской форме
-            //MF.ProfessorBetween = Convert.ToInt32(ProfdataGridView.Rows[e.RowIndex].Cells[0].Value);
+            MF.SelectedCode = (int)id;
+            
             this.Close();
             
         }

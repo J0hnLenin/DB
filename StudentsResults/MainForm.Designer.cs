@@ -38,6 +38,8 @@
             label10 = new Label();
             MarkCodeFilterBox = new TextBox();
             MarkdataGridView = new DataGridView();
+            _MM_Code = new DataGridViewTextBoxColumn();
+            _MName = new DataGridViewTextBoxColumn();
             Professor = new TabPage();
             splitContainer4 = new SplitContainer();
             label7 = new Label();
@@ -63,6 +65,8 @@
             label3 = new Label();
             SpCodeFilterBox = new TextBox();
             SpdataGridView = new DataGridView();
+            _SS_Code = new DataGridViewTextBoxColumn();
+            _SName = new DataGridViewTextBoxColumn();
             RecordBook = new TabPage();
             splitContainer1 = new SplitContainer();
             DisciplineFilterLabel = new Label();
@@ -83,10 +87,6 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            _MM_Code = new DataGridViewTextBoxColumn();
-            _MName = new DataGridViewTextBoxColumn();
-            _SS_Code = new DataGridViewTextBoxColumn();
-            _SName = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -217,6 +217,20 @@
             MarkdataGridView.TabIndex = 0;
             MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
             MarkdataGridView.UserDeletedRow += MarkdataGridView_UserDeletedRow;
+            // 
+            // _MM_Code
+            // 
+            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _MM_Code.HeaderText = "Код";
+            _MM_Code.Name = "_MM_Code";
+            _MM_Code.ReadOnly = true;
+            _MM_Code.Width = 60;
+            // 
+            // _MName
+            // 
+            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _MName.HeaderText = "Оценка";
+            _MName.Name = "_MName";
             // 
             // Professor
             // 
@@ -421,6 +435,7 @@
             DisdataGridView.RowTemplate.Height = 25;
             DisdataGridView.Size = new Size(799, 402);
             DisdataGridView.TabIndex = 0;
+            DisdataGridView.CellContentClick += DisdataGridView_CellContentClick;
             // 
             // Specialty
             // 
@@ -506,6 +521,20 @@
             SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
             SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
             SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
+            // 
+            // _SS_Code
+            // 
+            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _SS_Code.HeaderText = "Код";
+            _SS_Code.Name = "_SS_Code";
+            _SS_Code.ReadOnly = true;
+            _SS_Code.Width = 60;
+            // 
+            // _SName
+            // 
+            _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _SName.HeaderText = "Наименование";
+            _SName.Name = "_SName";
             // 
             // RecordBook
             // 
@@ -742,34 +771,6 @@
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
             ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
-            // 
-            // _MM_Code
-            // 
-            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _MM_Code.HeaderText = "Код";
-            _MM_Code.Name = "_MM_Code";
-            _MM_Code.ReadOnly = true;
-            _MM_Code.Width = 60;
-            // 
-            // _MName
-            // 
-            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _MName.HeaderText = "Оценка";
-            _MName.Name = "_MName";
-            // 
-            // _SS_Code
-            // 
-            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _SS_Code.HeaderText = "Код";
-            _SS_Code.Name = "_SS_Code";
-            _SS_Code.ReadOnly = true;
-            _SS_Code.Width = 60;
-            // 
-            // _SName
-            // 
-            _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _SName.HeaderText = "Наименование";
-            _SName.Name = "_SName";
             // 
             // MainForm
             // 
