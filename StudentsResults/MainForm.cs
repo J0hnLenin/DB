@@ -637,20 +637,7 @@ namespace StudentsResults
             OnCellChange(ProfdataGridView, "Professor", e);
         }
 
-        private void ProfdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            OnRowDeletion(ProfdataGridView, "Professor", e);
-        }
-
-        private void SpdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            OnCellChange(SpdataGridView, "Specialty", e);
-        }
-
-        private void SpdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            OnRowDeletion(SpdataGridView, "Specialty", e);
-        }
+        
 
         private void RB_DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

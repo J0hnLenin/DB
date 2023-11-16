@@ -124,30 +124,30 @@
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
             Discipline.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
             splitContainer3.Panel1.SuspendLayout();
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DisdataGridView).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)DisdataGridView).BeginInit();
             Professor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
             splitContainer4.Panel1.SuspendLayout();
             splitContainer4.Panel2.SuspendLayout();
             splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ProfdataGridView).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)ProfdataGridView).BeginInit();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
             splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)MarkdataGridView).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)MarkdataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainControl
             // 
-            MainControl.Controls.Add(MainMenu);
+            //MainControl.Controls.Add(MainMenu);
             MainControl.Controls.Add(RecordBook);
             MainControl.Controls.Add(Specialty);
             MainControl.Controls.Add(Discipline);
@@ -165,14 +165,14 @@
             // 
             // MainMenu
             // 
-            MainMenu.ImageIndex = 0;
+            /*MainMenu.ImageIndex = 0;
             MainMenu.Location = new Point(4, 44);
             MainMenu.Name = "MainMenu";
             MainMenu.Padding = new Padding(3);
             MainMenu.Size = new Size(1075, 402);
             MainMenu.TabIndex = 0;
             MainMenu.Text = "Главное меню";
-            MainMenu.UseVisualStyleBackColor = true;
+            MainMenu.UseVisualStyleBackColor = true;*/
             // 
             // RecordBook
             // 
@@ -551,7 +551,7 @@
             SpdataGridView.RowTemplate.Height = 25;
             SpdataGridView.Size = new Size(815, 402);
             SpdataGridView.TabIndex = 0;
-            SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
+            //SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
             SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
             SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
             // 
@@ -643,7 +643,7 @@
             // 
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _MM_Code, _MName });
+            //MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _MM_Code, _MName });
             MarkdataGridView.Dock = DockStyle.Fill;
             MarkdataGridView.Location = new Point(0, 0);
             MarkdataGridView.Name = "MarkdataGridView";
@@ -686,15 +686,15 @@
             RB_DataGridView.CellContentClick += RB_DataGridView_CellContentClick;
             RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
             //--
-            IconImageList.ColorDepth = ColorDepth.Depth32Bit;
-            IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
+            /*IconImageList.ColorDepth = ColorDepth.Depth32Bit;
+            //IconImageList.ImageStream = (ImageListStreamer)resources.GetObject("IconImageList.ImageStream");
             IconImageList.TransparentColor = Color.Transparent;
             IconImageList.Images.SetKeyName(0, "free-icon-home-3648679.png");
             IconImageList.Images.SetKeyName(1, "free-icon-open-book-760346.png");
             IconImageList.Images.SetKeyName(2, "free-icon-directional-sign-7276274.png");
             IconImageList.Images.SetKeyName(3, "free-icon-note-book-11092418.png");
             IconImageList.Images.SetKeyName(4, "free-icon-professor-6681350.png");
-            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");
+            IconImageList.Images.SetKeyName(5, "free-icon-5-stars-2355011.png");*/
             // 
             // _SS_Code
             // 
@@ -735,7 +735,7 @@
             MFilterLable.Size = new Size(64, 20);
             MFilterLable.TabIndex = 11;
             MFilterLable.Text = "Оценка:";
-            MFilterLable.Click += label1_Click_2;
+            //MFilterLable.Click += label1_Click_2;
             // 
             // MFilterBox
             // 
@@ -754,7 +754,7 @@
             SFilterLable.Size = new Size(107, 20);
             SFilterLable.TabIndex = 9;
             SFilterLable.Text = "Направление:";
-            SFilterLable.Click += label1_Click_1;
+            //SFilterLable.Click += label1_Click_1;
             // 
             // SFilterBox
             // 
@@ -773,7 +773,7 @@
             DFilterLable.Size = new Size(99, 20);
             DFilterLable.TabIndex = 7;
             DFilterLable.Text = "Дисциплина:";
-            DFilterLable.Click += label11_Click;
+            //DFilterLable.Click += label11_Click;
             // 
             // DFilterBox
             // 
@@ -910,9 +910,9 @@
         private TextBox ProfCodeFilterBox;
         private DataGridView ProfdataGridView;
         private TabPage Discipline;
-        private TabPage Professor;
+        /*private TabPage Professor;
         private TabPage Mark;
-        private ImageList IconImageList;
+        private ImageList IconImageList;*/
         private DataGridView RB_DataGridView;
         private SplitContainer splitContainer1;
         private Label CodeFilterLabel;
@@ -938,21 +938,21 @@
         private TextBox DisCodeFilterBox;
         private DataGridView DisdataGridView;
         private TabPage Specialty;
-        private SplitContainer splitContainer2;
+        /*private SplitContainer splitContainer2;
         private Label label2;
         private TextBox SpNameFilterBox;
         private Label label3;
         private TextBox SpCodeFilterBox;
-        private DataGridView SpdataGridView;
+        private DataGridView SpdataGridView;*/
         private TabPage RecordBook;
-        private SplitContainer splitContainer1;
+        /*private SplitContainer splitContainer1;
         private Label DisciplineFilterLabel;
         private TextBox DisciplineFilterBox;
         private Label NameFilterLabel;
         private TextBox NameFilterBox;
         private Label CodeFilterLabel;
         private TextBox CodeFilterBox;
-        private DataGridView RB_DataGridView;
+        private DataGridView RB_DataGridView;*/
         private TabControl MainControl;
         private TabPage ReportPage;
         private Button GetReport;
