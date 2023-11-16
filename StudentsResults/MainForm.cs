@@ -2,6 +2,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using static System.Windows.Forms.LinkLabel;
 using System.Windows.Forms;
+using Azure.Core;
 
 
 namespace StudentsResults
@@ -32,12 +33,7 @@ namespace StudentsResults
         //Marks grid
         private void MarkGridInit()
         {
-            DataGridView grid = MarkdataGridView;
-
-            grid.Columns.Add("M_Code", "Код");
-            grid.Columns.Add("Name", "Оценка");
-
-            GridUpdate(grid, MarkGridRequest(), MarkReadRow);
+            GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
         }
         private string MarkGridRequest()
         {
@@ -192,6 +188,25 @@ namespace StudentsResults
             grid.Rows.Add(record.GetInt32(0), record.GetString(1));
         }
 
+        private void GridUpdate(string table_name)
+        {
+            switch (table_name)
+            {
+                case "Professor":
+                    ProfGridInit();
+                    break;
+                case "Discipline":
+                    DisGridInit();
+                    break;
+                case "Specialty":
+                    SpGridInit();
+                    break;
+                case "Mark":
+                    MarkGridInit();
+                    break;
+            }
+        }
+
         private void GridUpdate(DataGridView grid, string Request, Action<DataGridView, IDataRecord> ReadRow)
         {
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
@@ -204,7 +219,34 @@ namespace StudentsResults
                 ReadRow(grid, reader);
             }
             reader.Close();
+        }
+        private void UpdateObject(string table, string id_name, int id, string property, string value)
+        {
+            var request = $"UPDATE {table} " +
+                            $"SET {property} = '{value}' " +
+                            $"WHERE {id_name} = {id};";
 
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+        private void InsertObject(string table, string property, string value)
+        {
+            var request = $"INSERT INTO {table} ({property}) " +
+                            $"VALUES ('{value}')";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+        private void DeleteObject(string table, string id_name, int id)
+        {
+            var request = $"DELETE FROM {table} " +
+                            $"WHERE {id_name} = {id}";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
         }
 
         private void CreateColumns()
@@ -378,6 +420,46 @@ namespace StudentsResults
         private void label4_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void OnCellChange(DataGridView grid, string table, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            var row = grid.Rows[e.RowIndex];
+            var id_name = grid.Columns[0].Name.Substring(1);
+            var id = row.Cells[0].Value;
+            var property = grid.Columns[e.ColumnIndex].Name.Substring(1);
+            var value = (string)row.Cells[e.ColumnIndex].Value;
+            if (id is not null)
+            {
+                UpdateObject(table, id_name, (int)id, property, value);
+            }
+            else
+            {
+                InsertObject(table, property, value);
+            }
+
+            GridUpdate(table);
+        }
+
+        private void OnRowDeletion(DataGridView grid, string table, DataGridViewRowEventArgs e)
+        {
+            var row = e.Row;
+            var id_name = grid.Columns[0].Name.Substring(1);
+            var id = (int)row.Cells[0].Value;
+            DeleteObject(table, id_name, id);
+            GridUpdate(table);
+        }
+
+        private void MarkdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellChange(MarkdataGridView, "Mark", e);
+        }
+
+        private void MarkdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            OnRowDeletion(MarkdataGridView, "Mark", e);
         }
     }
 }

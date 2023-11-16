@@ -71,6 +71,8 @@
             label10 = new Label();
             MarkCodeFilterBox = new TextBox();
             MarkdataGridView = new DataGridView();
+            _M_Code = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
             IconImageList = new ImageList(components);
             MainControl.SuspendLayout();
             RecordBook.SuspendLayout();
@@ -585,17 +587,31 @@
             // 
             // MarkdataGridView
             // 
-            MarkdataGridView.AllowUserToAddRows = false;
-            MarkdataGridView.AllowUserToDeleteRows = false;
             MarkdataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MarkdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            MarkdataGridView.Columns.AddRange(new DataGridViewColumn[] { _M_Code, _Name });
             MarkdataGridView.Dock = DockStyle.Fill;
             MarkdataGridView.Location = new Point(0, 0);
             MarkdataGridView.Name = "MarkdataGridView";
-            MarkdataGridView.ReadOnly = true;
             MarkdataGridView.RowTemplate.Height = 25;
             MarkdataGridView.Size = new Size(815, 402);
             MarkdataGridView.TabIndex = 0;
+            MarkdataGridView.CellValueChanged += MarkdataGridView_CellValueChanged;
+            MarkdataGridView.UserDeletedRow += MarkdataGridView_UserDeletedRow;
+            // 
+            // _M_Code
+            // 
+            _M_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _M_Code.HeaderText = "Код";
+            _M_Code.Name = "_M_Code";
+            _M_Code.ReadOnly = true;
+            _M_Code.Width = 60;
+            // 
+            // _Name
+            // 
+            _Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _Name.HeaderText = "Оценка";
+            _Name.Name = "_Name";
             // 
             // IconImageList
             // 
@@ -703,5 +719,7 @@
         private Label label10;
         private TextBox MarkCodeFilterBox;
         private DataGridView MarkdataGridView;
+        private DataGridViewTextBoxColumn _M_Code;
+        private DataGridViewTextBoxColumn _Name;
     }
 }
