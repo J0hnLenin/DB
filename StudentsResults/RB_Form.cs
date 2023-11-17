@@ -113,7 +113,7 @@ namespace StudentsResults
             if (id == null)
             {
                 InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
-                                    $"{grid.RowCount}', '{RB_Code}', '1', '7', '12.02.2003");
+                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
                 RefreshDataGrid(grid);
             }
 
