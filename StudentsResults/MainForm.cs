@@ -54,6 +54,7 @@ namespace StudentsResults
                     args.Add(string.Format("Name LIKE '%{0}%'", name));
                 }
             }
+            args.Add(" ORDER BY Name");
             Request += String.Concat(args);
             return Request;
         }
@@ -97,6 +98,7 @@ namespace StudentsResults
                     args.Add(string.Format("P.Name LIKE '%{0}%'", professor));
                 }
             }
+            args.Add(" ORDER BY D.Name");
             Request += String.Concat(args);
             return Request;
         }
@@ -130,6 +132,7 @@ namespace StudentsResults
                     args.Add(string.Format("Name LIKE '%{0}%'", name));
                 }
             }
+            args.Add(" ORDER BY Name");
             Request += String.Concat(args);
             return Request;
         }
@@ -163,6 +166,7 @@ namespace StudentsResults
                     args.Add(string.Format("Name LIKE '%{0}%'", name));
                 }
             }
+            args.Add(" ORDER BY Name");
             Request += String.Concat(args);
             return Request;
         }
@@ -181,8 +185,8 @@ namespace StudentsResults
             string code = CodeFilterBox.Text;
             string name = NameFilterBox.Text;
             string dis = DisciplineFilterBox.Text;
-            string Request = @"SELECT RB_Code, R.Name, ISNULL(S.Name, '') AS SpecialtyName
-                                FROM RecordBook AS R LEFT JOIN Specialty AS S ON FK_Specialty = S_Code ";
+            string Request = @"SELECT RB_Code, RB.Name, ISNULL(S.Name, '') AS SpecialtyName
+                                FROM RecordBook AS RB LEFT JOIN Specialty AS S ON FK_Specialty = S_Code ";
             List<string> args = new List<string>();
             if (code != "" || name != "" || dis != "")
             {
@@ -195,7 +199,7 @@ namespace StudentsResults
                 {
                     if (args.Count() > 1)
                         args.Add(" AND ");
-                    args.Add(string.Format("R.Name LIKE '%{0}%'", name));
+                    args.Add(string.Format("RB.Name LIKE '%{0}%'", name));
                 }
                 if (dis != "")
                 {
@@ -204,6 +208,7 @@ namespace StudentsResults
                     args.Add(string.Format("S.Name LIKE '%{0}%'", dis));
                 }
             }
+            args.Add(" ORDER BY RB.Name");
             Request += String.Concat(args);
             return Request;
         }
@@ -273,7 +278,12 @@ namespace StudentsResults
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
-            Command.ExecuteNonQuery();
+            try
+            {
+                Command.ExecuteNonQuery();
+            }
+            catch (Exception ex){}
+            
         }
         private void RB_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -459,7 +469,7 @@ namespace StudentsResults
                     {
                         ReportDataGridView.Columns.Clear();
                         ReportDataGridView.Columns.Add("Number", "Количество студентов");
-                        ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
+                        //ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
                         ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
                         ReportDataGridView.Columns.Add("MarkName", "Оценка");
                         break;
@@ -479,7 +489,7 @@ namespace StudentsResults
                     }
                 case 1:
                     {
-                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2), record.GetString(3));
+                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
                         break;
                     }
 
@@ -515,7 +525,7 @@ namespace StudentsResults
                     {
                         Request = @"SELECT
 	                        COUNT(RB_Code) AS NUMBER,
-	                        ISNULL(S.Name, '') AS SpecialityName,
+	                        --ISNULL(S.Name, '') AS SpecialityName,
 	                        ISNULL(D.Name, '') AS DisciplineName,
 	                        ISNULL(M.Name, '') AS MarkName
                         FROM RecordBook AS RB INNER JOIN Line AS L ON
@@ -566,14 +576,16 @@ namespace StudentsResults
             switch (id)
             {
                 case 0:
+                    Request = string.Format(@"{0} ORDER BY RB.Name", Request);
                     break;
                 case 1:
                     {
                         Request = string.Format(@"{0}
                                                 GROUP BY
-                                                    S.Name,
+                                                    --S.Name,
                                                     D.Name,
-                                                    M.Name", Request);
+                                                    M.Name
+                                                ORDER BY D.Name", Request);
                         break;
                     }
             }

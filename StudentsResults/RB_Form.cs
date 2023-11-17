@@ -110,12 +110,7 @@ namespace StudentsResults
 
             var row = grid.Rows[e.RowIndex];
             var id = row.Cells[0].Value;
-            if (id == null)
-            {
-                InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
-                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
-                RefreshDataGrid(grid);
-            }
+
 
             switch (e.ColumnIndex)
             {
@@ -135,8 +130,41 @@ namespace StudentsResults
                         break;
                     }
             }
+
+            if (id is null)
+            {
+                //if (Check_Row(row)) ;
+            }
+            else
+            {
+                UpdateObject("RecordBook", "RB_Code", RB_Code, grid.Columns[e.col], Convert.ToString(SelectedCode));
+
+            }
+            /*{
+                InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
+                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
+                RefreshDataGrid(grid);
+            }*/
         }
 
+        private void UpdateRow(DataGridViewRow R)
+        {
+
+            RefreshDataGrid(R.DataGridView);
+        }
+
+        private bool Check_Row(DataGridViewRow R)
+        {
+            if (R.Index == -1) return false;
+            foreach (DataGridViewCell Cell in R.Cells)
+            {
+                if (Cell.ColumnIndex == 0) continue;
+                if (Cell.Value is null) return false;
+                if (Cell.Value is string && (Cell.Value == "" || Cell.Value == " ")) return false;
+            }
+
+            return true;
+        }
         private void SpecialtyNameBox_Click(object sender, EventArgs e)
         {
             SelectSpecialty(sender, e);
@@ -173,8 +201,7 @@ namespace StudentsResults
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
-                UpdateObject("Line", "L_Code", (int)id, "FK_Discipline", Convert.ToString(SelectedCode));
-                RefreshDataGrid(grid);
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedCode);
                 SelectedCode = -1;
             }
         }
@@ -192,9 +219,9 @@ namespace StudentsResults
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
-                UpdateObject("Line", "L_Code", (int)id, "FK_Mark", Convert.ToString(SelectedCode));
-                RefreshDataGrid(grid);
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedCode);
                 SelectedCode = -1;
+
             }
         }
         public string SelectedDate = "";
@@ -211,8 +238,7 @@ namespace StudentsResults
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
-                UpdateObject("Line", "L_Code", (int)id, "Date", SelectedDate);
-                RefreshDataGrid(grid);
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedDate);
                 SelectedDate = "";
             }
         }
@@ -269,5 +295,6 @@ namespace StudentsResults
             DeleteObject(table, id_name, id);
             RefreshDataGrid(grid);
         }
+
     }
 }

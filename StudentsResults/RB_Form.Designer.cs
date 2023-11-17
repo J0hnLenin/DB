@@ -97,6 +97,7 @@
             Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Date.HeaderText = "Дата экзамена";
             Date.Name = "Date";
+            Date.ReadOnly = true;
             Date.Width = 102;
             // 
             // ProfessorName
