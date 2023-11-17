@@ -37,6 +37,7 @@ namespace StudentsResults
             Line_DataGridView.Columns.Add("MarkName", "Оценка");
             Line_DataGridView.Columns[3].ReadOnly = true;
             Line_DataGridView.Columns.Add("Date", "Дата экзамена");
+            Line_DataGridView.Columns[4].ReadOnly = true;
             Line_DataGridView.Columns.Add("ProfessorName", "Преподаватель");
             Line_DataGridView.Columns[5].ReadOnly = true;
 
@@ -112,7 +113,7 @@ namespace StudentsResults
             if (id == null)
             {
                 InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
-                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
+                                    $"{grid.RowCount}', '{RB_Code}', '1', '7', '12.02.2003");
                 RefreshDataGrid(grid);
             }
 
@@ -126,6 +127,11 @@ namespace StudentsResults
                 case 3:
                     {
                         SelectMark(sender, e);
+                        break;
+                    }
+                case 4:
+                    {
+                        SelectDate(sender, e);
                         break;
                     }
             }
@@ -189,6 +195,25 @@ namespace StudentsResults
                 UpdateObject("Line", "L_Code", (int)id, "FK_Mark", Convert.ToString(SelectedCode));
                 RefreshDataGrid(grid);
                 SelectedCode = -1;
+            }
+        }
+        public string SelectedDate = "";
+        private void SelectDate(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            DataGridView grid = Line_DataGridView;
+
+            SelectedDate = "";
+            DateSelectForm selectForm = new DateSelectForm();
+            selectForm.ShowDialog(this);
+            if (SelectedDate != "")
+            {
+                var row = grid.Rows[e.RowIndex];
+                var id = row.Cells[0].Value;
+                UpdateObject("Line", "L_Code", (int)id, "Date", SelectedDate);
+                RefreshDataGrid(grid);
+                SelectedDate = "";
             }
         }
 
