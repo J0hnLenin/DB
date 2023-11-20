@@ -73,8 +73,12 @@ namespace StudentsResults
 
             var row = MarkdataGridView.Rows[e.RowIndex];
             var id = row.Cells[0].Value;
+            var name = row.Cells[1].Value;
+
             RB_Form MF = (RB_Form)this.Owner;
+
             MF.SelectedCode = (int)id;
+            MF.SelectedName = (string)name;
 
             this.Close();
         }

@@ -14,8 +14,12 @@ namespace StudentsResults
     public partial class DisciplineSelectForm : Form
     {
         DataBase dataBase = new DataBase();
-        public DisciplineSelectForm()
+        RB_Form Master;
+        public int RB_Code;
+        public DisciplineSelectForm(int RB_Code_, RB_Form master)
         {
+            Master = master;
+            RB_Code = RB_Code_;
             InitializeComponent();
             DisGridInit();
         }
@@ -32,33 +36,31 @@ namespace StudentsResults
         }
         private string DisGridRequest()
         {
+            RB_Form MF = (RB_Form)this.Owner;
+            
             string code = DisCodeFilterBox.Text;
             string name = DisNameFilterBox.Text;
             string professor = DisProfessorFilterBox.Text;
-            string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
-                               FROM Discipline AS D LEFT JOIN Professor AS P ON
-                               FK_Professor = P_Code ";
+            string Request = @"SELECT D_Code, 
+                                    D.Name, 
+                                    ISNULL(P.Name, '') as ProfessorName
+                                FROM Discipline AS D LEFT JOIN Professor AS P ON
+                                    FK_Professor = P_Code
+                                WHERE D_Code NOT IN (
+                                        SELECT L.FK_Discipline
+                                        FROM Line AS L
+                                        WHERE L.FK_RecordBook = " + RB_Code + ")";
             List<string> args = new List<string>();
-            if (code != "" || name != "" || professor != "")
-            {
-                args.Add("WHERE ");
-                if (code != "")
-                {
-                    args.Add("D_Code = " + code);
-                }
-                if (name != "")
-                {
-                    if (args.Count() > 1)
-                        args.Add(" AND ");
-                    args.Add(string.Format("D.Name LIKE '%{0}%'", name));
-                }
-                if (professor != "")
-                {
-                    if (args.Count() > 1)
-                        args.Add(" AND ");
-                    args.Add(string.Format("P.Name LIKE '%{0}%'", professor));
-                }
-            }
+            
+            if (code != "")
+                args.Add(" AND D_Code = " + code);
+            
+            if (name != "")
+                args.Add(string.Format(" AND D.Name LIKE '%{0}%'", name));
+            
+            if (professor != "")
+                args.Add(string.Format(" AND P.Name LIKE '%{0}%'", professor));
+            
             Request += String.Concat(args);
             return Request;
         }
@@ -88,8 +90,12 @@ namespace StudentsResults
 
             var row = DisdataGridView.Rows[e.RowIndex];
             var id = row.Cells[0].Value;
-            RB_Form MF = (RB_Form)this.Owner;
-            MF.SelectedCode = (int)id;
+            var name = row.Cells[1].Value;
+            var secondName = row.Cells[2].Value;
+
+            Master.SelectedCode = (int)id;
+            Master.SelectedName = (string)name;
+            Master.SelectedSecondName = (string)secondName;
 
             this.Close();
         }

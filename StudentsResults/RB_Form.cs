@@ -11,36 +11,23 @@ using System.Windows.Forms;
 
 namespace StudentsResults
 {
+
     public partial class RB_Form : Form
     {
         DataBase dataBase = new DataBase();
-        int RB_Code = -1;
+
         MainForm master;
+
+        public int RB_Code = -1;
+
         public RB_Form(int Code, MainForm master)
         {
+
             this.master = master;
             RB_Code = Code;
             InitializeComponent();
             RefreshHead();
-            //CreateColumns();
             RefreshDataGrid(Line_DataGridView);
-        }
-
-        private void CreateColumns()
-        {
-            Line_DataGridView.Columns.Clear();
-            Line_DataGridView.Columns.Add("L_Code", "№");
-            Line_DataGridView.Columns[0].Visible = false;
-            Line_DataGridView.Columns.Add("Number", "№");
-            Line_DataGridView.Columns.Add("DisciplineName", "Дисциплина");
-            Line_DataGridView.Columns[2].ReadOnly = true;
-            Line_DataGridView.Columns.Add("MarkName", "Оценка");
-            Line_DataGridView.Columns[3].ReadOnly = true;
-            Line_DataGridView.Columns.Add("Date", "Дата экзамена");
-            Line_DataGridView.Columns[4].ReadOnly = true;
-            Line_DataGridView.Columns.Add("ProfessorName", "Преподаватель");
-            Line_DataGridView.Columns[5].ReadOnly = true;
-
         }
 
         private void RefreshHead()
@@ -76,7 +63,9 @@ namespace StudentsResults
 	                                ISNULL(D.Name, '') AS DisciplineName,
 	                                ISNULL(M.Name, '') AS MarkName,
 	                                L.Date AS Date,
-	                                ISNULL(P.Name, '') AS ProfessorName
+	                                ISNULL(P.Name, '') AS ProfessorName,
+                                    M.M_Code AS M_Code,
+                                    D.D_Code AS D_Code
                                 FROM RecordBook AS RB INNER JOIN Line AS L
 	                                ON RB.RB_Code = L.FK_RecordBook
 	                                LEFT JOIN Mark AS M ON
@@ -99,7 +88,9 @@ namespace StudentsResults
         }
         private void ReadRow(DataGridView dgw, IDataRecord record)
         {
-            dgw.Rows.Add(record.GetInt32(0), record.GetInt32(1), record.GetString(2), record.GetString(3), record.GetDateTime(4).ToString("d"), record.GetString(5));
+            dgw.Rows.Add(record.GetInt32(0), record.GetInt32(1), record.GetString(2), record.GetString(3),
+                record.GetDateTime(4).ToString("d"), record.GetString(5),
+                record.GetInt32(6), record.GetInt32(7));
         }
 
         private void Line_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -133,18 +124,22 @@ namespace StudentsResults
 
             if (id is null)
             {
-                //if (Check_Row(row)) ;
+                if (Check_Row(row))
+                {
+                    String disc = Convert.ToString(row.Cells[7].Value);
+                    String mark = Convert.ToString(row.Cells[6].Value);
+                    String date = Convert.ToString(row.Cells[4].Value);
+
+                    InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
+                                    $"{grid.RowCount}', '{RB_Code}', '{disc}', '{mark}', '{date}");
+                    RefreshDataGrid(grid);
+                }
             }
             else
             {
-                UpdateObject("RecordBook", "RB_Code", RB_Code, grid.Columns[e.col], Convert.ToString(SelectedCode));
-
+                UpdateLine(e.RowIndex);
             }
-            /*{
-                InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
-                                    $"{grid.RowCount}', '{RB_Code}', '1', '1', '12.02.2003");
-                RefreshDataGrid(grid);
-            }*/
+            
         }
 
         private void UpdateRow(DataGridViewRow R)
@@ -158,9 +153,9 @@ namespace StudentsResults
             if (R.Index == -1) return false;
             foreach (DataGridViewCell Cell in R.Cells)
             {
-                if (Cell.ColumnIndex == 0) continue;
+                if (Cell.ColumnIndex <= 1) continue;
                 if (Cell.Value is null) return false;
-                if (Cell.Value is string && (Cell.Value == "" || Cell.Value == " ")) return false;
+                if (Cell.Value is string && (Cell.Value == "" || Cell.Value == " " || Cell.Value == "-1")) return false;
             }
 
             return true;
@@ -195,15 +190,25 @@ namespace StudentsResults
             DataGridView grid = Line_DataGridView;
 
             SelectedCode = -1;
-            DisciplineSelectForm selectForm = new DisciplineSelectForm();
+            SelectedName = "";
+            SelectedSecondName = "";
+
+            DisciplineSelectForm selectForm = new DisciplineSelectForm(RB_Code, this);
             selectForm.ShowDialog(this);
             if (SelectedCode != -1)
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
-                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedCode);
+
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedName);
+                row.Cells[7].Value = Convert.ToString(SelectedCode);
+                row.Cells[5].Value = Convert.ToString(SelectedSecondName);
+
                 SelectedCode = -1;
+                SelectedName = "";
+                SelectedSecondName = "";
             }
+
         }
 
         private void SelectMark(object sender, DataGridViewCellEventArgs e)
@@ -213,33 +218,41 @@ namespace StudentsResults
             DataGridView grid = Line_DataGridView;
 
             SelectedCode = -1;
+            SelectedName = "";
+
             MarkSelectForm selectForm = new MarkSelectForm();
             selectForm.ShowDialog(this);
             if (SelectedCode != -1)
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
+
                 row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedCode);
+                row.Cells[6].Value = Convert.ToString(SelectedCode);
+
                 SelectedCode = -1;
+                SelectedName = "";
 
             }
         }
-        public string SelectedDate = "";
+        public string SelectedName = "";
+        public string SelectedSecondName = "";
+
         private void SelectDate(object sender, DataGridViewCellEventArgs e)
         {
 
 
             DataGridView grid = Line_DataGridView;
 
-            SelectedDate = "";
+            SelectedName = "";
             DateSelectForm selectForm = new DateSelectForm();
             selectForm.ShowDialog(this);
-            if (SelectedDate != "")
+            if (SelectedName != "")
             {
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
-                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedDate);
-                SelectedDate = "";
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedName);
+                SelectedName = "";
             }
         }
 
@@ -248,6 +261,28 @@ namespace StudentsResults
             var request = $"UPDATE {table} " +
                             $"SET {property} = '{value}' " +
                             $"WHERE {id_name} = {id};";
+
+            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+        }
+
+        private void UpdateLine(int Row)
+        {
+            DataGridView grid = Line_DataGridView;
+            var row = grid.Rows[Row];
+            String id = Convert.ToString(row.Cells[0].Value);
+            String n = Convert.ToString(row.Cells[1].Value);
+            String disc = Convert.ToString(row.Cells[7].Value);
+            String mark = Convert.ToString(row.Cells[6].Value);
+            String date = Convert.ToString(row.Cells[4].Value);
+
+            var request = @$"UPDATE Line 
+                            SET Number  = '{n}',
+                                FK_Discipline  = '{disc}',
+                                FK_Mark   = '{mark}',
+                                Date  = '{date}'
+                            WHERE L_Code = {id};";
 
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
@@ -263,6 +298,7 @@ namespace StudentsResults
             dataBase.openConnection();
             Command.ExecuteNonQuery();
         }
+
         private void NameBox_Validated(object sender, EventArgs e)
         {
             UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);

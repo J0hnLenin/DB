@@ -23,7 +23,7 @@ namespace StudentsResults
 
 
             RB_Form MF = (RB_Form)this.Owner;
-            MF.SelectedDate = Datedate;
+            MF.SelectedName = Datedate;
 
             this.Close();
         }
