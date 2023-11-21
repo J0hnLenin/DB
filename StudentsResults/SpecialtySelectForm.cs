@@ -25,14 +25,14 @@ namespace StudentsResults
         }
         private string SpGridRequest()
         {
-            string code = SpCodeFilterBox.Text;
-            string name = SpNameFilterBox.Text;
+            int code = dataBase.ParseInt(SpCodeFilterBox.Text);
+            string name = dataBase.ParseString(SpNameFilterBox.Text);
             string Request = @"SELECT S_Code, Name from Specialty ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
                     args.Add("S_code = " + code);
                 }

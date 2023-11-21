@@ -46,14 +46,14 @@ namespace StudentsResults
         }
         private string ProfGridRequest()
         {
-            string code = ProfCodeFilterBox.Text;
-            string name = ProfNameFilterBox.Text;
+            int code = dataBase.ParseInt(ProfCodeFilterBox.Text);
+            string name = dataBase.ParseString(ProfNameFilterBox.Text);
             string Request = @"SELECT P_Code, Name FROM Professor ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
                     args.Add("P_Code = " + code);
                 }

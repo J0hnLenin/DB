@@ -36,16 +36,16 @@ namespace StudentsResults
         }
         private string MarkGridRequest()
         {
-            string code = MarkCodeFilterBox.Text;
-            string name = MarkNameFilterBox.Text;
+            int code = dataBase.ParseInt(MarkCodeFilterBox.Text);
+            string name = dataBase.ParseString(MarkNameFilterBox.Text);
             string Request = @"SELECT M_Code, Name FROM Mark ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
-                    args.Add("M_Code = " + code);
+                    args.Add($"M_Code = '{code}'");
                 }
                 if (name != "")
                 {
@@ -71,19 +71,19 @@ namespace StudentsResults
         }
         private string DisGridRequest()
         {
-            string code = DisCodeFilterBox.Text;
-            string name = DisNameFilterBox.Text;
-            string professor = DisProfessorFilterBox.Text;
+            int code = dataBase.ParseInt(DisCodeFilterBox.Text);
+            string name = dataBase.ParseString(DisNameFilterBox.Text);
+            string professor = dataBase.ParseString(DisProfessorFilterBox.Text);
             string Request = @"SELECT D_Code, D.Name, ISNULL(P.Name, '') as ProfessorName
                                FROM Discipline AS D LEFT JOIN Professor AS P ON
                                FK_Professor = P_Code ";
             List<string> args = new List<string>();
-            if (code != "" || name != "" || professor != "")
+            if (code != -1 || name != "" || professor != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
-                    args.Add("D_Code = " + code);
+                    args.Add($"D_Code = '{code}'");
                 }
                 if (name != "")
                 {
@@ -114,16 +114,16 @@ namespace StudentsResults
         }
         private string ProfGridRequest()
         {
-            string code = ProfCodeFilterBox.Text;
-            string name = ProfNameFilterBox.Text;
+            int code = dataBase.ParseInt(ProfCodeFilterBox.Text);
+            string name = dataBase.ParseString(ProfNameFilterBox.Text);
             string Request = @"SELECT P_Code, Name FROM Professor ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
-                    args.Add("P_Code = " + code);
+                    args.Add($"P_Code = '{code}'");
                 }
                 if (name != "")
                 {
@@ -148,16 +148,16 @@ namespace StudentsResults
         }
         private string SpGridRequest()
         {
-            string code = SpCodeFilterBox.Text;
-            string name = SpNameFilterBox.Text;
+            int code = dataBase.ParseInt(SpCodeFilterBox.Text);
+            string name = dataBase.ParseString(SpNameFilterBox.Text);
             string Request = @"SELECT S_Code, Name from Specialty ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
-                    args.Add("S_code = " + code);
+                    args.Add($"S_code = '{code}'");
                 }
                 if (name != "")
                 {
@@ -182,18 +182,18 @@ namespace StudentsResults
         }
         private string RBGridRequest()
         {
-            string code = CodeFilterBox.Text;
-            string name = NameFilterBox.Text;
-            string dis = DisciplineFilterBox.Text;
+            int code = dataBase.ParseInt(CodeFilterBox.Text);
+            string name = dataBase.ParseString(NameFilterBox.Text);
+            string dis = dataBase.ParseString(DisciplineFilterBox.Text);
             string Request = @"SELECT RB_Code, RB.Name, ISNULL(S.Name, '') AS SpecialtyName
                                 FROM RecordBook AS RB LEFT JOIN Specialty AS S ON FK_Specialty = S_Code ";
             List<string> args = new List<string>();
-            if (code != "" || name != "" || dis != "")
+            if (code != -1 || name != "" || dis != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
-                    args.Add("RB_Code = " + code);
+                    args.Add($"RB_Code = '{code}'");
                 }
                 if (name != "")
                 {
@@ -254,6 +254,7 @@ namespace StudentsResults
         }
         private void UpdateObject(string table, string id_name, int id, string property, string value)
         {
+            value = dataBase.ParseString(value);
             var request = $"UPDATE {table} " +
                             $"SET {property} = '{value}' " +
                             $"WHERE {id_name} = {id};";
@@ -264,6 +265,7 @@ namespace StudentsResults
         }
         private void InsertObject(string table, string property, string value)
         {
+            value = dataBase.ParseString(value);
             var request = $"INSERT INTO {table} ({property}) " +
                             $"VALUES ('{value}')";
 
@@ -295,7 +297,9 @@ namespace StudentsResults
             var id = row.Cells[0].Value;
             if (id == null)
             {
-                InsertObject("RecordBook", "Name, FK_Specialty", " ', '1");
+                var property = new List<string> { "Name", "FK_Specialty" };
+                var value = new List<string> { " ", "1" };
+                dataBase.InsertObject("RecordBook", property, value);
                 GridUpdate("RecordBook");
             }
 
@@ -551,7 +555,7 @@ namespace StudentsResults
                     {
                         Request = string.Format("{0} AND", Request);
                     }
-                    Request = string.Format("{0} S.Name LIKE '%{1}%'", Request, SFilterBox.Text);
+                    Request = string.Format("{0} S.Name LIKE '%{1}%'", Request, dataBase.ParseString(SFilterBox.Text));
                     Flag = true;
                 }
                 if (DFilterBox.Text != "")
@@ -560,7 +564,7 @@ namespace StudentsResults
                     {
                         Request = string.Format("{0} AND", Request);
                     }
-                    Request = string.Format("{0} D.Name LIKE '%{1}%'", Request, DFilterBox.Text);
+                    Request = string.Format("{0} D.Name LIKE '%{1}%'", Request, dataBase.ParseString(DFilterBox.Text));
                     Flag = true;
                 }
                 if (MFilterBox.Text != "")
@@ -569,7 +573,7 @@ namespace StudentsResults
                     {
                         Request = string.Format("{0} AND", Request);
                     }
-                    Request = string.Format("{0} M.Name LIKE '%{1}%'", Request, MFilterBox.Text);
+                    Request = string.Format("{0} M.Name LIKE '%{1}%'", Request, dataBase.ParseString(MFilterBox.Text));
                     Flag = true;
                 }
             }
@@ -658,7 +662,9 @@ namespace StudentsResults
                 var id = row.Cells[0].Value;
                 if (id == null)
                 {
-                    InsertObject("Discipline", "Name, FK_Professor", " ', '1");
+                    var property = new List<string> { "Name", "FK_Professor" };
+                    var value = new List<string> { " ", "1" };
+                    dataBase.InsertObject("Discipline", property, value);
                     GridUpdate("Discipline");
                     id = grid.Rows[e.RowIndex].Cells[0].Value;
                 }
@@ -678,8 +684,10 @@ namespace StudentsResults
             var id = row.Cells[0].Value;
             if (id == null)
             {
-                var value = (string)row.Cells[e.ColumnIndex].Value;
-                InsertObject("Discipline", "Name, FK_Professor", $"{value}', '1");
+                var property = new List<string> { "Name", "FK_Professor" };
+                var value = new List<string> { (string)row.Cells[e.ColumnIndex].Value, "1" };
+
+                dataBase.InsertObject("Discipline", property, value);
                 GridUpdate("Discipline");
             }
             OnCellChange(DisdataGridView, "Discipline", e);
@@ -699,8 +707,9 @@ namespace StudentsResults
             var id = row.Cells[0].Value;
             if (id == null)
             {
-                var value = (string)row.Cells[e.ColumnIndex].Value;
-                InsertObject("RecordBook", "Name, FK_Specialty", $"{value}', '1");
+                var property = new List<string> { "Name", "FK_Professor" };
+                var value = new List<string> { (string)row.Cells[e.ColumnIndex].Value, "1" };
+                dataBase.InsertObject("RecordBook", property, value);
                 GridUpdate("RecordBook");
             }
             OnCellChange(RB_DataGridView, "RecordBook", e);

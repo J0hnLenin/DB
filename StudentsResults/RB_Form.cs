@@ -126,12 +126,17 @@ namespace StudentsResults
             {
                 if (Check_Row(row))
                 {
+                    var property = new List<string> { "Number", "FK_RecordBook", "FK_Discipline", "FK_Mark", "Date" };
+
+                    String number = Convert.ToString(grid.RowCount);
+                    String rbook = Convert.ToString(RB_Code);
                     String disc = Convert.ToString(row.Cells[7].Value);
                     String mark = Convert.ToString(row.Cells[6].Value);
                     String date = Convert.ToString(row.Cells[4].Value);
 
-                    InsertObject("Line", "Number, FK_RecordBook, FK_Discipline, FK_Mark, Date",
-                                    $"{grid.RowCount}', '{RB_Code}', '{disc}', '{mark}', '{date}");
+                    var value = new List<string> { number, rbook, disc, mark, date };
+                    dataBase.InsertObject("Line", property, value);
+
                     RefreshDataGrid(grid);
                 }
             }
@@ -258,6 +263,7 @@ namespace StudentsResults
 
         private void UpdateObject(string table, string id_name, int id, string property, string value)
         {
+            value = dataBase.ParseString(value);
             var request = $"UPDATE {table} " +
                             $"SET {property} = '{value}' " +
                             $"WHERE {id_name} = {id};";
@@ -271,11 +277,11 @@ namespace StudentsResults
         {
             DataGridView grid = Line_DataGridView;
             var row = grid.Rows[Row];
-            String id = Convert.ToString(row.Cells[0].Value);
-            String n = Convert.ToString(row.Cells[1].Value);
-            String disc = Convert.ToString(row.Cells[7].Value);
-            String mark = Convert.ToString(row.Cells[6].Value);
-            String date = Convert.ToString(row.Cells[4].Value);
+            String id = dataBase.ParseString(Convert.ToString(row.Cells[0].Value));
+            String n = dataBase.ParseString(Convert.ToString(row.Cells[1].Value));
+            String disc = dataBase.ParseString(Convert.ToString(row.Cells[7].Value));
+            String mark = dataBase.ParseString(Convert.ToString(row.Cells[6].Value));
+            String date = dataBase.ParseString(Convert.ToString(row.Cells[4].Value));
 
             var request = @$"UPDATE Line 
                             SET Number  = '{n}',
@@ -291,6 +297,7 @@ namespace StudentsResults
 
         private void InsertObject(string table, string property, string value)
         {
+            value = dataBase.ParseString(value);
             var request = $"INSERT INTO {table} ({property}) " +
                             $"VALUES ('{value}')";
 

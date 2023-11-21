@@ -26,14 +26,14 @@ namespace StudentsResults
         }
         private string MarkGridRequest()
         {
-            string code = MarkCodeFilterBox.Text;
-            string name = MarkNameFilterBox.Text;
+            int code = dataBase.ParseInt(MarkCodeFilterBox.Text);
+            string name = dataBase.ParseString(MarkNameFilterBox.Text);
             string Request = @"SELECT M_Code, Name FROM Mark ";
             List<string> args = new List<string>();
-            if (code != "" || name != "")
+            if (code != -1 || name != "")
             {
                 args.Add("WHERE ");
-                if (code != "")
+                if (code != -1)
                 {
                     args.Add("M_Code = " + code);
                 }

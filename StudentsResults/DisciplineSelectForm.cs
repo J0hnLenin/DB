@@ -38,9 +38,9 @@ namespace StudentsResults
         {
             RB_Form MF = (RB_Form)this.Owner;
             
-            string code = DisCodeFilterBox.Text;
-            string name = DisNameFilterBox.Text;
-            string professor = DisProfessorFilterBox.Text;
+            int code = dataBase.ParseInt(DisCodeFilterBox.Text);
+            string name = dataBase.ParseString(DisNameFilterBox.Text);
+            string professor = dataBase.ParseString(DisProfessorFilterBox.Text);
             string Request = @"SELECT D_Code, 
                                     D.Name, 
                                     ISNULL(P.Name, '') as ProfessorName
@@ -52,7 +52,7 @@ namespace StudentsResults
                                         WHERE L.FK_RecordBook = " + RB_Code + ")";
             List<string> args = new List<string>();
             
-            if (code != "")
+            if (code != -1)
                 args.Add(" AND D_Code = " + code);
             
             if (name != "")
