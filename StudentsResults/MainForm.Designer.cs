@@ -318,7 +318,6 @@
             ProfdataGridView.RowTemplate.Height = 25;
             ProfdataGridView.Size = new Size(815, 402);
             ProfdataGridView.TabIndex = 0;
-            ProfdataGridView.CellClick += ProfdataGridView_CellClick;
             ProfdataGridView.CellValueChanged += ProfdataGridView_CellValueChanged;
             ProfdataGridView.UserDeletedRow += ProfdataGridView_UserDeletedRow;
             // 
@@ -379,7 +378,6 @@
             label4.Size = new Size(120, 20);
             label4.TabIndex = 5;
             label4.Text = "Преподаватель:";
-            label4.Click += label4_Click_1;
             // 
             // DisProfessorFilterBox
             // 
@@ -506,7 +504,6 @@
             label2.Size = new Size(119, 20);
             label2.TabIndex = 3;
             label2.Text = "Наименование:";
-            label2.Click += label2_Click;
             // 
             // SpNameFilterBox
             // 
@@ -547,7 +544,6 @@
             SpdataGridView.RowTemplate.Height = 25;
             SpdataGridView.Size = new Size(815, 402);
             SpdataGridView.TabIndex = 0;
-            SpdataGridView.CellContentClick += dataGridView1_CellContentClick;
             SpdataGridView.CellValueChanged += SpdataGridView_CellValueChanged;
             SpdataGridView.UserDeletedRow += SpdataGridView_UserDeletedRow;
             // 
@@ -626,7 +622,6 @@
             NameFilterLabel.Size = new Size(45, 20);
             NameFilterLabel.TabIndex = 3;
             NameFilterLabel.Text = "ФИО:";
-            NameFilterLabel.Click += label1_Click;
             // 
             // NameFilterBox
             // 
@@ -719,7 +714,6 @@
             MFilterLable.Size = new Size(64, 20);
             MFilterLable.TabIndex = 11;
             MFilterLable.Text = "Оценка:";
-            MFilterLable.Click += label1_Click_2;
             // 
             // MFilterBox
             // 
@@ -738,7 +732,6 @@
             SFilterLable.Size = new Size(107, 20);
             SFilterLable.TabIndex = 9;
             SFilterLable.Text = "Направление:";
-            SFilterLable.Click += label1_Click_1;
             // 
             // SFilterBox
             // 
@@ -757,7 +750,6 @@
             DFilterLable.Size = new Size(99, 20);
             DFilterLable.TabIndex = 7;
             DFilterLable.Text = "Дисциплина:";
-            DFilterLable.Click += label11_Click;
             // 
             // DFilterBox
             // 
@@ -799,7 +791,6 @@
             ReportDataGridView.RowTemplate.Height = 25;
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
-            ReportDataGridView.CellContentClick += ReportDataGridView_CellContentClick;
             // 
             // _RRB_Code
             // 

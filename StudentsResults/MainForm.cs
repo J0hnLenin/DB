@@ -308,16 +308,6 @@ namespace StudentsResults
             GridUpdate("RecordBook");
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void NameFilterBox_TextChanged(object sender, EventArgs e)
         {
             RBGridInit();
@@ -332,26 +322,6 @@ namespace StudentsResults
         private void DisciplineFilterBox_TextChanged(object sender, EventArgs e)
         {
             RBGridInit();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProfdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void SpCodeFilterBox_TextChanged(object sender, EventArgs e)
@@ -397,11 +367,6 @@ namespace StudentsResults
         private void MarkNameFilterBox_TextChanged(object sender, EventArgs e)
         {
             GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void OnCellChange(DataGridView grid, string table, DataGridViewCellEventArgs e)
@@ -603,26 +568,6 @@ namespace StudentsResults
                 ReportReadRow(dgw, reader, id);
             }
             reader.Close();
-        }
-
-        private void ReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
         }
 
         private void ProfdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
