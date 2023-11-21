@@ -294,16 +294,12 @@ namespace StudentsResults
             DataGridView grid = RB_DataGridView;
 
             var row = grid.Rows[e.RowIndex];
-            var id = row.Cells[0].Value;
-            if (id == null)
-            {
-                var property = new List<string> { "Name", "FK_Specialty" };
-                var value = new List<string> { " ", "1" };
-                dataBase.InsertObject("RecordBook", property, value);
-                GridUpdate("RecordBook");
-            }
+            var id_raw = row.Cells[0].Value;
+            var id = -1;
+            if (id_raw != null)
+                id = Convert.ToInt32(id_raw);
 
-            RB_Form New_RB_Form = new RB_Form(Convert.ToInt32(RB_DataGridView.Rows[e.RowIndex].Cells[0].Value), this);
+            RB_Form New_RB_Form = new RB_Form(id,  this);
             New_RB_Form.Show();
             GridUpdate("RecordBook");
         }
@@ -641,23 +637,6 @@ namespace StudentsResults
         private void DisdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             OnRowDeletion(DisdataGridView, "Discipline", e);
-        }
-        private void RB_DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1)
-                return;
-            DataGridView grid = RB_DataGridView;
-
-            var row = grid.Rows[e.RowIndex];
-            var id = row.Cells[0].Value;
-            if (id == null)
-            {
-                var property = new List<string> { "Name", "FK_Professor" };
-                var value = new List<string> { (string)row.Cells[e.ColumnIndex].Value, "1" };
-                dataBase.InsertObject("RecordBook", property, value);
-                GridUpdate("RecordBook");
-            }
-            OnCellChange(RB_DataGridView, "RecordBook", e);
         }
 
         private void RB_DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)

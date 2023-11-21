@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Azure.Core;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,8 @@ namespace StudentsResults
 
         private void RefreshHead()
         {
+            Line_DataGridView.ReadOnly = RB_Code == -1;
+
             string Request = @"SELECT TOP 1
 	                            RB_Code,
 	                            RB.Name AS RB_Name,
@@ -52,6 +55,36 @@ namespace StudentsResults
                 SpecialtyNameBox.Text = reader.GetString(3);
             }
             reader.Close();
+        }
+
+        private int Max_code()
+        {
+            string Request = $@"SELECT MAX(RB_Code) FROM RecordBook;";
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            SqlDataReader reader = Command.ExecuteReader();
+            var max = -1;
+            while (reader.Read())
+            {
+                max = reader.GetInt32(0);
+            }
+            reader.Close();
+            return max;
+        }
+
+        private void CreateRB()
+        {
+            var name = dataBase.ParseString(NameBox.Text);
+            var sp_id = dataBase.ParseInt(DisciplineCodeBox.Text);
+
+            string Request = $@"INSERT INTO RecordBook (Name, FK_Specialty)
+                                VALUES ('{name}', '{sp_id}');";
+
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+
+            RB_Code = Max_code();
         }
 
         private void RefreshDataGrid(DataGridView dgw)
@@ -124,7 +157,7 @@ namespace StudentsResults
 
             if (id is null)
             {
-                if (Check_Row(row))
+                if (Check_Row(row) && RB_Code != -1)
                 {
                     var property = new List<string> { "Number", "FK_RecordBook", "FK_Discipline", "FK_Mark", "Date" };
 
@@ -182,14 +215,24 @@ namespace StudentsResults
             selectForm.ShowDialog(this);
             if (SelectedCode != -1)
             {
-
-                UpdateObject("RecordBook", "RB_Code", RB_Code, "FK_Specialty", Convert.ToString(SelectedCode));
-                RefreshHead();
+                DisciplineCodeBox.Text = Convert.ToString(SelectedCode);
+                if (RB_Code != -1)
+                {
+                    UpdateObject("RecordBook", "RB_Code", RB_Code, "FK_Specialty", DisciplineCodeBox.Text);
+                    RefreshHead();
+                }
+                else if (NameBox.Text != "" && DisciplineCodeBox.Text != "")
+                {
+                    CreateRB();
+                    RefreshHead();
+                }
                 SelectedCode = -1;
             }
         }
         private void SelectDiscipline(object sender, DataGridViewCellEventArgs e)
         {
+            if (RB_Code == -1)
+                return;
 
 
             DataGridView grid = Line_DataGridView;
@@ -218,7 +261,8 @@ namespace StudentsResults
 
         private void SelectMark(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (RB_Code == -1)
+                return;
 
             DataGridView grid = Line_DataGridView;
 
@@ -245,7 +289,8 @@ namespace StudentsResults
 
         private void SelectDate(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (RB_Code == -1)
+                return;
 
             DataGridView grid = Line_DataGridView;
 
@@ -295,20 +340,18 @@ namespace StudentsResults
             Command.ExecuteNonQuery();
         }
 
-        private void InsertObject(string table, string property, string value)
-        {
-            value = dataBase.ParseString(value);
-            var request = $"INSERT INTO {table} ({property}) " +
-                            $"VALUES ('{value}')";
-
-            SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
-            dataBase.openConnection();
-            Command.ExecuteNonQuery();
-        }
-
         private void NameBox_Validated(object sender, EventArgs e)
         {
-            UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);
+            if (RB_Code != -1)
+            {
+                UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);
+                RefreshHead();
+            }
+            else if (NameBox.Text != "" && DisciplineCodeBox.Text != "")
+            {
+                CreateRB();
+                RefreshHead();
+            }
         }
 
         private void RB_Form_FormClosed(object sender, FormClosedEventArgs e)

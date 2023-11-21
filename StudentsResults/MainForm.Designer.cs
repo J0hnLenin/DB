@@ -79,6 +79,9 @@
             CodeFilterLabel = new Label();
             CodeFilterBox = new TextBox();
             RB_DataGridView = new DataGridView();
+            _RRB_Code = new DataGridViewTextBoxColumn();
+            _RName = new DataGridViewTextBoxColumn();
+            _RSpecialtyName = new DataGridViewTextBoxColumn();
             MainControl = new TabControl();
             ReportPage = new TabPage();
             MFilterLable = new Label();
@@ -90,9 +93,6 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            _RRB_Code = new DataGridViewTextBoxColumn();
-            _RName = new DataGridViewTextBoxColumn();
-            _RSpecialtyName = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -664,8 +664,31 @@
             RB_DataGridView.Size = new Size(815, 402);
             RB_DataGridView.TabIndex = 0;
             RB_DataGridView.CellDoubleClick += RB_DataGridView_CellDoubleClick;
-            RB_DataGridView.CellValueChanged += RB_DataGridView_CellValueChanged;
             RB_DataGridView.UserDeletedRow += RB_DataGridView_UserDeletedRow;
+            // 
+            // _RRB_Code
+            // 
+            _RRB_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _RRB_Code.HeaderText = "Код";
+            _RRB_Code.Name = "_RRB_Code";
+            _RRB_Code.ReadOnly = true;
+            _RRB_Code.Width = 60;
+            // 
+            // _RName
+            // 
+            _RName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _RName.HeaderText = "ФИО";
+            _RName.MaxInputLength = 50;
+            _RName.Name = "_RName";
+            _RName.ReadOnly = true;
+            _RName.Width = 67;
+            // 
+            // _RSpecialtyName
+            // 
+            _RSpecialtyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _RSpecialtyName.HeaderText = "Направление подготовки";
+            _RSpecialtyName.Name = "_RSpecialtyName";
+            _RSpecialtyName.ReadOnly = true;
             // 
             // MainControl
             // 
@@ -791,30 +814,6 @@
             ReportDataGridView.RowTemplate.Height = 25;
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
-            // 
-            // _RRB_Code
-            // 
-            _RRB_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _RRB_Code.HeaderText = "Код";
-            _RRB_Code.Name = "_RRB_Code";
-            _RRB_Code.ReadOnly = true;
-            _RRB_Code.Width = 60;
-            // 
-            // _RName
-            // 
-            _RName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _RName.HeaderText = "ФИО";
-            _RName.MaxInputLength = 50;
-            _RName.Name = "_RName";
-            _RName.ReadOnly = true;
-            _RName.Width = 67;
-            // 
-            // _RSpecialtyName
-            // 
-            _RSpecialtyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _RSpecialtyName.HeaderText = "Направление подготовки";
-            _RSpecialtyName.Name = "_RSpecialtyName";
-            _RSpecialtyName.ReadOnly = true;
             // 
             // MainForm
             // 
