@@ -276,7 +276,7 @@ namespace StudentsResults
                 var row = grid.Rows[e.RowIndex];
                 var id = row.Cells[0].Value;
 
-                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedCode);
+                row.Cells[e.ColumnIndex].Value = Convert.ToString(SelectedName);
                 row.Cells[6].Value = Convert.ToString(SelectedCode);
 
                 SelectedCode = -1;
