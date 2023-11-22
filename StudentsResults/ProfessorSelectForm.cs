@@ -15,10 +15,22 @@ namespace StudentsResults
     public partial class ProfessorSelectForm : Form
     {
         DataBase dataBase = new DataBase();
+        int selected_row = -1;
         public ProfessorSelectForm()
         {
             InitializeComponent();
             ProfGridInit();
+        }
+
+        public (int, string) GetProf(Form Owner)
+        {
+            this.ShowDialog(Owner);
+            if (selected_row == -1)
+                return (-1, "");
+            var row = ProfdataGridView.Rows[selected_row];
+            var prof_id = dataBase.ParseInt(Convert.ToString(row.Cells[0].Value));
+            var name = dataBase.ParseString(Convert.ToString(row.Cells[1].Value));
+            return (prof_id, name);
         }
 
         private void ProfdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -26,6 +38,7 @@ namespace StudentsResults
             if (e.RowIndex < 0)
                 return;
 
+            selected_row = e.RowIndex;
             var row = ProfdataGridView.Rows[e.RowIndex];
             var id = row.Cells[0].Value;
             MainForm MF = (MainForm)this.Owner;

@@ -594,44 +594,60 @@ namespace StudentsResults
                 return;
             DataGridView grid = DisdataGridView;
 
-            SelectedCode = -1;
             ProfessorSelectForm selectForm = new ProfessorSelectForm();
-            selectForm.ShowDialog(this);
-            if (SelectedCode != -1)
+            int prof_id;
+            string prof_name;
+            (prof_id, prof_name) = selectForm.GetProf(this);
+
+            if (prof_id <= 0 || prof_name == "")
+                return;
+
+            var row = grid.Rows[e.RowIndex];
+            row.Cells[2].Value = prof_name;
+            row.Cells[3].Value = prof_id;
+
+            var id = row.Cells[0].Value;
+            if (id == null)
+                CreateDis(row);
+            else
             {
-                var row = grid.Rows[e.RowIndex];
-                var id = row.Cells[0].Value;
-                if (id == null)
-                {
-                    var property = new List<string> { "Name", "FK_Professor" };
-                    var value = new List<string> { " ", "1" };
-                    dataBase.InsertObject("Discipline", property, value);
-                    GridUpdate("Discipline");
-                    id = grid.Rows[e.RowIndex].Cells[0].Value;
-                }
-                UpdateObject("Discipline", "D_Code", (int)id, "FK_Professor", Convert.ToString(SelectedCode));
+                UpdateObject("Discipline", "D_Code", (int)id, "FK_Professor", prof_id.ToString());
                 GridUpdate(grid, DisGridRequest(), DisReadRow);
-                SelectedCode = -1;
             }
+        }
+
+        private void CreateDis(DataGridViewRow row)
+        {
+            if (row.Cells[1].Value is null)
+                return;
+            var name = dataBase.ParseString(Convert.ToString(row.Cells[1].Value));
+
+            if (row.Cells[3].Value is null)
+                return;
+            var prof_id = dataBase.ParseInt(Convert.ToString(row.Cells[3].Value));
+
+            if (prof_id <= 0)
+                return;
+
+            var property = new List<string> { "Name", "FK_Professor" };
+            var value = new List<string> { name, prof_id.ToString() };
+
+            dataBase.InsertObject("Discipline", property, value);
+            GridUpdate("Discipline");
         }
 
         private void DisdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1)
+            if (e.RowIndex == -1 || e.ColumnIndex != 1)
                 return;
             DataGridView grid = DisdataGridView;
 
             var row = grid.Rows[e.RowIndex];
             var id = row.Cells[0].Value;
             if (id == null)
-            {
-                var property = new List<string> { "Name", "FK_Professor" };
-                var value = new List<string> { (string)row.Cells[e.ColumnIndex].Value, "1" };
-
-                dataBase.InsertObject("Discipline", property, value);
-                GridUpdate("Discipline");
-            }
-            OnCellChange(DisdataGridView, "Discipline", e);
+                CreateDis(row);
+            else
+                OnCellChange(DisdataGridView, "Discipline", e);
         }
 
         private void DisdataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
