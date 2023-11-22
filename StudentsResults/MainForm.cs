@@ -534,13 +534,14 @@ namespace StudentsResults
 			                                    WHEN M.Name = 'Удовлетворительно' THEN 3.0
 			                                    WHEN M.Name = 'Хорошо'            THEN 4.0
 			                                    WHEN M.Name = 'Отлично'           THEN 5.0
+                                                ELSE 0.0
 		                                      END), 2) AS Float) AS Average
                                     FROM RecordBook AS RB LEFT JOIN Line AS L ON
 	                                    RB_Code = L.FK_RecordBook
 	                                    LEFT JOIN Mark AS M ON
 	                                    M.M_Code = L.FK_Mark
-                                    WHERE M.Name IN ('Удовлетворительно', 'Хорошо', 'Отлично')
-                                        AND RB.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
+                                        AND M.Name IN ('Удовлетворительно', 'Хорошо', 'Отлично')
+                                    WHERE RB.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
                                     GROUP BY RB.RB_Code, RB.Name
                                     ORDER BY RB.Name;";
                         break;
