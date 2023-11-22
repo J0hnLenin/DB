@@ -793,7 +793,7 @@
             // ReportComboBox
             // 
             ReportComboBox.FormattingEnabled = true;
-            ReportComboBox.Items.AddRange(new object[] { "Списочный отчёт об успеваемости", "Статистический отчёт об успеваемости " });
+            ReportComboBox.Items.AddRange(new object[] { "Списочный отчёт об успеваемости", "Статистический отчёт об успеваемости ", "Средний бал экзаменов" });
             ReportComboBox.Location = new Point(8, 55);
             ReportComboBox.Name = "ReportComboBox";
             ReportComboBox.Size = new Size(298, 28);

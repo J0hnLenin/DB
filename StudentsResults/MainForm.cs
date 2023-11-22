@@ -448,6 +448,15 @@ namespace StudentsResults
                         ReportDataGridView.Columns.Add("MarkName", "Оценка");
                         break;
                     }
+                case 2:
+                    {
+                        ReportDataGridView.Columns.Clear();
+                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная книга");
+                        ReportDataGridView.Columns.Add("RB_Name", "ФИО");
+                        ReportDataGridView.Columns.Add("Passed", "Экзаменов сдано");
+                        ReportDataGridView.Columns.Add("Average", "Средний балл");
+                        break;
+                    }
             }
 
         }
@@ -464,6 +473,11 @@ namespace StudentsResults
                 case 1:
                     {
                         dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
+                        break;
+                    }
+                case 2:
+                    {
+                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetInt32(2), record.GetDouble(3));
                         break;
                     }
 
@@ -512,9 +526,29 @@ namespace StudentsResults
 	                        D_Code = FK_Discipline";
                         break;
                     }
+                case 2:
+                    {
+                        Request = $@"
+                                    SELECT 
+	                                    RB.RB_Code as RB_Code,
+	                                    RB.Name as RB_Name, 
+	                                    COUNT(L.L_Code) as Passed,
+	                                    ROUND(ISNULL((6-AVG(CAST(L2.FK_Mark as Float))), 0), 2) as Average
+                                    FROM RecordBook as RB LEFT JOIN Line AS L ON
+	                                    RB_Code = L.FK_RecordBook
+	                                    LEFT JOIN Line AS L2 ON
+	                                    RB_Code = L2.FK_RecordBook AND
+	                                    L2.FK_Mark <= 3
+                                    WHERE RB.Name LIKE '%%'
+                                    GROUP BY RB.RB_Code, RB.Name
+                                    ORDER BY RB.Name;
+                                    ";
+                        break;
+                        
+                    }
             }
 
-            if (SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "")
+            if ((SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "") && id != 2)
             {
                 bool Flag = false;
                 Request = string.Format("{0} WHERE", Request);
