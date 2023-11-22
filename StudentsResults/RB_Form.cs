@@ -128,6 +128,11 @@ namespace StudentsResults
 
         private void Line_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (RB_Code == -1)
+            {
+                ShowError();
+                return;
+            }
             if (e.RowIndex == -1)
                 return;
             DataGridView grid = Line_DataGridView;
@@ -177,7 +182,7 @@ namespace StudentsResults
             {
                 UpdateLine(e.RowIndex);
             }
-            
+
         }
 
         private void UpdateRow(DataGridViewRow R)
@@ -228,6 +233,11 @@ namespace StudentsResults
                 }
                 SelectedCode = -1;
             }
+        }
+
+        private void ShowError()
+        {
+            MessageBox.Show("Заполните ФИО и выберите направление", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void SelectDiscipline(object sender, DataGridViewCellEventArgs e)
         {
