@@ -94,6 +94,8 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
+            FIO_FilterLabel = new Label();
+            FIO_FilterBox = new TextBox();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -718,6 +720,8 @@
             // 
             // ReportPage
             // 
+            ReportPage.Controls.Add(FIO_FilterBox);
+            ReportPage.Controls.Add(FIO_FilterLabel);
             ReportPage.Controls.Add(MFilterLable);
             ReportPage.Controls.Add(MFilterBox);
             ReportPage.Controls.Add(SFilterLable);
@@ -822,6 +826,24 @@
             ReportDataGridView.RowTemplate.Height = 25;
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
+            // 
+            // FIO_FilterLabel
+            // 
+            FIO_FilterLabel.AutoSize = true;
+            FIO_FilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FIO_FilterLabel.Location = new Point(8, 194);
+            FIO_FilterLabel.Name = "FIO_FilterLabel";
+            FIO_FilterLabel.Size = new Size(45, 20);
+            FIO_FilterLabel.TabIndex = 12;
+            FIO_FilterLabel.Text = "ФИО:";
+            // 
+            // FIO_FilterBox
+            // 
+            FIO_FilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FIO_FilterBox.Location = new Point(121, 191);
+            FIO_FilterBox.Name = "FIO_FilterBox";
+            FIO_FilterBox.Size = new Size(185, 27);
+            FIO_FilterBox.TabIndex = 13;
             // 
             // MainForm
             // 
@@ -939,5 +961,7 @@
         private DataGridViewTextBoxColumn _DName;
         private DataGridViewTextBoxColumn _DProfessorName;
         private DataGridViewTextBoxColumn _DFK_Professor;
+        private TextBox FIO_FilterBox;
+        private Label FIO_FilterLabel;
     }
 }

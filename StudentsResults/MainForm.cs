@@ -309,7 +309,7 @@ namespace StudentsResults
                 id = Convert.ToInt32(id_raw);
 
             RB_Form New_RB_Form = new RB_Form(id, this);
-            New_RB_Form.Show();
+            New_RB_Form.ShowDialog();
             GridUpdate("RecordBook");
         }
 
@@ -443,7 +443,6 @@ namespace StudentsResults
                     {
                         ReportDataGridView.Columns.Clear();
                         ReportDataGridView.Columns.Add("Number", "Количество студентов");
-                        //ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
                         ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
                         ReportDataGridView.Columns.Add("MarkName", "Оценка");
                         break;
@@ -513,7 +512,6 @@ namespace StudentsResults
                     {
                         Request = @"SELECT
 	                        COUNT(RB_Code) AS NUMBER,
-	                        --ISNULL(S.Name, '') AS SpecialityName,
 	                        ISNULL(D.Name, '') AS DisciplineName,
 	                        ISNULL(M.Name, '') AS MarkName
                         FROM RecordBook AS RB INNER JOIN Line AS L ON
@@ -539,12 +537,11 @@ namespace StudentsResults
 	                                    LEFT JOIN Line AS L2 ON
 	                                    RB_Code = L2.FK_RecordBook AND
 	                                    L2.FK_Mark <= 3
-                                    WHERE RB.Name LIKE '%%'
+                                    WHERE RB.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
                                     GROUP BY RB.RB_Code, RB.Name
-                                    ORDER BY RB.Name;
-                                    ";
+                                    ORDER BY RB.Name;";
                         break;
-                        
+
                     }
             }
 
