@@ -526,18 +526,21 @@ namespace StudentsResults
                     }
                 case 2:
                     {
-                        Request = $@"
-                                    SELECT 
-	                                    RB.RB_Code as RB_Code,
-	                                    RB.Name as RB_Name, 
-	                                    COUNT(L.L_Code) as Passed,
-	                                    ROUND(ISNULL((6-AVG(CAST(L2.FK_Mark as Float))), 0), 2) as Average
-                                    FROM RecordBook as RB LEFT JOIN Line AS L ON
+                        Request = $@"SELECT 
+	                                    RB.RB_Code AS RB_Code,
+	                                    RB.Name AS RB_Name, 
+	                                    COUNT(L.L_Code) AS Passed,
+	                                    CAST(ROUND(AVG(CASE 
+			                                    WHEN M.Name = 'Удовлетворительно' THEN 3.0
+			                                    WHEN M.Name = 'Хорошо'            THEN 4.0
+			                                    WHEN M.Name = 'Отлично'           THEN 5.0
+		                                      END), 2) AS Float) AS Average
+                                    FROM RecordBook AS RB LEFT JOIN Line AS L ON
 	                                    RB_Code = L.FK_RecordBook
-	                                    LEFT JOIN Line AS L2 ON
-	                                    RB_Code = L2.FK_RecordBook AND
-	                                    L2.FK_Mark <= 3
-                                    WHERE RB.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
+	                                    LEFT JOIN Mark AS M ON
+	                                    M.M_Code = L.FK_Mark
+                                    WHERE M.Name IN ('Удовлетворительно', 'Хорошо', 'Отлично')
+                                        AND RB.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
                                     GROUP BY RB.RB_Code, RB.Name
                                     ORDER BY RB.Name;";
                         break;

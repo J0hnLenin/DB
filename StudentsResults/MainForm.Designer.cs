@@ -58,10 +58,6 @@
             label6 = new Label();
             DisCodeFilterBox = new TextBox();
             DisdataGridView = new DataGridView();
-            _DD_Code = new DataGridViewTextBoxColumn();
-            _DName = new DataGridViewTextBoxColumn();
-            _DProfessorName = new DataGridViewTextBoxColumn();
-            _DFK_Professor = new DataGridViewTextBoxColumn();
             Specialty = new TabPage();
             splitContainer2 = new SplitContainer();
             label2 = new Label();
@@ -85,6 +81,8 @@
             _RSpecialtyName = new DataGridViewTextBoxColumn();
             MainControl = new TabControl();
             ReportPage = new TabPage();
+            FIO_FilterBox = new TextBox();
+            FIO_FilterLabel = new Label();
             MFilterLable = new Label();
             MFilterBox = new TextBox();
             SFilterLable = new Label();
@@ -94,8 +92,10 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            FIO_FilterLabel = new Label();
-            FIO_FilterBox = new TextBox();
+            _DD_Code = new DataGridViewTextBoxColumn();
+            _DName = new DataGridViewTextBoxColumn();
+            _DProfessorName = new DataGridViewTextBoxColumn();
+            _DFK_Professor = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -444,35 +444,6 @@
             DisdataGridView.CellValueChanged += DisdataGridView_CellValueChanged;
             DisdataGridView.UserDeletedRow += DisdataGridView_UserDeletedRow;
             // 
-            // _DD_Code
-            // 
-            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DD_Code.HeaderText = "Код";
-            _DD_Code.Name = "_DD_Code";
-            _DD_Code.ReadOnly = true;
-            _DD_Code.Width = 60;
-            // 
-            // _DName
-            // 
-            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DName.HeaderText = "Наименование";
-            _DName.MaxInputLength = 50;
-            _DName.Name = "_DName";
-            _DName.Width = 141;
-            // 
-            // _DProfessorName
-            // 
-            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _DProfessorName.HeaderText = "Преподаватель";
-            _DProfessorName.Name = "_DProfessorName";
-            _DProfessorName.ReadOnly = true;
-            // 
-            // _DFK_Professor
-            // 
-            _DFK_Professor.HeaderText = "FK_Professor";
-            _DFK_Professor.Name = "_DFK_Professor";
-            _DFK_Professor.ReadOnly = true;
-            // 
             // Specialty
             // 
             Specialty.Controls.Add(splitContainer2);
@@ -740,6 +711,24 @@
             ReportPage.Text = "Отчёты";
             ReportPage.UseVisualStyleBackColor = true;
             // 
+            // FIO_FilterBox
+            // 
+            FIO_FilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FIO_FilterBox.Location = new Point(121, 191);
+            FIO_FilterBox.Name = "FIO_FilterBox";
+            FIO_FilterBox.Size = new Size(185, 27);
+            FIO_FilterBox.TabIndex = 13;
+            // 
+            // FIO_FilterLabel
+            // 
+            FIO_FilterLabel.AutoSize = true;
+            FIO_FilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FIO_FilterLabel.Location = new Point(8, 194);
+            FIO_FilterLabel.Name = "FIO_FilterLabel";
+            FIO_FilterLabel.Size = new Size(45, 20);
+            FIO_FilterLabel.TabIndex = 12;
+            FIO_FilterLabel.Text = "ФИО:";
+            // 
             // MFilterLable
             // 
             MFilterLable.AutoSize = true;
@@ -827,23 +816,35 @@
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
             // 
-            // FIO_FilterLabel
+            // _DD_Code
             // 
-            FIO_FilterLabel.AutoSize = true;
-            FIO_FilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            FIO_FilterLabel.Location = new Point(8, 194);
-            FIO_FilterLabel.Name = "FIO_FilterLabel";
-            FIO_FilterLabel.Size = new Size(45, 20);
-            FIO_FilterLabel.TabIndex = 12;
-            FIO_FilterLabel.Text = "ФИО:";
+            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DD_Code.HeaderText = "Код";
+            _DD_Code.Name = "_DD_Code";
+            _DD_Code.ReadOnly = true;
+            _DD_Code.Width = 60;
             // 
-            // FIO_FilterBox
+            // _DName
             // 
-            FIO_FilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            FIO_FilterBox.Location = new Point(121, 191);
-            FIO_FilterBox.Name = "FIO_FilterBox";
-            FIO_FilterBox.Size = new Size(185, 27);
-            FIO_FilterBox.TabIndex = 13;
+            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DName.HeaderText = "Наименование";
+            _DName.MaxInputLength = 50;
+            _DName.Name = "_DName";
+            _DName.Width = 141;
+            // 
+            // _DProfessorName
+            // 
+            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _DProfessorName.HeaderText = "Преподаватель";
+            _DProfessorName.Name = "_DProfessorName";
+            _DProfessorName.ReadOnly = true;
+            // 
+            // _DFK_Professor
+            // 
+            _DFK_Professor.HeaderText = "FK_Professor";
+            _DFK_Professor.Name = "_DFK_Professor";
+            _DFK_Professor.ReadOnly = true;
+            _DFK_Professor.Visible = false;
             // 
             // MainForm
             // 
@@ -957,11 +958,11 @@
         private DataGridViewTextBoxColumn _RRB_Code;
         private DataGridViewTextBoxColumn _RName;
         private DataGridViewTextBoxColumn _RSpecialtyName;
+        private TextBox FIO_FilterBox;
+        private Label FIO_FilterLabel;
         private DataGridViewTextBoxColumn _DD_Code;
         private DataGridViewTextBoxColumn _DName;
         private DataGridViewTextBoxColumn _DProfessorName;
         private DataGridViewTextBoxColumn _DFK_Professor;
-        private TextBox FIO_FilterBox;
-        private Label FIO_FilterLabel;
     }
 }
