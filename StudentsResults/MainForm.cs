@@ -33,6 +33,7 @@ namespace StudentsResults
         private void MarkGridInit()
         {
             GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
+            MarkdataGridView.Sort(MarkdataGridView.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string MarkGridRequest()
         {
@@ -68,6 +69,8 @@ namespace StudentsResults
         private void DisGridInit()
         {
             GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
+            var grid = DisdataGridView;
+            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string DisGridRequest()
         {
@@ -111,6 +114,8 @@ namespace StudentsResults
         private void ProfGridInit()
         {
             GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
+            var grid = ProfdataGridView;
+            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string ProfGridRequest()
         {
@@ -145,6 +150,8 @@ namespace StudentsResults
         private void SpGridInit()
         {
             GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
+            var grid = SpdataGridView;
+            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string SpGridRequest()
         {
@@ -179,6 +186,8 @@ namespace StudentsResults
         private void RBGridInit()
         {
             GridUpdate(RB_DataGridView, RBGridRequest(), RBReadRow);
+            var grid = RB_DataGridView;
+            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string RBGridRequest()
         {
@@ -284,8 +293,8 @@ namespace StudentsResults
             {
                 Command.ExecuteNonQuery();
             }
-            catch (Exception ex){}
-            
+            catch (Exception ex) { }
+
         }
         private void RB_DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -299,7 +308,7 @@ namespace StudentsResults
             if (id_raw != null)
                 id = Convert.ToInt32(id_raw);
 
-            RB_Form New_RB_Form = new RB_Form(id,  this);
+            RB_Form New_RB_Form = new RB_Form(id, this);
             New_RB_Form.Show();
             GridUpdate("RecordBook");
         }
@@ -661,5 +670,27 @@ namespace StudentsResults
             OnRowDeletion(RB_DataGridView, "RecordBook", e);
         }
 
+        private void MainControl_Selected(object sender, TabControlEventArgs e)
+        {
+            switch (e.TabPageIndex)
+            {
+
+                case 0:
+                    RBGridInit();
+                    break;
+                case 1:
+                    SpGridInit();
+                    break;
+                case 2:
+                    DisGridInit();
+                    break;
+                case 3:
+                    ProfGridInit();
+                    break;
+                case 4:
+                    MarkGridInit();
+                    break;
+            }
+        }
     }
 }
