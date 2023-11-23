@@ -44,6 +44,7 @@ namespace StudentsResults
                     args.Add(string.Format("Name LIKE '%{0}%'", name));
                 }
             }
+            args.Add(" ORDER BY Name");
             Request += String.Concat(args);
             return Request;
         }

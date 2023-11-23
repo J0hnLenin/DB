@@ -48,7 +48,7 @@ namespace StudentsResults
             int code = dataBase.ParseInt(DisCodeFilterBox.Text);
             string name = dataBase.ParseString(DisNameFilterBox.Text);
             string professor = dataBase.ParseString(DisProfessorFilterBox.Text);
-            string Request = @"SELECT D_Code, 
+            string Request = $@"SELECT D_Code, 
                                     D.Name, 
                                     ISNULL(P.Name, '') as ProfessorName
                                 FROM Discipline AS D LEFT JOIN Professor AS P ON
@@ -56,7 +56,8 @@ namespace StudentsResults
                                 WHERE D_Code NOT IN (
                                         SELECT L.FK_Discipline
                                         FROM Line AS L
-                                        WHERE L.FK_RecordBook = " + RB_Code + ")";
+                                        WHERE L.FK_RecordBook = {RB_Code} )
+                                ORDER BY D.Name";
             List<string> args = new List<string>();
             
             if (code != -1)
