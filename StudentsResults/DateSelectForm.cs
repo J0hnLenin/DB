@@ -23,6 +23,8 @@ namespace StudentsResults
 
 
             RB_Form MF = (RB_Form)this.Owner;
+            if (Datedate == "")
+                Datedate = DateTime.Today.ToShortDateString();
             MF.SelectedName = Datedate;
 
             this.Close();

@@ -36,9 +36,10 @@
             // 
             monthCalendar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             monthCalendar1.Location = new Point(18, 18);
+            monthCalendar1.MaxSelectionCount = 1;
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 1;
-            monthCalendar1.DateChanged += monthCalendar1_DateChanged;
+            monthCalendar1.DateSelected += monthCalendar1_DateChanged;
             // 
             // button1
             // 
