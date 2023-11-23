@@ -30,10 +30,14 @@ namespace StudentsResults
 
             grid.Columns.Add("D_Code", "Код");
             grid.Columns[0].ReadOnly = true;
+            grid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            grid.Columns[0].ReadOnly = true;
             grid.Columns.Add("Name", "Наименование");
             grid.Columns[1].ReadOnly = true;
+            grid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             grid.Columns.Add("ProfessorName", "Преподаватель");
             grid.Columns[2].ReadOnly = true;
+            grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GridUpdate(grid, DisGridRequest(), DisReadRow);
         }

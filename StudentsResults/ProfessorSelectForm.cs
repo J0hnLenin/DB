@@ -54,8 +54,10 @@ namespace StudentsResults
 
             ProfdataGridView.Columns.Add("P_Code", "Код");
             ProfdataGridView.Columns[0].ReadOnly = true;
+            ProfdataGridView.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             ProfdataGridView.Columns.Add("Name", "ФИО");
             ProfdataGridView.Columns[1].ReadOnly = true;
+            ProfdataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
         }

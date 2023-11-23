@@ -422,18 +422,18 @@ namespace StudentsResults
                 case 0:
                     {
                         ReportDataGridView.Columns.Clear();
-                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная книга");
+                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная\nкнига");
                         ReportDataGridView.Columns.Add("RB_Name", "ФИО");
-                        ReportDataGridView.Columns.Add("SpecialtyName", "Направление подготовки");
+                        ReportDataGridView.Columns.Add("SpecialtyName", "Направление \nподготовки");
                         ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
                         ReportDataGridView.Columns.Add("MarkName", "Оценка");
-                        ReportDataGridView.Columns.Add("Date", "Дата экзамена");
+                        ReportDataGridView.Columns.Add("Date", "Дата\nэкзамена");
                         break;
                     }
                 case 1:
                     {
                         ReportDataGridView.Columns.Clear();
-                        ReportDataGridView.Columns.Add("Number", "Количество студентов");
+                        ReportDataGridView.Columns.Add("Number", "Количество\nстудентов");
                         ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
                         ReportDataGridView.Columns.Add("MarkName", "Оценка");
                         break;
@@ -441,13 +441,18 @@ namespace StudentsResults
                 case 2:
                     {
                         ReportDataGridView.Columns.Clear();
-                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная книга");
+                        ReportDataGridView.Columns.Add("RB_Code", "Зачётная\nкнига");
                         ReportDataGridView.Columns.Add("RB_Name", "ФИО");
-                        ReportDataGridView.Columns.Add("Passed", "Экзаменов сдано");
-                        ReportDataGridView.Columns.Add("Average", "Средний балл");
+                        ReportDataGridView.Columns.Add("Passed", "Экзаменов\nсдано");
+                        ReportDataGridView.Columns.Add("Average", "Средний\nбалл");
                         break;
                     }
             }
+            foreach (DataGridViewColumn column in ReportDataGridView.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
+            ReportDataGridView.Columns[ReportDataGridView.ColumnCount- 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
