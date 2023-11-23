@@ -33,7 +33,6 @@ namespace StudentsResults
         private void MarkGridInit()
         {
             GridUpdate(MarkdataGridView, MarkGridRequest(), MarkReadRow);
-            MarkdataGridView.Sort(MarkdataGridView.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string MarkGridRequest()
         {
@@ -69,8 +68,6 @@ namespace StudentsResults
         private void DisGridInit()
         {
             GridUpdate(DisdataGridView, DisGridRequest(), DisReadRow);
-            var grid = DisdataGridView;
-            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string DisGridRequest()
         {
@@ -114,8 +111,6 @@ namespace StudentsResults
         private void ProfGridInit()
         {
             GridUpdate(ProfdataGridView, ProfGridRequest(), ProfReadRow);
-            var grid = ProfdataGridView;
-            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string ProfGridRequest()
         {
@@ -150,8 +145,6 @@ namespace StudentsResults
         private void SpGridInit()
         {
             GridUpdate(SpdataGridView, SpGridRequest(), SpReadRow);
-            var grid = SpdataGridView;
-            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string SpGridRequest()
         {
@@ -186,8 +179,6 @@ namespace StudentsResults
         private void RBGridInit()
         {
             GridUpdate(RB_DataGridView, RBGridRequest(), RBReadRow);
-            var grid = RB_DataGridView;
-            grid.Sort(grid.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
         }
         private string RBGridRequest()
         {
