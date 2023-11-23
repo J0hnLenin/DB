@@ -161,9 +161,11 @@
             // 
             // Number
             // 
+            Number.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             Number.HeaderText = "№";
             Number.Name = "Number";
             Number.ReadOnly = true;
+            Number.Width = 45;
             // 
             // DisciplineName
             // 
@@ -183,8 +185,8 @@
             // 
             // Date
             // 
-            Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Date.HeaderText = "Дата экзамена";
+            Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Date.HeaderText = "Дата\nэкзамена";
             Date.Name = "Date";
             Date.ReadOnly = true;
             Date.Width = 111;
