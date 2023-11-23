@@ -29,8 +29,11 @@ namespace StudentsResults
             DataGridView grid = DisdataGridView;
 
             grid.Columns.Add("D_Code", "Код");
+            grid.Columns[0].ReadOnly = true;
             grid.Columns.Add("Name", "Наименование");
+            grid.Columns[1].ReadOnly = true;
             grid.Columns.Add("ProfessorName", "Преподаватель");
+            grid.Columns[2].ReadOnly = true;
 
             GridUpdate(grid, DisGridRequest(), DisReadRow);
         }

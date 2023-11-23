@@ -529,13 +529,13 @@ namespace StudentsResults
                         Request = $@"SELECT 
 	                                    RB.RB_Code AS RB_Code,
 	                                    RB.Name AS RB_Name, 
-	                                    COUNT(L.L_Code) AS Passed,
-	                                    CAST(ROUND(AVG(CASE 
+	                                    COUNT(M.M_Code) AS Passed,
+	                                    CAST(ROUND(ISNULL(AVG(CASE 
 			                                    WHEN M.Name = 'Удовлетворительно' THEN 3.0
 			                                    WHEN M.Name = 'Хорошо'            THEN 4.0
 			                                    WHEN M.Name = 'Отлично'           THEN 5.0
-                                                ELSE 0.0
-		                                      END), 2) AS Float) AS Average
+                                                ELSE NULL
+		                                        END), 0.0), 2) AS Float) AS Average
                                     FROM RecordBook AS RB LEFT JOIN Line AS L ON
 	                                    RB_Code = L.FK_RecordBook
 	                                    LEFT JOIN Mark AS M ON
@@ -549,12 +549,19 @@ namespace StudentsResults
                     }
             }
 
-            if ((SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "") && id != 2)
+            if ((SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "" || FIO_FilterBox.Text != "") && id != 2)
             {
                 bool Flag = false;
-                Request = string.Format("{0} WHERE", Request);
+                if (id == 1 && (DFilterBox.Text != "" || MFilterBox.Text != ""))
+                {
+                    Request = string.Format("{0} WHERE", Request);
+                }
+                if (id == 0)
+                {
+                    Request = string.Format("{0} WHERE", Request);
+                }
 
-                if (SFilterBox.Text != "")
+                if (SFilterBox.Text != "" && id != 1)
                 {
                     if (Flag)
                     {
@@ -581,6 +588,15 @@ namespace StudentsResults
                     Request = string.Format("{0} M.Name LIKE '%{1}%'", Request, dataBase.ParseString(MFilterBox.Text));
                     Flag = true;
                 }
+                if (FIO_FilterBox.Text != "" && id != 1)
+                {
+                    if (Flag)
+                    {
+                        Request = string.Format("{0} AND", Request);
+                    }
+                    Request = string.Format("{0} RB.Name LIKE '%{1}%'", Request, dataBase.ParseString(FIO_FilterBox.Text));
+                    Flag = true;
+                }
             }
             switch (id)
             {
@@ -591,7 +607,6 @@ namespace StudentsResults
                     {
                         Request = string.Format(@"{0}
                                                 GROUP BY
-                                                    --S.Name,
                                                     D.Name,
                                                     M.Name
                                                 ORDER BY D.Name", Request);
@@ -725,6 +740,40 @@ namespace StudentsResults
                 case 4:
                     MarkGridInit();
                     break;
+            }
+        }
+
+        private void ReportComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = (int)ReportComboBox.SelectedIndex;
+            switch (id)
+            {
+                case 0:
+                    SFilterBox.ReadOnly = false;
+                    DFilterBox.ReadOnly = false;
+                    MFilterBox.ReadOnly = false;
+                    FIO_FilterBox.ReadOnly = false;
+                    break;
+                case 1:
+                    SFilterBox.ReadOnly = true;
+                    DFilterBox.ReadOnly = false;
+                    MFilterBox.ReadOnly = false;
+                    FIO_FilterBox.ReadOnly = true;
+
+                    SFilterBox.Text = "";
+                    FIO_FilterBox.Text = "";
+                    break;
+                case 2:
+                    SFilterBox.ReadOnly = true;
+                    DFilterBox.ReadOnly = true;
+                    MFilterBox.ReadOnly = true;
+                    FIO_FilterBox.ReadOnly = false;
+
+                    SFilterBox.Text = "";
+                    DFilterBox.Text = "";
+                    MFilterBox.Text = "";
+                    break;
+
             }
         }
     }

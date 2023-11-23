@@ -389,7 +389,18 @@ namespace StudentsResults
             var id_name = "L_Code";
             var id = (int)row.Cells[0].Value;
             DeleteObject(table, id_name, id);
+            UpdateNumber(grid);
             RefreshDataGrid(grid);
+        }
+
+        private void UpdateNumber(DataGridView grid)
+        {
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                object id = row.Cells[0].Value;
+                if (id is not null)
+                    UpdateObject("Line", "L_Code", (int)id, "Number", Convert.ToString(row.Index + 1));
+            }
         }
 
     }

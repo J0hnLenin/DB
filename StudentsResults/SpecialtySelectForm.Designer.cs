@@ -30,12 +30,12 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             SpdataGridView = new DataGridView();
-            _SS_Code = new DataGridViewTextBoxColumn();
-            _SName = new DataGridViewTextBoxColumn();
             label2 = new Label();
             SpNameFilterBox = new TextBox();
             label3 = new Label();
             SpCodeFilterBox = new TextBox();
+            _SS_Code = new DataGridViewTextBoxColumn();
+            _SName = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)SpdataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -60,20 +60,6 @@
             SpdataGridView.Size = new Size(555, 438);
             SpdataGridView.TabIndex = 4;
             SpdataGridView.CellDoubleClick += SpdataGridView_CellDoubleClick;
-            // 
-            // _SS_Code
-            // 
-            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _SS_Code.HeaderText = "Код";
-            _SS_Code.Name = "_SS_Code";
-            _SS_Code.ReadOnly = true;
-            _SS_Code.Width = 52;
-            // 
-            // _SName
-            // 
-            _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _SName.HeaderText = "Наименование";
-            _SName.Name = "_SName";
             // 
             // label2
             // 
@@ -113,6 +99,21 @@
             SpCodeFilterBox.TabIndex = 5;
             SpCodeFilterBox.TextChanged += SpCodeFilterBox_TextChanged;
             // 
+            // _SS_Code
+            // 
+            _SS_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _SS_Code.HeaderText = "Код";
+            _SS_Code.Name = "_SS_Code";
+            _SS_Code.ReadOnly = true;
+            _SS_Code.Width = 52;
+            // 
+            // _SName
+            // 
+            _SName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _SName.HeaderText = "Наименование";
+            _SName.Name = "_SName";
+            _SName.ReadOnly = true;
+            // 
             // SpecialtySelectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -133,11 +134,11 @@
         #endregion
 
         private DataGridView SpdataGridView;
-        private DataGridViewTextBoxColumn _SS_Code;
-        private DataGridViewTextBoxColumn _SName;
         private Label label2;
         private TextBox SpNameFilterBox;
         private Label label3;
         private TextBox SpCodeFilterBox;
+        private DataGridViewTextBoxColumn _SS_Code;
+        private DataGridViewTextBoxColumn _SName;
     }
 }

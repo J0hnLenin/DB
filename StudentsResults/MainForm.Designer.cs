@@ -58,6 +58,10 @@
             label6 = new Label();
             DisCodeFilterBox = new TextBox();
             DisdataGridView = new DataGridView();
+            _DD_Code = new DataGridViewTextBoxColumn();
+            _DName = new DataGridViewTextBoxColumn();
+            _DProfessorName = new DataGridViewTextBoxColumn();
+            _DFK_Professor = new DataGridViewTextBoxColumn();
             Specialty = new TabPage();
             splitContainer2 = new SplitContainer();
             label2 = new Label();
@@ -92,10 +96,6 @@
             ReportComboBox = new ComboBox();
             GetReport = new Button();
             ReportDataGridView = new DataGridView();
-            _DD_Code = new DataGridViewTextBoxColumn();
-            _DName = new DataGridViewTextBoxColumn();
-            _DProfessorName = new DataGridViewTextBoxColumn();
-            _DFK_Professor = new DataGridViewTextBoxColumn();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -444,6 +444,36 @@
             DisdataGridView.CellValueChanged += DisdataGridView_CellValueChanged;
             DisdataGridView.UserDeletedRow += DisdataGridView_UserDeletedRow;
             // 
+            // _DD_Code
+            // 
+            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DD_Code.HeaderText = "Код";
+            _DD_Code.Name = "_DD_Code";
+            _DD_Code.ReadOnly = true;
+            _DD_Code.Width = 60;
+            // 
+            // _DName
+            // 
+            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _DName.HeaderText = "Наименование";
+            _DName.MaxInputLength = 50;
+            _DName.Name = "_DName";
+            _DName.Width = 141;
+            // 
+            // _DProfessorName
+            // 
+            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _DProfessorName.HeaderText = "Преподаватель";
+            _DProfessorName.Name = "_DProfessorName";
+            _DProfessorName.ReadOnly = true;
+            // 
+            // _DFK_Professor
+            // 
+            _DFK_Professor.HeaderText = "FK_Professor";
+            _DFK_Professor.Name = "_DFK_Professor";
+            _DFK_Professor.ReadOnly = true;
+            _DFK_Professor.Visible = false;
+            // 
             // Specialty
             // 
             Specialty.Controls.Add(splitContainer2);
@@ -791,6 +821,7 @@
             ReportComboBox.Name = "ReportComboBox";
             ReportComboBox.Size = new Size(298, 28);
             ReportComboBox.TabIndex = 2;
+            ReportComboBox.SelectedIndexChanged += ReportComboBox_SelectedIndexChanged;
             // 
             // GetReport
             // 
@@ -815,36 +846,6 @@
             ReportDataGridView.RowTemplate.Height = 25;
             ReportDataGridView.Size = new Size(760, 396);
             ReportDataGridView.TabIndex = 0;
-            // 
-            // _DD_Code
-            // 
-            _DD_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DD_Code.HeaderText = "Код";
-            _DD_Code.Name = "_DD_Code";
-            _DD_Code.ReadOnly = true;
-            _DD_Code.Width = 60;
-            // 
-            // _DName
-            // 
-            _DName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _DName.HeaderText = "Наименование";
-            _DName.MaxInputLength = 50;
-            _DName.Name = "_DName";
-            _DName.Width = 141;
-            // 
-            // _DProfessorName
-            // 
-            _DProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _DProfessorName.HeaderText = "Преподаватель";
-            _DProfessorName.Name = "_DProfessorName";
-            _DProfessorName.ReadOnly = true;
-            // 
-            // _DFK_Professor
-            // 
-            _DFK_Professor.HeaderText = "FK_Professor";
-            _DFK_Professor.Name = "_DFK_Professor";
-            _DFK_Professor.ReadOnly = true;
-            _DFK_Professor.Visible = false;
             // 
             // MainForm
             // 

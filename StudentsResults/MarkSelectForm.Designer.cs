@@ -30,12 +30,12 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             MarkdataGridView = new DataGridView();
-            _MM_Code = new DataGridViewTextBoxColumn();
-            _MName = new DataGridViewTextBoxColumn();
             label9 = new Label();
             MarkNameFilterBox = new TextBox();
             label10 = new Label();
             MarkCodeFilterBox = new TextBox();
+            _MM_Code = new DataGridViewTextBoxColumn();
+            _MName = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)MarkdataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -60,20 +60,6 @@
             MarkdataGridView.Size = new Size(546, 448);
             MarkdataGridView.TabIndex = 4;
             MarkdataGridView.CellDoubleClick += MarkdataGridView_CellDoubleClick;
-            // 
-            // _MM_Code
-            // 
-            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            _MM_Code.HeaderText = "Код";
-            _MM_Code.Name = "_MM_Code";
-            _MM_Code.ReadOnly = true;
-            _MM_Code.Width = 60;
-            // 
-            // _MName
-            // 
-            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _MName.HeaderText = "Оценка";
-            _MName.Name = "_MName";
             // 
             // label9
             // 
@@ -113,6 +99,21 @@
             MarkCodeFilterBox.TabIndex = 5;
             MarkCodeFilterBox.TextChanged += MarkCodeFilterBox_TextChanged;
             // 
+            // _MM_Code
+            // 
+            _MM_Code.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _MM_Code.HeaderText = "Код";
+            _MM_Code.Name = "_MM_Code";
+            _MM_Code.ReadOnly = true;
+            _MM_Code.Width = 60;
+            // 
+            // _MName
+            // 
+            _MName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _MName.HeaderText = "Оценка";
+            _MName.Name = "_MName";
+            _MName.ReadOnly = true;
+            // 
             // MarkSelectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -133,11 +134,11 @@
         #endregion
 
         private DataGridView MarkdataGridView;
-        private DataGridViewTextBoxColumn _MM_Code;
-        private DataGridViewTextBoxColumn _MName;
         private Label label9;
         private TextBox MarkNameFilterBox;
         private Label label10;
         private TextBox MarkCodeFilterBox;
+        private DataGridViewTextBoxColumn _MM_Code;
+        private DataGridViewTextBoxColumn _MName;
     }
 }

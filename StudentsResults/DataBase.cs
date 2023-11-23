@@ -10,7 +10,8 @@ namespace StudentsResults
     internal class DataBase
     {
         //SqlConnection sqlConnection = new SqlConnection(@"JOHN_LENIN");
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-MNROJ18;Initial Catalog=Study_results;Integrated Security=True;TrustServerCertificate=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=JOHN_LENIN;Initial Catalog=Study_results;Integrated Security=True;TrustServerCertificate=True");
+        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-MNROJ18;Initial Catalog=Study_results;Integrated Security=True;TrustServerCertificate=True");
         //SqlConnection sqlConnection = new SqlConnection(@"Server=localhost;Database=Study_results;Trusted_Connection=True;TrustServerCertificate=True");
         public void openConnection()
         {
