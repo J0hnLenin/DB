@@ -55,6 +55,8 @@ namespace StudentsResults
                 SpecialtyNameBox.Text = reader.GetString(3);
             }
             reader.Close();
+
+            UpdateAVG();
         }
 
         private int Max_code()
@@ -118,6 +120,7 @@ namespace StudentsResults
                 ReadRow(dgw, reader);
             }
             reader.Close();
+            UpdateAVG();
         }
         private void ReadRow(DataGridView dgw, IDataRecord record)
         {
@@ -326,6 +329,7 @@ namespace StudentsResults
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
             Command.ExecuteNonQuery();
+            UpdateAVG();
         }
 
         private void UpdateLine(int Row)
@@ -348,6 +352,9 @@ namespace StudentsResults
             SqlCommand Command = new SqlCommand(request, dataBase.getConnection());
             dataBase.openConnection();
             Command.ExecuteNonQuery();
+            UpdateAVG();
+
+
         }
 
         private void NameBox_Validated(object sender, EventArgs e)
@@ -356,6 +363,7 @@ namespace StudentsResults
             {
                 UpdateObject("RecordBook", "RB_Code", RB_Code, "Name", NameBox.Text);
                 RefreshHead();
+
             }
             else if (NameBox.Text != "" && DisciplineCodeBox.Text != "")
             {
@@ -400,7 +408,39 @@ namespace StudentsResults
                 object id = row.Cells[0].Value;
                 if (id is not null)
                     UpdateObject("Line", "L_Code", (int)id, "Number", Convert.ToString(row.Index + 1));
+
+                UpdateAVG();
             }
+        }
+
+        private void UpdateAVG()
+        {
+            String Request = $@"SELECT
+	                    RB.RB_Code AS RB_Code,
+	                    RB.Name AS RB_Name, 
+	                    COUNT(M.M_Code) AS Passed,
+	                    CAST(ROUND(ISNULL(AVG(CASE 
+			                    WHEN M.Name = 'Удовлетворительно' THEN 3.0
+			                    WHEN M.Name = 'Хорошо'            THEN 4.0
+			                    WHEN M.Name = 'Отлично'           THEN 5.0
+                                ELSE NULL
+		                        END), 0.0), 1) AS Float) AS Average
+                    FROM RecordBook AS RB LEFT JOIN Line AS L ON
+	                    RB_Code = L.FK_RecordBook
+	                    LEFT JOIN Mark AS M ON
+	                    M.M_Code = L.FK_Mark
+                        AND M.Name IN ('Удовлетворительно', 'Хорошо', 'Отлично')
+                    WHERE RB.RB_Code = " + RB_Code + $@"
+                    GROUP BY RB.RB_Code, RB.Name
+                    ORDER BY RB.Name;";
+
+            SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
+            dataBase.openConnection();
+            Command.ExecuteNonQuery();
+            SqlDataReader reader = Command.ExecuteReader();
+            if (reader.Read())
+                AVG_Ball.Text = Convert.ToString(reader.GetDouble(3));
+            reader.Close();
         }
 
     }

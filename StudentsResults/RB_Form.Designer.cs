@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             Line_DataGridView = new DataGridView();
+            L_Code = new DataGridViewTextBoxColumn();
+            Number = new DataGridViewTextBoxColumn();
+            DisciplineName = new DataGridViewTextBoxColumn();
+            MarkName = new DataGridViewTextBoxColumn();
+            Date = new DataGridViewTextBoxColumn();
+            ProfessorName = new DataGridViewTextBoxColumn();
+            M_Code = new DataGridViewTextBoxColumn();
+            D_Code = new DataGridViewTextBoxColumn();
             SpecialtyNameLabel = new Label();
             SpecialtyNameBox = new TextBox();
             NameLabel = new Label();
@@ -38,14 +46,8 @@
             DisciplineCodeLabel = new Label();
             DisciplineCodeBox = new TextBox();
             TableLable = new Label();
-            L_Code = new DataGridViewTextBoxColumn();
-            Number = new DataGridViewTextBoxColumn();
-            DisciplineName = new DataGridViewTextBoxColumn();
-            MarkName = new DataGridViewTextBoxColumn();
-            Date = new DataGridViewTextBoxColumn();
-            ProfessorName = new DataGridViewTextBoxColumn();
-            M_Code = new DataGridViewTextBoxColumn();
-            D_Code = new DataGridViewTextBoxColumn();
+            label1 = new Label();
+            AVG_Ball = new TextBox();
             ((System.ComponentModel.ISupportInitialize)Line_DataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -56,13 +58,73 @@
             Line_DataGridView.Columns.AddRange(new DataGridViewColumn[] { L_Code, Number, DisciplineName, MarkName, Date, ProfessorName, M_Code, D_Code });
             Line_DataGridView.Dock = DockStyle.Bottom;
             Line_DataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
-            Line_DataGridView.Location = new Point(0, 196);
+            Line_DataGridView.Location = new Point(0, 212);
             Line_DataGridView.Name = "Line_DataGridView";
             Line_DataGridView.RowTemplate.Height = 25;
-            Line_DataGridView.Size = new Size(800, 254);
+            Line_DataGridView.Size = new Size(800, 278);
             Line_DataGridView.TabIndex = 0;
             Line_DataGridView.CellDoubleClick += Line_DataGridView_CellDoubleClick;
             Line_DataGridView.UserDeletedRow += Line_DataGridView_UserDeletedRow;
+            // 
+            // L_Code
+            // 
+            L_Code.HeaderText = "L_Code";
+            L_Code.Name = "L_Code";
+            L_Code.ReadOnly = true;
+            L_Code.Visible = false;
+            // 
+            // Number
+            // 
+            Number.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Number.HeaderText = "№";
+            Number.Name = "Number";
+            Number.ReadOnly = true;
+            Number.Width = 45;
+            // 
+            // DisciplineName
+            // 
+            DisciplineName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DisciplineName.HeaderText = "Дисциплина";
+            DisciplineName.Name = "DisciplineName";
+            DisciplineName.ReadOnly = true;
+            DisciplineName.Width = 101;
+            // 
+            // MarkName
+            // 
+            MarkName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            MarkName.HeaderText = "Оценка";
+            MarkName.Name = "MarkName";
+            MarkName.ReadOnly = true;
+            MarkName.Width = 73;
+            // 
+            // Date
+            // 
+            Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Date.HeaderText = "Дата\nэкзамена";
+            Date.Name = "Date";
+            Date.ReadOnly = true;
+            Date.Width = 83;
+            // 
+            // ProfessorName
+            // 
+            ProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProfessorName.HeaderText = "Преподаватель";
+            ProfessorName.Name = "ProfessorName";
+            ProfessorName.ReadOnly = true;
+            // 
+            // M_Code
+            // 
+            M_Code.HeaderText = "M_Code";
+            M_Code.Name = "M_Code";
+            M_Code.ReadOnly = true;
+            M_Code.Visible = false;
+            // 
+            // D_Code
+            // 
+            D_Code.HeaderText = "D_Code";
+            D_Code.Name = "D_Code";
+            D_Code.ReadOnly = true;
+            D_Code.Visible = false;
             // 
             // SpecialtyNameLabel
             // 
@@ -146,77 +208,38 @@
             // 
             TableLable.AutoSize = true;
             TableLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            TableLable.Location = new Point(12, 173);
+            TableLable.Location = new Point(16, 189);
             TableLable.Name = "TableLable";
             TableLable.Size = new Size(287, 20);
             TableLable.TabIndex = 14;
             TableLable.Text = "Результаты промежуточной аттестации:";
             // 
-            // L_Code
+            // label1
             // 
-            L_Code.HeaderText = "L_Code";
-            L_Code.Name = "L_Code";
-            L_Code.ReadOnly = true;
-            L_Code.Visible = false;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(16, 153);
+            label1.Name = "label1";
+            label1.Size = new Size(110, 20);
+            label1.TabIndex = 16;
+            label1.Text = "Средний балл:";
             // 
-            // Number
+            // AVG_Ball
             // 
-            Number.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            Number.HeaderText = "№";
-            Number.Name = "Number";
-            Number.ReadOnly = true;
-            Number.Width = 45;
-            // 
-            // DisciplineName
-            // 
-            DisciplineName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            DisciplineName.HeaderText = "Дисциплина";
-            DisciplineName.Name = "DisciplineName";
-            DisciplineName.ReadOnly = true;
-            DisciplineName.Width = 101;
-            // 
-            // MarkName
-            // 
-            MarkName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            MarkName.HeaderText = "Оценка";
-            MarkName.Name = "MarkName";
-            MarkName.ReadOnly = true;
-            MarkName.Width = 73;
-            // 
-            // Date
-            // 
-            Date.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            Date.HeaderText = "Дата\nэкзамена";
-            Date.Name = "Date";
-            Date.ReadOnly = true;
-            Date.Width = 111;
-            // 
-            // ProfessorName
-            // 
-            ProfessorName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ProfessorName.HeaderText = "Преподаватель";
-            ProfessorName.Name = "ProfessorName";
-            ProfessorName.ReadOnly = true;
-            // 
-            // M_Code
-            // 
-            M_Code.HeaderText = "M_Code";
-            M_Code.Name = "M_Code";
-            M_Code.ReadOnly = true;
-            M_Code.Visible = false;
-            // 
-            // D_Code
-            // 
-            D_Code.HeaderText = "D_Code";
-            D_Code.Name = "D_Code";
-            D_Code.ReadOnly = true;
-            D_Code.Visible = false;
+            AVG_Ball.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            AVG_Ball.Location = new Point(236, 150);
+            AVG_Ball.Name = "AVG_Ball";
+            AVG_Ball.ReadOnly = true;
+            AVG_Ball.Size = new Size(131, 27);
+            AVG_Ball.TabIndex = 15;
             // 
             // RB_Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 490);
+            Controls.Add(label1);
+            Controls.Add(AVG_Ball);
             Controls.Add(TableLable);
             Controls.Add(DisciplineCodeLabel);
             Controls.Add(DisciplineCodeBox);
@@ -255,5 +278,7 @@
         private DataGridViewTextBoxColumn ProfessorName;
         private DataGridViewTextBoxColumn M_Code;
         private DataGridViewTextBoxColumn D_Code;
+        private Label label1;
+        private TextBox AVG_Ball;
     }
 }

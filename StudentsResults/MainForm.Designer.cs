@@ -89,12 +89,10 @@
             FIO_FilterLabel = new Label();
             MFilterLable = new Label();
             MFilterBox = new TextBox();
-            SFilterLable = new Label();
             SFilterBox = new TextBox();
             DFilterLable = new Label();
             DFilterBox = new TextBox();
             ReportComboBox = new ComboBox();
-            GetReport = new Button();
             ReportDataGridView = new DataGridView();
             Mark.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
@@ -723,14 +721,12 @@
             // 
             ReportPage.Controls.Add(FIO_FilterBox);
             ReportPage.Controls.Add(FIO_FilterLabel);
-            ReportPage.Controls.Add(MFilterLable);
+            //ReportPage.Controls.Add(MFilterLable);
             ReportPage.Controls.Add(MFilterBox);
-            ReportPage.Controls.Add(SFilterLable);
             ReportPage.Controls.Add(SFilterBox);
-            ReportPage.Controls.Add(DFilterLable);
+            //ReportPage.Controls.Add(DFilterLable);
             ReportPage.Controls.Add(DFilterBox);
             ReportPage.Controls.Add(ReportComboBox);
-            ReportPage.Controls.Add(GetReport);
             ReportPage.Controls.Add(ReportDataGridView);
             ReportPage.ImageIndex = 6;
             ReportPage.Location = new Point(4, 44);
@@ -744,16 +740,17 @@
             // FIO_FilterBox
             // 
             FIO_FilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            FIO_FilterBox.Location = new Point(121, 191);
+            FIO_FilterBox.Location = new Point(121, 40);
             FIO_FilterBox.Name = "FIO_FilterBox";
             FIO_FilterBox.Size = new Size(185, 27);
             FIO_FilterBox.TabIndex = 13;
+            FIO_FilterBox.TextChanged += FIO_FilterBox_TextChanged;
             // 
             // FIO_FilterLabel
             // 
             FIO_FilterLabel.AutoSize = true;
             FIO_FilterLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            FIO_FilterLabel.Location = new Point(8, 194);
+            FIO_FilterLabel.Location = new Point(8, 43);
             FIO_FilterLabel.Name = "FIO_FilterLabel";
             FIO_FilterLabel.Size = new Size(45, 20);
             FIO_FilterLabel.TabIndex = 12;
@@ -763,7 +760,7 @@
             // 
             MFilterLable.AutoSize = true;
             MFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            MFilterLable.Location = new Point(8, 157);
+            MFilterLable.Location = new Point(8, 459);
             MFilterLable.Name = "MFilterLable";
             MFilterLable.Size = new Size(64, 20);
             MFilterLable.TabIndex = 11;
@@ -772,34 +769,28 @@
             // MFilterBox
             // 
             MFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            MFilterBox.Location = new Point(121, 154);
+            MFilterBox.Location = new Point(121, 456);
             MFilterBox.Name = "MFilterBox";
             MFilterBox.Size = new Size(185, 27);
             MFilterBox.TabIndex = 10;
-            // 
-            // SFilterLable
-            // 
-            SFilterLable.AutoSize = true;
-            SFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            SFilterLable.Location = new Point(8, 92);
-            SFilterLable.Name = "SFilterLable";
-            SFilterLable.Size = new Size(107, 20);
-            SFilterLable.TabIndex = 9;
-            SFilterLable.Text = "Направление:";
+            MFilterBox.Visible = false;
+            MFilterBox.TextChanged += MFilterBox_TextChanged;
             // 
             // SFilterBox
             // 
             SFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            SFilterBox.Location = new Point(121, 89);
+            SFilterBox.Location = new Point(121, 391);
             SFilterBox.Name = "SFilterBox";
             SFilterBox.Size = new Size(185, 27);
             SFilterBox.TabIndex = 8;
+            SFilterBox.Visible = false;
+            SFilterBox.TextChanged += SFilterBox_TextChanged;
             // 
             // DFilterLable
             // 
             DFilterLable.AutoSize = true;
             DFilterLable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DFilterLable.Location = new Point(8, 125);
+            DFilterLable.Location = new Point(8, 427);
             DFilterLable.Name = "DFilterLable";
             DFilterLable.Size = new Size(99, 20);
             DFilterLable.TabIndex = 7;
@@ -808,31 +799,22 @@
             // DFilterBox
             // 
             DFilterBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            DFilterBox.Location = new Point(121, 122);
+            DFilterBox.Location = new Point(121, 424);
             DFilterBox.Name = "DFilterBox";
             DFilterBox.Size = new Size(185, 27);
             DFilterBox.TabIndex = 6;
+            DFilterBox.Visible = false;
+            DFilterBox.TextChanged += DFilterBox_TextChanged;
             // 
             // ReportComboBox
             // 
             ReportComboBox.FormattingEnabled = true;
-            ReportComboBox.Items.AddRange(new object[] { "Списочный отчёт об успеваемости", "Статистический отчёт об успеваемости ", "Средний бал экзаменов" });
-            ReportComboBox.Location = new Point(8, 55);
+            ReportComboBox.Items.AddRange(new object[] { "Списочный отчёт об успеваемости", "Оценки по дисциплинам", "Средний бал экзаменов", "Количество студентов на направлениях", "Количество дисциплин за преподавателем" });
+            ReportComboBox.Location = new Point(8, 6);
             ReportComboBox.Name = "ReportComboBox";
             ReportComboBox.Size = new Size(298, 28);
             ReportComboBox.TabIndex = 2;
             ReportComboBox.SelectedIndexChanged += ReportComboBox_SelectedIndexChanged;
-            // 
-            // GetReport
-            // 
-            GetReport.BackColor = Color.AliceBlue;
-            GetReport.Location = new Point(8, 11);
-            GetReport.Name = "GetReport";
-            GetReport.Size = new Size(125, 38);
-            GetReport.TabIndex = 1;
-            GetReport.Text = "Сформировать";
-            GetReport.UseVisualStyleBackColor = false;
-            GetReport.Click += GetReport_Click;
             // 
             // ReportDataGridView
             // 
@@ -941,12 +923,10 @@
         private DataGridView RB_DataGridView;
         private TabControl MainControl;
         private TabPage ReportPage;
-        private Button GetReport;
         private ComboBox ReportComboBox;
         private DataGridView ReportDataGridView;
         private Label DFilterLable;
         private TextBox DFilterBox;
-        private Label SFilterLable;
         private TextBox SFilterBox;
         private Label MFilterLable;
         private TextBox MFilterBox;

@@ -413,6 +413,8 @@ namespace StudentsResults
             int id = (int)ReportComboBox.SelectedIndex;
             ReportCreateColumns(id);
             RefreshReportDataGrid(ReportDataGridView, id);
+
+
         }
 
         private void ReportCreateColumns(int id)
@@ -433,9 +435,11 @@ namespace StudentsResults
                 case 1:
                     {
                         ReportDataGridView.Columns.Clear();
-                        ReportDataGridView.Columns.Add("Number", "Количество\nстудентов");
                         ReportDataGridView.Columns.Add("DisciplineName", "Дисциплина");
-                        ReportDataGridView.Columns.Add("MarkName", "Оценка");
+                        ReportDataGridView.Columns.Add("Zachet", "Зачтено");
+                        ReportDataGridView.Columns.Add("UDVL", "Удовлетворительно");
+                        ReportDataGridView.Columns.Add("HOROSHO", "Хорошо");
+                        ReportDataGridView.Columns.Add("OTLICHNA", "Отлично");
                         break;
                     }
                 case 2:
@@ -447,12 +451,26 @@ namespace StudentsResults
                         ReportDataGridView.Columns.Add("Average", "Средний\nбалл");
                         break;
                     }
+                case 3:
+                    {
+                        ReportDataGridView.Columns.Clear();
+                        ReportDataGridView.Columns.Add("S_Name", "Направление");
+                        ReportDataGridView.Columns.Add("Number", "Количество\nстудентов");
+                        break;
+                    }
+                case 4:
+                    {
+                        ReportDataGridView.Columns.Clear();
+                        ReportDataGridView.Columns.Add("P_Name", "Преподаватель");
+                        ReportDataGridView.Columns.Add("Number", "Количество\nдисциплин");
+                        break;
+                    }
             }
             foreach (DataGridViewColumn column in ReportDataGridView.Columns)
             {
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
-            ReportDataGridView.Columns[ReportDataGridView.ColumnCount- 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ReportDataGridView.Columns[ReportDataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -467,12 +485,22 @@ namespace StudentsResults
                     }
                 case 1:
                     {
-                        dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetString(2));
+                        dgw.Rows.Add(record.GetString(0), record.GetInt32(1), record.GetInt32(2), record.GetInt32(3), record.GetInt32(4));
                         break;
                     }
                 case 2:
                     {
                         dgw.Rows.Add(record.GetInt32(0), record.GetString(1), record.GetInt32(2), record.GetDouble(3));
+                        break;
+                    }
+                case 3:
+                    {
+                        dgw.Rows.Add(record.GetString(0), record.GetInt32(1));
+                        break;
+                    }
+                case 4:
+                    {
+                        dgw.Rows.Add(record.GetString(0), record.GetInt32(1));
                         break;
                     }
 
@@ -506,18 +534,72 @@ namespace StudentsResults
                     }
                 case 1:
                     {
-                        Request = @"SELECT
-	                        COUNT(RB_Code) AS NUMBER,
-	                        ISNULL(D.Name, '') AS DisciplineName,
-	                        ISNULL(M.Name, '') AS MarkName
-                        FROM RecordBook AS RB INNER JOIN Line AS L ON
-	                        RB_Code = FK_RecordBook
-	                        LEFT JOIN Mark AS M ON 
-	                        M_Code = FK_Mark
-	                        LEFT JOIN Specialty AS S ON
-	                        S_Code = FK_Specialty
-	                        LEFT JOIN Discipline AS D ON
-	                        D_Code = FK_Discipline";
+                        Request = @"SELECT Name AS DisciplineName,
+	                                    	ISNULL(Zachet.NUMBER, 0) AS Zachet,
+	                                        ISNULL(UDVL.NUMBER, 0) AS UDVL,
+	                                        ISNULL(HOROSHO.NUMBER, 0) AS HOROSHO,
+	                                        ISNULL(OTLICHNA.NUMBER, 0) AS OTLICHNA
+                                    FROM Discipline LEFT JOIN (SELECT
+	                                    COUNT(RB_Code) AS NUMBER,
+	                                    ISNULL(D.D_Code, 0) AS DisciplineCode
+                                    FROM RecordBook AS RB INNER JOIN Line AS L ON
+		                                    RB_Code = FK_RecordBook
+		                                    LEFT JOIN Mark AS M ON 
+		                                    M_Code = FK_Mark
+		                                    LEFT JOIN Specialty AS S ON
+		                                    S_Code = FK_Specialty
+		                                    LEFT JOIN Discipline AS D ON
+		                                    D_Code = FK_Discipline
+	                                    WHERE M.Name = 'Отлично'
+	                                    GROUP BY
+		                                    D.D_Code,
+		                                    M.Name) AS OTLICHNA ON D_Code = OTLICHNA.DisciplineCode
+	                                    LEFT JOIN (SELECT
+	                                    COUNT(RB_Code) AS NUMBER,
+	                                    ISNULL(D.D_Code, 0) AS DisciplineCode
+                                    FROM RecordBook AS RB INNER JOIN Line AS L ON
+	                                    RB_Code = FK_RecordBook
+	                                    LEFT JOIN Mark AS M ON 
+	                                    M_Code = FK_Mark
+	                                    LEFT JOIN Specialty AS S ON
+	                                    S_Code = FK_Specialty
+	                                    LEFT JOIN Discipline AS D ON
+	                                    D_Code = FK_Discipline
+                                    WHERE M.Name = 'Хорошо'
+                                    GROUP BY
+                                        D.D_Code,
+                                        M.Name) AS HOROSHO ON D_Code = HOROSHO.DisciplineCode
+	                                    LEFT JOIN (SELECT
+	                                    COUNT(RB_Code) AS NUMBER,
+	                                    ISNULL(D.D_Code, 0) AS DisciplineCode
+                                    FROM RecordBook AS RB INNER JOIN Line AS L ON
+	                                    RB_Code = FK_RecordBook
+	                                    LEFT JOIN Mark AS M ON 
+	                                    M_Code = FK_Mark
+	                                    LEFT JOIN Specialty AS S ON
+	                                    S_Code = FK_Specialty
+	                                    LEFT JOIN Discipline AS D ON
+	                                    D_Code = FK_Discipline
+                                    WHERE M.Name = 'Удовлетворительно'
+                                    GROUP BY
+                                        D.D_Code,
+                                        M.Name) AS UDVL ON D_Code = UDVL.DisciplineCode
+	                                    LEFT JOIN (SELECT
+	                                    COUNT(RB_Code) AS NUMBER,
+	                                    ISNULL(D.D_Code, 0) AS DisciplineCode
+                                    FROM RecordBook AS RB INNER JOIN Line AS L ON
+	                                    RB_Code = FK_RecordBook
+	                                    LEFT JOIN Mark AS M ON 
+	                                    M_Code = FK_Mark
+	                                    LEFT JOIN Specialty AS S ON
+	                                    S_Code = FK_Specialty
+	                                    LEFT JOIN Discipline AS D ON
+	                                    D_Code = FK_Discipline
+                                    WHERE M.Name = 'Зачтено'
+                                    GROUP BY
+                                        D.D_Code,
+                                        M.Name) AS Zachet ON D_Code = Zachet.DisciplineCode
+                                    ORDER BY DisciplineName";
                         break;
                     }
                 case 2:
@@ -531,7 +613,7 @@ namespace StudentsResults
 			                                    WHEN M.Name = 'Хорошо'            THEN 4.0
 			                                    WHEN M.Name = 'Отлично'           THEN 5.0
                                                 ELSE NULL
-		                                        END), 0.0), 2) AS Float) AS Average
+		                                        END), 0.0), 1) AS Float) AS Average
                                     FROM RecordBook AS RB LEFT JOIN Line AS L ON
 	                                    RB_Code = L.FK_RecordBook
 	                                    LEFT JOIN Mark AS M ON
@@ -543,9 +625,34 @@ namespace StudentsResults
                         break;
 
                     }
+                case 3:
+                    {
+                        Request = $@"SELECT
+	                                    S.Name AS S_Name,
+	                                    COUNT(RB_Code) AS Number
+                                    FROM Specialty AS S LEFT JOIN RecordBook ON
+	                                    FK_Specialty = S_Code
+                                    GROUP BY S.Name
+                                    ORDER BY S.Name";
+                        break;
+
+                    }
+                case 4:
+                    {
+                        Request = $@"SELECT
+	                                    P.Name AS P_Name,
+	                                    COUNT(D_Code) AS Number
+                                    FROM Professor AS P LEFT JOIN Discipline ON
+	                                    FK_Professor = P_Code
+                                    WHERE P.Name LIKE '%" + dataBase.ParseString(FIO_FilterBox.Text) + $@"%'
+                                    GROUP BY P.Name
+                                    ORDER BY P.Name";
+                        break;
+
+                    }
             }
 
-            if ((SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "" || FIO_FilterBox.Text != "") && id != 2)
+            if ((SFilterBox.Text != "" || DFilterBox.Text != "" || MFilterBox.Text != "" || FIO_FilterBox.Text != "") && id == 0)
             {
                 bool Flag = false;
                 if (id == 1 && (DFilterBox.Text != "" || MFilterBox.Text != ""))
@@ -594,21 +701,12 @@ namespace StudentsResults
                     Flag = true;
                 }
             }
-            switch (id)
+            if (id == 0)
             {
-                case 0:
-                    Request = string.Format(@"{0} ORDER BY RB.Name", Request);
-                    break;
-                case 1:
-                    {
-                        Request = string.Format(@"{0}
-                                                GROUP BY
-                                                    D.Name,
-                                                    M.Name
-                                                ORDER BY D.Name", Request);
-                        break;
-                    }
+                Request = string.Format(@"{0} ORDER BY RB.Name", Request);
+
             }
+
 
 
             SqlCommand Command = new SqlCommand(Request, dataBase.getConnection());
@@ -742,6 +840,9 @@ namespace StudentsResults
         private void ReportComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = (int)ReportComboBox.SelectedIndex;
+            if (id == -1)
+                return;
+
             switch (id)
             {
                 case 0:
@@ -752,11 +853,13 @@ namespace StudentsResults
                     break;
                 case 1:
                     SFilterBox.ReadOnly = true;
-                    DFilterBox.ReadOnly = false;
-                    MFilterBox.ReadOnly = false;
+                    DFilterBox.ReadOnly = true;
+                    MFilterBox.ReadOnly = true;
                     FIO_FilterBox.ReadOnly = true;
 
                     SFilterBox.Text = "";
+                    DFilterBox.Text = "";
+                    MFilterBox.Text = "";
                     FIO_FilterBox.Text = "";
                     break;
                 case 2:
@@ -769,8 +872,67 @@ namespace StudentsResults
                     DFilterBox.Text = "";
                     MFilterBox.Text = "";
                     break;
+                case 3:
+                    SFilterBox.ReadOnly = true;
+                    DFilterBox.ReadOnly = true;
+                    MFilterBox.ReadOnly = true;
+                    FIO_FilterBox.ReadOnly = true;
+
+                    FIO_FilterBox.Text = "";
+                    DFilterBox.Text = "";
+                    MFilterBox.Text = "";
+                    break;
+                case 4:
+                    SFilterBox.ReadOnly = true;
+                    DFilterBox.ReadOnly = true;
+                    MFilterBox.ReadOnly = true;
+                    FIO_FilterBox.ReadOnly = false;
+
+                    SFilterBox.Text = "";
+                    DFilterBox.Text = "";
+                    MFilterBox.Text = "";
+                    break;
 
             }
+
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
+        }
+
+        private void SFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            int id = (int)ReportComboBox.SelectedIndex;
+            if (id == -1)
+                return;
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
+        }
+
+        private void DFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            int id = (int)ReportComboBox.SelectedIndex;
+            if (id == -1)
+                return;
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
+        }
+
+        private void MFilterBox_TextChanged(object sender, EventArgs e)
+        {
+            int id = (int)ReportComboBox.SelectedIndex;
+            if (id == -1)
+                return;
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
+        }
+
+        private void FIO_FilterBox_TextChanged(object sender, EventArgs e)
+        {
+            int id = (int)ReportComboBox.SelectedIndex;
+            if (id == -1)
+                return;
+            ReportCreateColumns(id);
+            RefreshReportDataGrid(ReportDataGridView, id);
         }
     }
 }
